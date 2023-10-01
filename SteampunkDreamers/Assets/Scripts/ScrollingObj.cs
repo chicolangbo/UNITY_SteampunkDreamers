@@ -9,7 +9,7 @@ public class ScrollingObj : MonoBehaviour
 
     private void FixedUpdate()
     {
-        speed = player.initialFrontSpeed;
+        speed = player.frontSpeed;
         transform.Translate(Vector3.left * speed * Time.deltaTime);
     }
 }

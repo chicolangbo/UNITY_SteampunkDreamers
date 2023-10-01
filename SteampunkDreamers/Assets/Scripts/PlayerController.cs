@@ -7,7 +7,6 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    // 유한상태머신
     public StateMachine stateMachine { get; private set; }
 
     public float initialFrontSpeed;
@@ -15,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public float maxAngle { get; private set; } = 50f;
     public float minAngle { get; private set; } = -50f;
 
-    public Rigidbody rb;
+    public Rigidbody rb { get; private set; }
     private float flightForce = 10f;
 
     public float distance = 0f;
@@ -31,7 +30,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        //StartCoroutine(DistanceLog());
         InitStateMachine();
     }
 
@@ -46,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
         altitude = rb.position.y * altitudeRatio;
         UIManager.instance.UpdateDistanceText(distance);
-        UIManager.instance.UpdateVelocityText(initialFrontSpeed);
+        UIManager.instance.UpdateVelocityText(frontSpeed);
         UIManager.instance.UpdateAltitudeText(altitude);
     }
 
@@ -65,14 +63,5 @@ public class PlayerController : MonoBehaviour
     {
         // 나중에 Ready로 바꿔야 함
         stateMachine = new StateMachine(StateName.Gliding, new StateGliding(this));
-    }
-
-    private IEnumerator DistanceLog()
-    {
-        while(true)
-        {
-            //Debug.Log("distance : " + distance);
-            //yield return new WaitForSeconds(1f);
-        }
     }
 }

@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
     public void UpdateDistanceText(float d)
     {
         StringBuilder sb = new StringBuilder();
-        sb.Append((float)Math.Round(d,3));
+        sb.Append(d.ToString("F3"));
         sb.Append(" m");
         distance.text = sb.ToString();
     }
@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
     public void UpdateVelocityText(float v)
     {
         StringBuilder sb = new StringBuilder();
-        sb.Append((float)Math.Round(v,3));
+        sb.Append(v.ToString("F3"));
         sb.Append(" m/s");
         velocity.text = sb.ToString();
     }
@@ -49,7 +49,7 @@ public class UIManager : MonoBehaviour
     public void UpdateAltitudeText(float a)
     {
         StringBuilder sb = new StringBuilder();
-        sb.Append((float)Math.Round(a,3));
+        sb.Append(a.ToString("F3"));
         sb.Append(" m");
         altitude.text = sb.ToString();
     }

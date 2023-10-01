@@ -10,6 +10,9 @@ public class StateGliding : BaseState
 
     public float rotUpSpeed = 10f;
     public float rotDownSpeed = 30f;
+    public float airResistance = 10f;
+
+    private float standardFrontSpeed;
 
     public StateGliding(PlayerController controller) : base(controller)
     {
@@ -18,6 +21,7 @@ public class StateGliding : BaseState
     public override void OnEnterState()
     {
         controller.transform.localRotation = controller.initialRotation;
+        standardFrontSpeed = controller.initialFrontSpeed;
         //StateLaunch launch = (StateLaunch)controller.stateMachine.GetState(StateName.Launch);
         //launchSuccess = launch.launchSuccess;
     }
@@ -33,6 +37,8 @@ public class StateGliding : BaseState
 
     public override void OnUpdateState()
     {
+        standardFrontSpeed -= Time.deltaTime* airResistance;
+        controller.frontSpeed = Mathf.Sqrt((1 - Mathf.Sin(Mathf.Abs(EulerToAngle(controller.transform.localEulerAngles.z)))) * Mathf.Pow(standardFrontSpeed, 2));
     }
 
     private void MovePlane(bool up)
@@ -49,15 +55,19 @@ public class StateGliding : BaseState
         }
 
         ClampRotation();
-        controller.altitude = controller.rb.position.y * controller.altitudeRatio;
         controller.distance += controller.initialFrontSpeed * Time.deltaTime;
     }
 
     public void ClampRotation()
     {
         Vector3 targetAngles = controller.transform.localEulerAngles;
-        targetAngles.z = (targetAngles.z > 180f) ? targetAngles.z - 360f : targetAngles.z;
+        targetAngles.z = EulerToAngle(targetAngles.z);
         targetAngles.z = Mathf.Clamp(targetAngles.z, controller.minAngle, controller.maxAngle);
         controller.transform.localRotation = Quaternion.Euler(targetAngles);
+    }
+
+    public float EulerToAngle(float z)
+    {
+        return (z > 180f) ? z - 360f : z;
     }
 }
