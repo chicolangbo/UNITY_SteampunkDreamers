@@ -7,58 +7,55 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
-    public float speedUpChange;
-    public float speedDownChange;
-    public float altitude = 1f;
-    public float altitudeRatio = 100f;
-    public float angleUpChange;
-    public float angleDownChange;
-    private Quaternion angleMin = Quaternion.Euler(0, 0, -60f);
-    private Quaternion angleMax = Quaternion.Euler(0, 0, 60f);
-    private float distance = 0f;
+    // 유한상태머신
+    public StateMachine stateMachine { get; private set; }
+
+    public float initialFrontSpeed;
+    public Rigidbody rb;
+    private float flightForce = 10f;
 
     private void Awake()
     {
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Start()
     {
-        StartCoroutine(DistanceLog());
+        InitStateMachine();
+        //StartCoroutine(DistanceLog());
     }
 
     private void FixedUpdate()
     {
-        MovePlane(Input.GetMouseButton(0));
+        stateMachine?.FixedUpdateState();
     }
 
-    private void MovePlane(bool up)
+    private void Update()
     {
-        Quaternion newAngle;
-        float newSpeed;
+        stateMachine?.UpdateState();
+    }
 
-        if (up)
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Floor"))
         {
-            newAngle = transform.rotation * Quaternion.Euler(0, 0, angleUpChange);
-            newSpeed = Mathf.Clamp(speed - speedUpChange, 0, speed - speedUpChange);            
+            // 상태 패턴 변경
+            stateMachine?.ChangeState(StateName.Landing);
         }
-        else
-        {
-            newAngle = transform.rotation * Quaternion.Euler(0, 0, -angleDownChange);
-            newSpeed = Mathf.Clamp(speed + speedUpChange, 0, speed + speedUpChange);
-        }
-        speed = Mathf.Lerp(speed, newSpeed, Time.deltaTime);
-        altitude = transform.rotation.z * speed * Time.deltaTime;
-        transform.rotation = Quaternion.Lerp(transform.rotation, newAngle, Time.deltaTime);
-        distance += speed * Time.deltaTime;
+    }
+
+    public void InitStateMachine()
+    {
+        // 나중에 Ready로 바꿔야 함
+        stateMachine = new StateMachine(StateName.Gliding, new StateGliding(this));
     }
 
     private IEnumerator DistanceLog()
     {
         while(true)
         {
-            Debug.Log("distance : " + distance);
-            yield return new WaitForSeconds(1f);
+            //Debug.Log("distance : " + distance);
+            //yield return new WaitForSeconds(1f);
         }
     }
 }
