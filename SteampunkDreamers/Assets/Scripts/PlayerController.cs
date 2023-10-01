@@ -12,14 +12,21 @@ public class PlayerController : MonoBehaviour
 
     public float initialFrontSpeed;
     public Quaternion initialRotation;
+    public float maxAngle { get; private set; } = 50f;
+    public float minAngle { get; private set; } = -50f;
 
     public Rigidbody rb;
     private float flightForce = 10f;
 
+    public float distance = 0f;
+    public float frontSpeed;
+    public float altitude = 1f;
+    public float altitudeRatio = 10f; // 정해야 함
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        initialRotation = new Quaternion(0, 0, 30f, 1);
+        initialRotation = new Quaternion(0, 0, 0, 1);
     }
 
     private void Start()
@@ -36,6 +43,11 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         stateMachine?.UpdateState();
+
+        altitude = rb.position.y * altitudeRatio;
+        UIManager.instance.UpdateDistanceText(distance);
+        UIManager.instance.UpdateVelocityText(initialFrontSpeed);
+        UIManager.instance.UpdateAltitudeText(altitude);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -43,6 +55,8 @@ public class PlayerController : MonoBehaviour
         if (collision.collider.CompareTag("Floor"))
         {
             // 상태 패턴 변경
+
+            stateMachine.AddState(StateName.Landing, new StateLanding(this));
             stateMachine?.ChangeState(StateName.Landing);
         }
     }

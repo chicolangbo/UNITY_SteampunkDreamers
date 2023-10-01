@@ -22,14 +22,19 @@ public class StateLanding : BaseState
         controller.initialFrontSpeed = Mathf.Lerp(controller.initialFrontSpeed, 0, Time.deltaTime);
 
         // rotation -> 0
-        if (controller.transform.rotation.z > 0.5f || controller.transform.rotation.z < -0.5f)
+        var tempRot = controller.transform.localRotation;
+        if(tempRot.z > 0)
         {
-            controller.transform.rotation = Quaternion.Lerp(controller.transform.rotation, new Quaternion(0, 0, 0, 0), Time.deltaTime);
+            tempRot.z = Mathf.Clamp(tempRot.z - Time.deltaTime, 0, tempRot.z);
         }
+        else
+        {
+            tempRot.z = Mathf.Clamp(tempRot.z + Time.deltaTime, tempRot.z, 0);
+        }
+        controller.transform.localRotation = tempRot;
     }
 
     public override void OnUpdateState()
     {
     }
-
 }

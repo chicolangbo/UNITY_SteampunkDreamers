@@ -10,13 +10,6 @@ public class StateGliding : BaseState
 
     public float rotUpSpeed = 10f;
     public float rotDownSpeed = 30f;
-    private float frontSpeed;
-    private float frontSpeedMax;
-    public float maxAngle = 50f;
-    public float minAngle = -50f;
-    private float altitude = 1f;
-    public float altitudeRatio;
-    private float distance = 0f;
 
     public StateGliding(PlayerController controller) : base(controller)
     {
@@ -25,7 +18,6 @@ public class StateGliding : BaseState
     public override void OnEnterState()
     {
         controller.transform.localRotation = controller.initialRotation;
-        frontSpeedMax = controller.initialFrontSpeed + 100f;
         //StateLaunch launch = (StateLaunch)controller.stateMachine.GetState(StateName.Launch);
         //launchSuccess = launch.launchSuccess;
     }
@@ -57,15 +49,15 @@ public class StateGliding : BaseState
         }
 
         ClampRotation();
-        altitude = controller.rb.position.y * altitudeRatio;
-        distance += controller.initialFrontSpeed * Time.deltaTime;
+        controller.altitude = controller.rb.position.y * controller.altitudeRatio;
+        controller.distance += controller.initialFrontSpeed * Time.deltaTime;
     }
 
     public void ClampRotation()
     {
         Vector3 targetAngles = controller.transform.localEulerAngles;
         targetAngles.z = (targetAngles.z > 180f) ? targetAngles.z - 360f : targetAngles.z;
-        targetAngles.z = Mathf.Clamp(targetAngles.z, minAngle, maxAngle);
+        targetAngles.z = Mathf.Clamp(targetAngles.z, controller.minAngle, controller.maxAngle);
         controller.transform.localRotation = Quaternion.Euler(targetAngles);
     }
 }
