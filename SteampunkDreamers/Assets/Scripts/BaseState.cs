@@ -8,6 +8,7 @@ public abstract class BaseState
     public BaseState(PlayerController controller)
     {
         this.controller = controller;
+        OnEnterState();
     }
 
     // 

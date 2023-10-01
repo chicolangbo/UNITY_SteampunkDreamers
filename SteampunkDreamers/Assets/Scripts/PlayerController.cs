@@ -11,18 +11,21 @@ public class PlayerController : MonoBehaviour
     public StateMachine stateMachine { get; private set; }
 
     public float initialFrontSpeed;
+    public Quaternion initialRotation;
+
     public Rigidbody rb;
     private float flightForce = 10f;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        initialRotation = new Quaternion(0, 0, 30f, 1);
     }
 
     private void Start()
     {
-        InitStateMachine();
         //StartCoroutine(DistanceLog());
+        InitStateMachine();
     }
 
     private void FixedUpdate()

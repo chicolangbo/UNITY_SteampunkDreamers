@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StateLaunch : BaseState
 {
+    public bool launchSuccess { get; private set; }
+
     public StateLaunch(PlayerController controller) : base(controller)
     {
     }

@@ -18,17 +18,18 @@ public class StateLanding : BaseState
 
     public override void OnFixedUpdateState()
     {
+        // speed -> 0
+        controller.initialFrontSpeed = Mathf.Lerp(controller.initialFrontSpeed, 0, Time.deltaTime);
+
+        // rotation -> 0
+        if (controller.transform.rotation.z > 0.5f || controller.transform.rotation.z < -0.5f)
+        {
+            controller.transform.rotation = Quaternion.Lerp(controller.transform.rotation, new Quaternion(0, 0, 0, 0), Time.deltaTime);
+        }
     }
 
     public override void OnUpdateState()
     {
     }
 
-    public void OnCollisionStay(Collision collision)
-    {
-        if (collision.collider.CompareTag("Floor"))
-        {
-            controller.initialFrontSpeed = Mathf.Lerp(controller.initialFrontSpeed, 0, Time.deltaTime);
-        }
-    }
 }
