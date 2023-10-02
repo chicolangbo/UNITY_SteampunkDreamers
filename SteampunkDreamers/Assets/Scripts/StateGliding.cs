@@ -37,8 +37,10 @@ public class StateGliding : BaseState
 
     public override void OnUpdateState()
     {
-        standardFrontSpeed -= Time.deltaTime* airResistance;
-        controller.frontSpeed = Mathf.Sqrt((1 - Mathf.Sin(Mathf.Abs(EulerToAngle(controller.transform.localEulerAngles.z)))) * Mathf.Pow(standardFrontSpeed, 2));
+        standardFrontSpeed = Mathf.Clamp(standardFrontSpeed -Time.deltaTime, 0, standardFrontSpeed);
+        var angle = EulerToAngle(controller.transform.localEulerAngles.z);
+        var sin = Mathf.Sin(angle);
+        controller.frontSpeed = Mathf.Sqrt((1 - Mathf.Abs(sin)) * Mathf.Pow(standardFrontSpeed, 2));
     }
 
     private void MovePlane(bool up)

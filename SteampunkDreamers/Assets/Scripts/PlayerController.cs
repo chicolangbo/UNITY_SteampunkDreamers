@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     {
         stateMachine?.UpdateState();
 
+        // 인게임 정보 UI 업데이트
         altitude = rb.position.y * altitudeRatio;
         UIManager.instance.UpdateDistanceText(distance);
         UIManager.instance.UpdateVelocityText(frontSpeed);
@@ -52,8 +53,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.collider.CompareTag("Floor"))
         {
-            // 상태 패턴 변경
-
+            // 상태 패턴 변경 ( Gliding -> Landing )
             stateMachine.AddState(StateName.Landing, new StateLanding(this));
             stateMachine?.ChangeState(StateName.Landing);
         }
@@ -61,7 +61,9 @@ public class PlayerController : MonoBehaviour
 
     public void InitStateMachine()
     {
+        stateMachine = new StateMachine(StateName.Ready, new StateReady(this));
+
         // 나중에 Ready로 바꿔야 함
-        stateMachine = new StateMachine(StateName.Gliding, new StateGliding(this));
+        //stateMachine = new StateMachine(StateName.Gliding, new StateGliding(this));
     }
 }
