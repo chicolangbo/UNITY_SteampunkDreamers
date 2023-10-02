@@ -13,18 +13,22 @@ public class PlayerController : MonoBehaviour
     public Quaternion initialRotation;
     public float maxAngle { get; private set; } = 50f;
     public float minAngle { get; private set; } = -50f;
+    public float frontSpeedMax;
 
     public Rigidbody rb { get; private set; }
+    public GameObject setBar;
+    public SetBarController setBarController { get; private set; }
     private float flightForce = 10f;
 
     public float distance = 0f;
-    public float frontSpeed;
+    public float frontSpeed = 0f;
     public float altitude = 1f;
     public float altitudeRatio = 10f; // 정해야 함
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        setBarController = setBar.GetComponent<SetBarController>();
         initialRotation = new Quaternion(0, 0, 0, 1);
     }
 

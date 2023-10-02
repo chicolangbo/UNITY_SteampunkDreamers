@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpeedBarController : MonoBehaviour
+public class SetBarController : MonoBehaviour
 {
     public Image fillBar;
     public RectTransform controller;
-    public float speedValue = 0;
+    public float value = 0;
 
     public void Update()
     {
-        SpeedChange(speedValue);
+        SpeedChange(value);
     }
 
     public void SpeedChange(float value)
