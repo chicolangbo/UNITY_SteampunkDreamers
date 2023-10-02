@@ -6,8 +6,8 @@ using UnityEngine;
 
 public enum StateName
 {
-    Ready, // 속력 결정 + 일정 시속으로 보딩 위 이동 -> 일정 구간이 되면 Launch로 연결
-    Launch, // 보딩 일정 구간 동안 각도 조절 -> Gliding으로 연결(성공 실패 bool값 전달)
+    Speed, // 속력 결정 + 일정 시속으로 보딩 위 이동 -> 일정 구간이 되면 Launch로 연결
+    Angle, // 보딩 일정 구간 동안 각도 조절 -> Gliding으로 연결(성공 실패 bool값 전달)
     Gliding, // 활공 -> floor에 충돌하면 Landing으로 연결
     Landing // 착지
 }

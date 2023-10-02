@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         setBarController = setBar.GetComponent<SetBarController>();
+
+        // test code
         initialRotation = new Quaternion(0, 0, 0, 1);
     }
 
@@ -53,7 +55,7 @@ public class PlayerController : MonoBehaviour
         UIManager.instance.UpdateAltitudeText(altitude);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Floor"))
         {
@@ -63,9 +65,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Jump"))
+        {
+            // 상태 패턴 변경 (Angle -> Gliding)
+            stateMachine.AddState(StateName.Gliding, new StateGliding(this));
+            stateMachine?.ChangeState(StateName.Gliding);
+        }
+    }
+
     public void InitStateMachine()
     {
-        stateMachine = new StateMachine(StateName.Ready, new StateReady(this));
+        stateMachine = new StateMachine(StateName.Speed, new StateReady(this));
 
         // 나중에 Ready로 바꿔야 함
         //stateMachine = new StateMachine(StateName.Gliding, new StateGliding(this));
