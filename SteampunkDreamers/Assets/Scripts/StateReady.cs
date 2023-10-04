@@ -154,7 +154,7 @@ public class StateReady : BaseState
         {
             controller.initialSpeed = controller.maxSpeed * 0.9f;
         }
-
+        GameManager.instance.SetBoardLength(controller.initialSpeed);
         accelerator = Mathf.Pow(controller.initialSpeed, 2) / ((GameManager.instance.boardScaleX - 20f) * 2);
         controller.velocity += new Vector3(accelerator*Time.deltaTime, 0, 0);
         Debug.Log(controller.velocity.x);

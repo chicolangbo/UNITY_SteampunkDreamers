@@ -28,9 +28,9 @@ public class GameManager : MonoBehaviour
 
     public bool isGameover { get; private set; } // 게임 오버 상태
 
-    public void SetBoardLength(float maxSpeed)
+    public void SetBoardLength(float initialSpeed)
     {
-        boardScaleX = 0.5f * maxSpeed * 6f + 20f;
+        boardScaleX = 0.5f * initialSpeed * 6f + 20f;
         GameObject.FindWithTag("Board").transform.localScale = new Vector3(boardScaleX, boardScaleY, boardScaleZ);
     }
 
