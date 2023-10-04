@@ -20,7 +20,7 @@ public class StateReady : BaseState
     private bool startAngleMove = false;
     public bool selectAngle = false;
     private float controllSpeed_2 = 33.33f; // 0->100까지 3초, 왕복 X
-    private float transitionTime = 3f;
+    private float transitionTime = 6f;
     private float minAngle = 1f;
     private float maxAngle = 90f;
 
@@ -155,8 +155,9 @@ public class StateReady : BaseState
             controller.initialSpeed = controller.maxSpeed * 0.9f;
         }
 
-        accelerator = Mathf.Pow(controller.initialSpeed, 2) / 220f; // 220 = board 길이(110) * 2
-        controller.velocity += new Vector3(accelerator * Time.deltaTime, 0, 0);
+        accelerator = Mathf.Pow(controller.initialSpeed, 2) / ((GameManager.instance.boardScaleX - 20f) * 2);
+        controller.velocity += new Vector3(accelerator*Time.deltaTime, 0, 0);
+        Debug.Log(controller.velocity.x);
     }
 
     public void SetAngle()
