@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     public float maxAngle { get; private set; } = 50f;
     public float minAngle { get; private set; } = -50f;
     public float maxSpeed;
-    public Vector3 velocity = new Vector3 (0, 0, 0);
 
     public Rigidbody rb { get; private set; } // 충돌 처리만
     public GameObject speedBar;
@@ -23,8 +22,8 @@ public class PlayerController : MonoBehaviour
     public AngleBarController angleBarController { get; private set; }
     //private float flightForce = 10f;
 
+    public Vector3 velocity = new Vector3 (0, 0, 0);
     public float distance = 0f;
-    public float speed = 0f; // velocity의 x값
     public float altitude = 1f;
     public float altitudeRatio = 10f; // 정해야 함
 
@@ -53,7 +52,7 @@ public class PlayerController : MonoBehaviour
         // 인게임 정보 UI 업데이트
         altitude = transform.position.y * altitudeRatio;
         UIManager.instance.UpdateDistanceText(distance);
-        UIManager.instance.UpdateVelocityText(speed);
+        UIManager.instance.UpdateVelocityText(velocity.x);
         UIManager.instance.UpdateAltitudeText(altitude);
     }
 
@@ -73,6 +72,16 @@ public class PlayerController : MonoBehaviour
         {
             // 상태 패턴 변경 (Angle -> Gliding)
             stateMachine.AddState(StateName.Gliding, new StateGliding(this));
+            StateGliding stateGliding = (StateGliding)stateMachine.GetState(StateName.Gliding);
+            StateReady stateReady = stateMachine.CurrentState as StateReady;
+            if(stateReady != null)
+            {
+                stateGliding.launchSuccess = stateReady.selectAngle;
+            }
+            else
+            {
+                stateGliding.launchSuccess = false;
+            }
             stateMachine?.ChangeState(StateName.Gliding);
         }
     }

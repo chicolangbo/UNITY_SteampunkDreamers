@@ -16,7 +16,7 @@ public class StateReady : BaseState
 
     //angleBar
     private bool startAngleMove = false;
-    private bool selectAngle = false;
+    public bool selectAngle = false;
     private float controllSpeed_2 = 33.33f; // 0->100까지 3초, 왕복 X
     private float transitionTime = 3f;
     private float minAngle = 1f;
@@ -151,7 +151,7 @@ public class StateReady : BaseState
         // value 61~70, 81~90
         // value 71~80
         var value = controller.angleBarController.value;
-        controller.initialAngle = new Quaternion(0, 0, (value<1)?1:value, 1);
+        controller.initialAngle = new Quaternion(0, 0, (value<1)?1:value - 30f, 1);
     }
 
     public void StartAngleBar()
