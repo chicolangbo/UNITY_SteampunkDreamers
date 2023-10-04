@@ -19,7 +19,7 @@ public class StateLanding : BaseState
     public override void OnFixedUpdateState()
     {
         // speed -> 0
-        controller.frontSpeed = Mathf.Lerp(controller.frontSpeed, 0, Time.deltaTime * 5f);
+        controller.speed = Mathf.Lerp(controller.speed, 0, Time.deltaTime * 5f);
 
         // rotation -> 0
         var tempRot = controller.transform.localRotation;

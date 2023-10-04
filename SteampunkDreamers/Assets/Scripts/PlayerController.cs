@@ -9,29 +9,30 @@ public class PlayerController : MonoBehaviour
 {
     public StateMachine stateMachine { get; private set; }
 
-    public float initialFrontSpeed;
-    public Quaternion initialRotation;
+    public float initialSpeed;
+    public Quaternion initialAngle;
     public float maxAngle { get; private set; } = 50f;
     public float minAngle { get; private set; } = -50f;
-    public float frontSpeedMax;
+    public float maxSpeed;
+    public Vector3 velocity = new Vector3 (0, 0, 0);
 
-    public Rigidbody rb { get; private set; }
-    public GameObject setBar;
-    public SetBarController setBarController { get; private set; }
-    private float flightForce = 10f;
+    public Rigidbody rb { get; private set; } // 충돌 처리만
+    public GameObject speedBar;
+    public GameObject angleBar;
+    public SpeedBarController speedBarController { get; private set; }
+    public AngleBarController angleBarController { get; private set; }
+    //private float flightForce = 10f;
 
     public float distance = 0f;
-    public float frontSpeed = 0f;
+    public float speed = 0f; // velocity의 x값
     public float altitude = 1f;
     public float altitudeRatio = 10f; // 정해야 함
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        setBarController = setBar.GetComponent<SetBarController>();
-
-        // test code
-        initialRotation = new Quaternion(0, 0, 0, 1);
+        speedBarController = speedBar.GetComponent<SpeedBarController>();
+        angleBarController = angleBar.GetComponent<AngleBarController>();
     }
 
     private void Start()
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         stateMachine?.FixedUpdateState();
+        transform.position += velocity * Time.deltaTime;
     }
 
     private void Update()
@@ -49,9 +51,9 @@ public class PlayerController : MonoBehaviour
         stateMachine?.UpdateState();
 
         // 인게임 정보 UI 업데이트
-        altitude = rb.position.y * altitudeRatio;
+        altitude = transform.position.y * altitudeRatio;
         UIManager.instance.UpdateDistanceText(distance);
-        UIManager.instance.UpdateVelocityText(frontSpeed);
+        UIManager.instance.UpdateVelocityText(speed);
         UIManager.instance.UpdateAltitudeText(altitude);
     }
 
@@ -77,9 +79,6 @@ public class PlayerController : MonoBehaviour
 
     public void InitStateMachine()
     {
-        stateMachine = new StateMachine(StateName.Speed, new StateReady(this));
-
-        // 나중에 Ready로 바꿔야 함
-        //stateMachine = new StateMachine(StateName.Gliding, new StateGliding(this));
+        stateMachine = new StateMachine(StateName.Ready, new StateReady(this));
     }
 }

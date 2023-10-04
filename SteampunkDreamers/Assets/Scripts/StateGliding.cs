@@ -20,8 +20,9 @@ public class StateGliding : BaseState
 
     public override void OnEnterState()
     {
-        controller.transform.localRotation = controller.initialRotation;
-        standardFrontSpeed = controller.initialFrontSpeed;
+        controller.angleBar.SetActive(false);
+        controller.transform.localRotation = controller.initialAngle;
+        standardFrontSpeed = controller.initialSpeed;
         //StateLaunch launch = (StateLaunch)controller.stateMachine.GetState(StateName.Launch);
         //launchSuccess = launch.launchSuccess;
     }
@@ -40,7 +41,7 @@ public class StateGliding : BaseState
         standardFrontSpeed = Mathf.Clamp(standardFrontSpeed -Time.deltaTime, 0, standardFrontSpeed);
         var angle = EulerToAngle(controller.transform.localEulerAngles.z);
         var sin = Mathf.Sin(angle);
-        controller.frontSpeed = Mathf.Sqrt((1 - Mathf.Abs(sin)) * Mathf.Pow(standardFrontSpeed, 2));
+        controller.speed = Mathf.Sqrt((1 - Mathf.Abs(sin)) * Mathf.Pow(standardFrontSpeed, 2));
     }
 
     private void MovePlane(bool up)
@@ -57,7 +58,7 @@ public class StateGliding : BaseState
         }
 
         ClampRotation();
-        controller.distance += controller.initialFrontSpeed * Time.deltaTime;
+        controller.distance += controller.initialSpeed * Time.deltaTime;
     }
 
     public void ClampRotation()

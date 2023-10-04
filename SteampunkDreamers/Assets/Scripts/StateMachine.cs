@@ -6,8 +6,7 @@ using UnityEngine;
 
 public enum StateName
 {
-    Speed, // 속력 결정 + 일정 시속으로 보딩 위 이동 -> 일정 구간이 되면 Launch로 연결
-    Angle, // 보딩 일정 구간 동안 각도 조절 -> Gliding으로 연결(성공 실패 bool값 전달)
+    Ready, // 속력 결정 + 일정 시속으로 보딩 위 이동 -> 일정 구간이 되면 Launch로 연결
     Gliding, // 활공 -> floor에 충돌하면 Landing으로 연결
     Landing // 착지
 }
@@ -15,12 +14,14 @@ public enum StateName
 public class StateMachine
 {
     public BaseState CurrentState { get; private set; }
+    public string currentSatateName;
     private Dictionary<StateName, BaseState> states = new Dictionary<StateName, BaseState>();
 
     public StateMachine(StateName stateName, BaseState state)
     {
         AddState(stateName, state);
         CurrentState = GetState(stateName);
+        currentSatateName = stateName.ToString();
     }
 
     public void AddState(StateName stateName, BaseState state)
@@ -40,6 +41,11 @@ public class StateMachine
         return null;
     }
 
+    public string GetCurrentState()
+    {
+        return currentSatateName;
+    }
+
     public void DeleteState(StateName stateName)
     {
         if(states.ContainsKey(stateName))
@@ -53,6 +59,7 @@ public class StateMachine
         CurrentState?.OnExitState(); // 현재 상태 종료
         CurrentState = GetState(stateName);
         CurrentState?.OnEnterState(); // 다음 상태 진입
+        currentSatateName = stateName.ToString();
     }
 
     public void UpdateState()

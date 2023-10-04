@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SetBarController : MonoBehaviour
+public class SpeedBarController : MonoBehaviour
 {
     public Image fillBar;
     public RectTransform controller;
