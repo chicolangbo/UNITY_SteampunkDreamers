@@ -6,8 +6,9 @@ TagManager:
   tags:
   - Floor
   - Jump
-  - SpeedBar
   - AngleBar
+  - SpeedBar
+  - Board
   layers:
   - Default
   - TransparentFX

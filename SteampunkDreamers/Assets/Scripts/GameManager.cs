@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public float boardScaleX { get; private set; }
+    public float boardScaleY;
+    public float boardScaleZ;
+
     public static GameManager instance
     {
         get
@@ -23,6 +27,12 @@ public class GameManager : MonoBehaviour
     private static GameManager m_instance; // 싱글톤이 할당될 static 변수
 
     public bool isGameover { get; private set; } // 게임 오버 상태
+
+    public void SetBoardLength(float maxSpeed)
+    {
+        boardScaleX = 0.5f * maxSpeed * 6f;
+        GameObject.FindWithTag("Board").transform.localScale = new Vector3(boardScaleX, boardScaleY, boardScaleZ);
+    }
 
     // 게임 오버 처리
     public void EndGame()

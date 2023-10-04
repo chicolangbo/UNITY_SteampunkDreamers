@@ -16,7 +16,6 @@ public class StateGliding : BaseState
 
     public override void OnEnterState()
     {
-        controller.angleBar.SetActive(false);
         controller.transform.localRotation = Quaternion.Euler(0,0,EulerToAngle(controller.initialAngle.z));
     }
 

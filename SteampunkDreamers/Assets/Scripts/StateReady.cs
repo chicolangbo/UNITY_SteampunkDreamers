@@ -8,6 +8,7 @@ public class StateReady : BaseState
     private Transform player;
 
     //speedBar
+    private SpeedBarController speedBarController;
     private bool toRight = true;
     private bool selectSpeed = false;
     private float controllSpeed_1 = 66.67f; // 0->100까지 1.5초, 왕복 3초
@@ -15,6 +16,7 @@ public class StateReady : BaseState
     private float timer = 0f;
 
     //angleBar
+    private AngleBarController angleBarController;
     private bool startAngleMove = false;
     public bool selectAngle = false;
     private float controllSpeed_2 = 33.33f; // 0->100까지 3초, 왕복 X
@@ -29,6 +31,8 @@ public class StateReady : BaseState
     public override void OnEnterState()
     {
         player = controller.transform;
+        speedBarController = controller.speedBar.GetComponent<SpeedBarController>();
+        angleBarController = controller.angleBar.GetComponent<AngleBarController>();
     }
 
     public override void OnExitState()
@@ -72,7 +76,7 @@ public class StateReady : BaseState
                     AngleBarMoving();
                 }
 
-                if(controller.angleBar.active && Input.GetMouseButtonDown(0))
+                if(controller.angleBar.active == true && Input.GetMouseButtonDown(0))
                 {
                     selectAngle = true;
                     startAngleMove = false;
@@ -87,10 +91,10 @@ public class StateReady : BaseState
         if (toRight)
         {
             // 1.5초 도달
-            float tempValue = controller.speedBarController.value;
-            controller.speedBarController.value = Mathf.Clamp(tempValue + Time.deltaTime * controllSpeed_1, 0, 100f);
+            float tempValue = speedBarController.value;
+            speedBarController.value = Mathf.Clamp(tempValue + Time.deltaTime * controllSpeed_1, 0, 100f);
 
-            if (controller.speedBarController.value >= 100f)
+            if (speedBarController.value >= 100f)
             {
                 toRight = false;
             }
@@ -98,10 +102,10 @@ public class StateReady : BaseState
         // 100->0
         else
         {
-            float tempValue = controller.speedBarController.value;
-            controller.speedBarController.value = Mathf.Clamp(tempValue - Time.deltaTime * controllSpeed_1, 0, 100f);
+            float tempValue = speedBarController.value;
+            speedBarController.value = Mathf.Clamp(tempValue - Time.deltaTime * controllSpeed_1, 0, 100f);
 
-            if (controller.speedBarController.value <= 0)
+            if (speedBarController.value <= 0)
             {
                 toRight = true;
             }
@@ -111,12 +115,23 @@ public class StateReady : BaseState
     public void AngleBarMoving()
     {
         // 3초 도달
-        float tempValue = controller.angleBarController.value;
-        controller.angleBarController.value = Mathf.Clamp(tempValue + Time.deltaTime * controllSpeed_2, 0, 100f);
-
-        if (controller.angleBarController.value >= 100f) // 순회 완료
+        if(!toRight)
         {
-            controller.angleBar.SetActive(false);
+            float tempValue = angleBarController.value;
+            angleBarController.value = Mathf.Clamp(tempValue + Time.deltaTime * controllSpeed_2, 0, 100f);
+            if (angleBarController.value >= 100f)
+            {
+                toRight = true;
+            }
+        }
+        else
+        {
+            float tempValue = angleBarController.value;
+            angleBarController.value = Mathf.Clamp(tempValue - Time.deltaTime * controllSpeed_2, 0, 100f);
+            if(angleBarController.value <= 0f) // 순회 완료
+            {
+                controller.angleBar.SetActive(false);
+            }
         }
     }
 
@@ -126,7 +141,7 @@ public class StateReady : BaseState
         // value 0~70 : 최대 속력의 50%
         // value 70~80, 90~100 : 최대 속력의 70%
         // vlaue 80~90 : 최대 속력의 90%
-        var value = controller.speedBarController.value;
+        var value = speedBarController.value;
         if (value < 70)
         {
             controller.initialSpeed = controller.maxSpeed * 0.5f;
@@ -150,12 +165,13 @@ public class StateReady : BaseState
         // value 0~60, 91~100 : 1부터 시작
         // value 61~70, 81~90
         // value 71~80
-        var value = controller.angleBarController.value;
-        controller.initialAngle = new Quaternion(0, 0, (value<1)?1:value - 30f, 1);
+        var value = angleBarController.value;
+        controller.initialAngle = new Quaternion(0, 0, (value<1)?1f - 30f:value - 30f, 1);
     }
 
     public void StartAngleBar()
     {
+        toRight = false; // 재활용
         controller.angleBar.SetActive(true);
         startAngleMove = true;
     }
