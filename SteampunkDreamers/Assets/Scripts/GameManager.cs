@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     public void SetBoardLength(float maxSpeed)
     {
-        boardScaleX = 0.5f * maxSpeed * 6f;
+        boardScaleX = 0.5f * maxSpeed * 6f + 20f;
         GameObject.FindWithTag("Board").transform.localScale = new Vector3(boardScaleX, boardScaleY, boardScaleZ);
     }
 
