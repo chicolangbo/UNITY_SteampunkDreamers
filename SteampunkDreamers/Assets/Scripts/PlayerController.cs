@@ -50,7 +50,6 @@ public class PlayerController : MonoBehaviour
 
         // 인게임 정보 UI 업데이트
         altitude = transform.position.y * altitudeRatio;
-        distance = transform.position.x;
         UIManager.instance.UpdateDistanceText(distance);
         UIManager.instance.UpdateVelocityText(velocity.x);
         UIManager.instance.UpdateAltitudeText(altitude);
@@ -78,10 +77,6 @@ public class PlayerController : MonoBehaviour
             {
                 stateGliding.launchSuccess = stateReady.selectAngle;
                 stateGliding.accelerator = stateReady.accelerator;
-            }
-            else
-            {
-                stateGliding.launchSuccess = false;
             }
             angleBar.SetActive(false);
             stateMachine?.ChangeState(StateName.Gliding);
