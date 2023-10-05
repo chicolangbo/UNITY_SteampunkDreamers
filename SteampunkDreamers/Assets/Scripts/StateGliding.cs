@@ -10,12 +10,18 @@ public class StateGliding : BaseState
     public float accelerator;
     public Vector3 direction = Vector3.zero;
 
+    private float minAngle;
+    private float maxAngle;
     private float minRotSpeed = 1f;
     private float maxRotSpeed = 50f;
     private float rotSpeed;
 
-    //private float airResistance = -1f;
-    //private float gravity = -10f;
+    private float airResistance;
+    private float minAirResistance = -1f;
+    private float maxAirResistance = -5f;
+    private float gravity;
+    private float mingravity = -5f;
+    private float maxgravity = -10f;
 
     public StateGliding(PlayerController controller) : base(controller)
     {
@@ -30,6 +36,9 @@ public class StateGliding : BaseState
             direction = controller.transform.right;
             controller.velocity = direction * controller.initialSpeed;
         }
+
+        minAngle = controller.minAngle;
+        maxAngle = controller.maxAngle;
     }
 
     public override void OnExitState()
@@ -38,7 +47,7 @@ public class StateGliding : BaseState
 
     public override void OnFixedUpdateState()
     {
-        MovePlane(Input.GetMouseButton(0));
+        RotatePlane(Input.GetMouseButton(0));
     }
 
     public override void OnUpdateState()
@@ -49,11 +58,12 @@ public class StateGliding : BaseState
         // 회전 속도 업데이트
         SetRotSpeed(controller.velocity.x);
 
-        // resistance 적용
-        //controller.velocity += resistance * Time.deltaTime;
+        // resistance 값 업데이트
+        SetResistance(controller.transform.localEulerAngles);
+        controller.velocity += new Vector3( airResistance, gravity, 0) * Time.deltaTime;
     }
 
-    public void MovePlane(bool up)
+    public void RotatePlane(bool up)
     {
         Debug.Log(launchSuccess);
 
@@ -68,14 +78,23 @@ public class StateGliding : BaseState
         }
 
         ClampRotation(controller.transform.localEulerAngles);
-        controller.distance += controller.velocity.x * Time.deltaTime;
+    }
+
+    public void SetResistance(Vector3 localEulerAngle)
+    {
+        // 앵글 -> 백분율
+        localEulerAngle.z = EulerToAngle(localEulerAngle.z);
+        var anglePercentage = (localEulerAngle.z - minAngle) / (maxAngle - minAngle) * 100f;
+
+        // 앵글 - 저항값 맵핑
+        airResistance = anglePercentage / 100 * (maxAirResistance - minAirResistance) + minAirResistance;
+        gravity = (1 - anglePercentage / 100) * (maxgravity -  mingravity) + mingravity;
     }
 
     public void SetRotSpeed(float currSpeed)
     {
         float speedRatio = currSpeed / controller.maxSpeed; // 0~1
         rotSpeed = Mathf.Clamp(maxRotSpeed * (1 - speedRatio), minRotSpeed, maxRotSpeed);
-        //Debug.Log(rotSpeed);
     }
 
     public void ClampRotation(Vector3 localEulerAngle)

@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
         // 인게임 정보 UI 업데이트
         altitude = transform.position.y * altitudeRatio;
+        distance = transform.position.x;
         UIManager.instance.UpdateDistanceText(distance);
         UIManager.instance.UpdateVelocityText(velocity.x);
         UIManager.instance.UpdateAltitudeText(altitude);

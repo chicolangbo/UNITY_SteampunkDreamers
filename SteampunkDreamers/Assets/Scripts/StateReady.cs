@@ -77,6 +77,7 @@ public class StateReady : BaseState
                 }
 
                 if(controller.angleBar.active == true && Input.GetMouseButtonDown(0))
+                if(controller.angleBar.active == true && Input.GetMouseButtonDown(0))
                 {
                     selectAngle = true;
                     startAngleMove = false;
