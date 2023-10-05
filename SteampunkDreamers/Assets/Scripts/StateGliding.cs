@@ -7,8 +7,14 @@ using UnityEngine.WSA;
 public class StateGliding : BaseState
 {
     public bool launchSuccess = false;
-    
-    private Vector3 resistance = new Vector3(-1f, -9.8f, 0f);
+    public float accelerator;
+    public Vector3 direction = Vector3.zero;
+
+    private float minRotSpeed = 1f;
+    private float maxRotSpeed = 50f;
+
+    //private float airResistance = -1f;
+    //private float gravity = -10f;
 
     public StateGliding(PlayerController controller) : base(controller)
     {
@@ -17,6 +23,9 @@ public class StateGliding : BaseState
     public override void OnEnterState()
     {
         controller.transform.localRotation = Quaternion.Euler(0,0,EulerToAngle(controller.initialAngle.z));
+        // velocity 적용
+        direction = controller.transform.right;
+        controller.velocity = direction * controller.initialSpeed;
     }
 
     public override void OnExitState()
@@ -30,7 +39,11 @@ public class StateGliding : BaseState
 
     public override void OnUpdateState()
     {
-        controller.velocity += resistance;
+        // 방향 업데이트
+        direction = controller.transform.right;
+
+        // resistance 적용
+        //controller.velocity += resistance * Time.deltaTime;
     }
 
     private void MovePlane(bool up)
@@ -61,5 +74,14 @@ public class StateGliding : BaseState
     public float EulerToAngle(float z)
     {
         return (z > 180f) ? z - 360f : z;
+    }
+
+    public void EulerToDirection(float z)
+    {
+        var angle = z;
+        var angleInRadians = angle * Mathf.Deg2Rad; // 각도->라디안 변환
+        direction = new Vector3(Mathf.Cos(angleInRadians), Mathf.Sin(angleInRadians), 0); // 디렉션 변환
+        direction.Normalize();
+        Debug.Log(direction);
     }
 }

@@ -12,7 +12,7 @@ public class StateReady : BaseState
     private bool toRight = true;
     private bool selectSpeed = false;
     private float controllSpeed_1 = 66.67f; // 0->100까지 1.5초, 왕복 3초
-    private float accelerator;
+    public float accelerator;
     private float timer = 0f;
 
     //angleBar

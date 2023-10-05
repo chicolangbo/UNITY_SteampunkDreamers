@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
             if(stateReady != null)
             {
                 stateGliding.launchSuccess = stateReady.selectAngle;
+                stateGliding.accelerator = stateReady.accelerator;
             }
             else
             {
