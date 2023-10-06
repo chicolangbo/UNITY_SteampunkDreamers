@@ -12,30 +12,20 @@ public class StateGliding : BaseState
 
     private float minAngle;
     private float maxAngle;
-    private float minRotSpeed = 1f;
+    private float minRotSpeed = 10f;
     private float maxRotSpeed = 50f;
     private float rotSpeed;
 
-    private bool upLimited = false;
+    private Vector3 initialPos;
 
     // Resistance & Speed
-    // x up
-    //public float xSpeed;
-    //private float minXSpeed = 0.2f;
-    //private float maxXSpeed = 2f;
-    // x down
     private float airResistance;
-    private float minAirResistance = 3f;
-    private float maxAirResistance = -5f;
-    // y up
-    //public float ySpeed;
-    //private float minYSpeed = 5f;
-    //private float maxYSpeed = 15f;
-    // y down
+    private float minAirResistance = 10f;
+    private float maxAirResistance = -15f;
     private float gravity = -15f;
     private float upForce;
-    private float minUpForce = 20f;
-    private float maxUpForce = 30f;
+    private float minUpForce = 0f;
+    private float maxUpForce = 60f;
 
     public StateGliding(PlayerController controller) : base(controller)
     {
@@ -43,17 +33,22 @@ public class StateGliding : BaseState
 
     public override void OnEnterState()
     {
+        // original code
         // 초기 각도 세팅
-        controller.transform.localRotation = Quaternion.Euler(0, 0, EulerToAngle(controller.initialAngle.z));
-
+        //controller.transform.localRotation = Quaternion.Euler(0, 0, EulerToAngle(controller.initialAngle.z));
+        controller.transform.localRotation = Quaternion.Euler(0, 0, EulerToAngle(50f)); // test code
         // velocity 적용 -> 발사
         if (launchSuccess)
         {
             direction = controller.transform.right;
             controller.velocity = direction * controller.initialSpeed;
+            initialPos = controller.transform.position;
         }
         minAngle = controller.minAngle;
         maxAngle = controller.maxAngle;
+
+        // test code
+        controller.velocity = direction * controller.maxSpeed;
     }     
 
     public override void OnExitState()
@@ -62,26 +57,27 @@ public class StateGliding : BaseState
 
     public override void OnFixedUpdateState()
     {
-        RotatePlane(Input.GetMouseButton(0));
-    }
-
-    public override void OnUpdateState()
-    {
         // 방향 업데이트
         direction = controller.transform.right;
 
-        // 회전 속도 업데이트
-        SetRotSpeed(controller.velocity.x);
+        RotatePlane(Input.GetMouseButton(0));
 
         //resistance 값 업데이트
         SetResistance(controller.transform.localEulerAngles);
         controller.velocity += new Vector3(airResistance, gravity, 0) * Time.deltaTime;
-        //controller.velocity += 
+
+        // 회전 속도 업데이트
+        SetRotSpeed(controller.velocity.x);
+    }
+
+    public override void OnUpdateState()
+    {
+        controller.distance = controller.transform.position.x - initialPos.x;
     }
 
     public void RotatePlane(bool up)
     {   
-        if (up && launchSuccess && !upLimited)
+        if (up && launchSuccess)
         {
             controller.transform.Rotate(Vector3.forward * rotSpeed * Time.deltaTime);
             controller.velocity.y += upForce * Time.deltaTime;
@@ -109,18 +105,20 @@ public class StateGliding : BaseState
         if(controller.velocity.x < 0) // 뒤로가는 거 막음
         {
             airResistance = 0;
+            upForce = 0;
         }
-        //if(controller.velocity.x <= controller.velocity.y) // y값 증가 한계선
-        //{
-        //    upLimited = true;
-            // y값 못 올라가도록 세팅(y저항값 최대) & x저항값은 최소
+        if (controller.velocity.x <= controller.velocity.y) // y값 증가 한계선
+        {
+            upForce = 0;
+            //upLimited = true;
+            //y값 못 올라가도록 세팅(y저항값 최대) &x저항값은 최소
             //gravity = maxgravity;
             //UnityEditor.EditorApplication.isPaused = true;
-        //}
-        //else
-        //{
-        //    upLimited = false;
-        //}
+        }
+        else
+        {
+            //upLimited = false;
+        }
         Debug.Log("gravity : " + gravity);
         Debug.Log("air : " + airResistance);
         Debug.Log("velocity : " + controller.velocity);

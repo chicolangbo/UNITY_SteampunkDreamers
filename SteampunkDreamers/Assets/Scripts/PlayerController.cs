@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
         // 인게임 정보 UI 업데이트
         altitude = transform.position.y * altitudeRatio;
-        distance = transform.position.x;
+        //distance = transform.position.x;
         UIManager.instance.UpdateDistanceText(distance);
         UIManager.instance.UpdateVelocityText(velocity.x);
         UIManager.instance.UpdateAltitudeText(altitude);
@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
             stateMachine.AddState(StateName.Gliding, new StateGliding(this));
             StateGliding stateGliding = (StateGliding)stateMachine.GetState(StateName.Gliding);
             StateReady stateReady = stateMachine.CurrentState as StateReady;
-            if(stateReady != null)
+            if (stateReady != null)
             {
                 stateGliding.launchSuccess = stateReady.selectAngle;
                 stateGliding.accelerator = stateReady.accelerator;
@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
 
     public void InitStateMachine()
     {
+        // original code
         stateMachine = new StateMachine(StateName.Ready, new StateReady(this));
     }
 }
