@@ -16,23 +16,26 @@ public class StateGliding : BaseState
     private float maxRotSpeed = 50f;
     private float rotSpeed;
 
+    private bool upLimited = false;
+
     // Resistance & Speed
     // x up
-    public float xSpeed;
-    private float minXSpeed = 0.2f;
-    private float maxXSpeed = 2f;
+    //public float xSpeed;
+    //private float minXSpeed = 0.2f;
+    //private float maxXSpeed = 2f;
     // x down
     private float airResistance;
     private float minAirResistance = 3f;
     private float maxAirResistance = -5f;
     // y up
-    public float ySpeed;
-    private float minYSpeed = 5f;
-    private float maxYSpeed = 15f;
+    //public float ySpeed;
+    //private float minYSpeed = 5f;
+    //private float maxYSpeed = 15f;
     // y down
-    private float gravity;
-    private float mingravity = 10f;
-    private float maxgravity = -15f;
+    private float gravity = -15f;
+    private float upForce;
+    private float minUpForce = 20f;
+    private float maxUpForce = 30f;
 
     public StateGliding(PlayerController controller) : base(controller)
     {
@@ -51,7 +54,7 @@ public class StateGliding : BaseState
         }
         minAngle = controller.minAngle;
         maxAngle = controller.maxAngle;
-    }
+    }     
 
     public override void OnExitState()
     {
@@ -73,17 +76,15 @@ public class StateGliding : BaseState
         //resistance 값 업데이트
         SetResistance(controller.transform.localEulerAngles);
         controller.velocity += new Vector3(airResistance, gravity, 0) * Time.deltaTime;
+        //controller.velocity += 
     }
 
     public void RotatePlane(bool up)
     {   
-        if (up && launchSuccess)
+        if (up && launchSuccess && !upLimited)
         {
             controller.transform.Rotate(Vector3.forward * rotSpeed * Time.deltaTime);
-            // minAirResistance, minGravity 감소
-            minAirResistance -= Time.deltaTime;
-            mingravity -= Time.deltaTime;
-            Debug.Log(mingravity);
+            controller.velocity.y += upForce * Time.deltaTime;
         }
         else
         {
@@ -100,9 +101,29 @@ public class StateGliding : BaseState
         localEulerAngle.z = EulerToAngle(localEulerAngle.z);
         var anglePercentage = (localEulerAngle.z - minAngle) / (maxAngle - minAngle) * 100f;
 
-        // 앵글 - 저항값 맵핑
+        // 앵글 - 저항값, upForce 맵핑
         airResistance = anglePercentage / 100 * (maxAirResistance - minAirResistance) + minAirResistance;
-        gravity = (1 - anglePercentage / 100) * (maxgravity -  mingravity) + mingravity;
+        upForce = anglePercentage / 100 * (maxUpForce - minUpForce) + minUpForce;
+
+        // 최소값 세팅
+        if(controller.velocity.x < 0) // 뒤로가는 거 막음
+        {
+            airResistance = 0;
+        }
+        //if(controller.velocity.x <= controller.velocity.y) // y값 증가 한계선
+        //{
+        //    upLimited = true;
+            // y값 못 올라가도록 세팅(y저항값 최대) & x저항값은 최소
+            //gravity = maxgravity;
+            //UnityEditor.EditorApplication.isPaused = true;
+        //}
+        //else
+        //{
+        //    upLimited = false;
+        //}
+        Debug.Log("gravity : " + gravity);
+        Debug.Log("air : " + airResistance);
+        Debug.Log("velocity : " + controller.velocity);
     }
 
     public void SetXYSpeed()

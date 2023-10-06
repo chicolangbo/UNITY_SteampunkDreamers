@@ -2715,7 +2715,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialSpeed: 0
   initialAngle: {x: 0, y: 0, z: 0, w: 0}
-  maxSpeed: 100
+  maxSpeed: 50
   velocity: {x: 0, y: 0, z: 0}
   distance: 0
   altitude: 1
