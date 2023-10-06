@@ -22,6 +22,7 @@ public class StateGliding : BaseState
     private float airResistance;
     private float minAirResistance = 10f;
     private float maxAirResistance = -15f;
+
     private float gravity = -15f;
     private float upForce;
     private float minUpForce = 0f;
@@ -110,14 +111,6 @@ public class StateGliding : BaseState
         if (controller.velocity.x <= controller.velocity.y) // y값 증가 한계선
         {
             upForce = 0;
-            //upLimited = true;
-            //y값 못 올라가도록 세팅(y저항값 최대) &x저항값은 최소
-            //gravity = maxgravity;
-            //UnityEditor.EditorApplication.isPaused = true;
-        }
-        else
-        {
-            //upLimited = false;
         }
         Debug.Log("gravity : " + gravity);
         Debug.Log("air : " + airResistance);
