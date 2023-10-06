@@ -56,16 +56,6 @@ public class PlayerController : MonoBehaviour
         UIManager.instance.UpdateAltitudeText(altitude);
     }
 
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("Floor"))
-        {
-            // 상태 변경 ( Gliding -> Landing )
-            stateMachine.AddState(StateName.Landing, new StateLanding(this));
-            stateMachine?.ChangeState(StateName.Landing);
-        }
-    }
-
     public void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Jump"))
@@ -81,6 +71,13 @@ public class PlayerController : MonoBehaviour
             }
             angleBar.SetActive(false);
             stateMachine?.ChangeState(StateName.Gliding);
+        }
+
+        if (other.CompareTag("Floor"))
+        {
+            // 상태 변경 ( Gliding -> Landing )
+            stateMachine.AddState(StateName.Landing, new StateLanding(this));
+            stateMachine?.ChangeState(StateName.Landing);
         }
     }
 
