@@ -19,6 +19,8 @@ public class StateGliding : BaseState
     private Vector3 initialPos;
 
     // Resistance & Speed
+    private bool isRotPossible = false;
+
     private float airResistance;
     private float minAirResistance = 10f;
     private float maxAirResistance = -15f;
@@ -26,7 +28,7 @@ public class StateGliding : BaseState
     private float gravity = -15f;
     private float upForce;
     private float minUpForce = 0f;
-    private float maxUpForce = 60f;
+    private float maxUpForce = 40f;
     private float downForce;
 
 
@@ -70,10 +72,15 @@ public class StateGliding : BaseState
         {
             controller.velocity.x = 0;
             upForce = 0;
+            isRotPossible = false;
         }
         else if(controller.velocity.x > controller.maxSpeed)
         {
             controller.velocity.x = controller.maxSpeed;
+        }
+        else if( controller.velocity.x > 5f)
+        {
+            isRotPossible = true;
         }
     }
 
@@ -81,7 +88,6 @@ public class StateGliding : BaseState
     {
         // 방향 업데이트
         direction = controller.transform.right;
-
 
         // 회전 속도 업데이트
         SetRotSpeed(controller.velocity.x);
@@ -91,7 +97,7 @@ public class StateGliding : BaseState
 
     public void RotatePlane(bool up)
     {   
-        if (up && launchSuccess)
+        if (up && launchSuccess && isRotPossible)
         {
             controller.transform.Rotate(Vector3.forward * rotSpeed * Time.deltaTime);
         }
