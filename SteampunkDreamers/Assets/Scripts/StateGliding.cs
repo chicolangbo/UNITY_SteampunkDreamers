@@ -27,6 +27,8 @@ public class StateGliding : BaseState
     private float upForce;
     private float minUpForce = 0f;
     private float maxUpForce = 60f;
+    private float downForce;
+
 
     public StateGliding(PlayerController controller) : base(controller)
     {
@@ -34,7 +36,6 @@ public class StateGliding : BaseState
 
     public override void OnEnterState()
     {
-        // original code
         // 초기 각도 세팅
         //controller.transform.localRotation = Quaternion.Euler(0, 0, EulerToAngle(controller.initialAngle.z));
         controller.transform.localRotation = Quaternion.Euler(0, 0, EulerToAngle(50f)); // test code
@@ -58,21 +59,33 @@ public class StateGliding : BaseState
 
     public override void OnFixedUpdateState()
     {
-        // 방향 업데이트
-        direction = controller.transform.right;
-
         RotatePlane(Input.GetMouseButton(0));
+        controller.velocity += new Vector3(airResistance, gravity + upForce, 0) * Time.deltaTime;
 
         //resistance 값 업데이트
         SetResistance(controller.transform.localEulerAngles);
-        controller.velocity += new Vector3(airResistance, gravity, 0) * Time.deltaTime;
 
-        // 회전 속도 업데이트
-        SetRotSpeed(controller.velocity.x);
+        // x speed 예외 처리
+        if (controller.velocity.x < 0)
+        {
+            controller.velocity.x = 0;
+            upForce = 0;
+        }
+        else if(controller.velocity.x > controller.maxSpeed)
+        {
+            controller.velocity.x = controller.maxSpeed;
+        }
     }
 
     public override void OnUpdateState()
     {
+        // 방향 업데이트
+        direction = controller.transform.right;
+
+
+        // 회전 속도 업데이트
+        SetRotSpeed(controller.velocity.x);
+
         controller.distance = controller.transform.position.x - initialPos.x;
     }
 
@@ -81,12 +94,12 @@ public class StateGliding : BaseState
         if (up && launchSuccess)
         {
             controller.transform.Rotate(Vector3.forward * rotSpeed * Time.deltaTime);
-            controller.velocity.y += upForce * Time.deltaTime;
         }
         else
         {
             var change = Vector3.forward * -rotSpeed * Time.deltaTime;
             controller.transform.Rotate((change.z < 0) ? change : -change);
+            upForce = 0;
         }
 
         ClampRotation(controller.transform.localEulerAngles);
@@ -103,24 +116,14 @@ public class StateGliding : BaseState
         upForce = anglePercentage / 100 * (maxUpForce - minUpForce) + minUpForce;
 
         // 최소값 세팅
-        if(controller.velocity.x < 0) // 뒤로가는 거 막음
-        {
-            airResistance = 0;
-            upForce = 0;
-        }
-        if (controller.velocity.x <= controller.velocity.y) // y값 증가 한계선
-        {
-            upForce = 0;
-        }
-        Debug.Log("gravity : " + gravity);
-        Debug.Log("air : " + airResistance);
-        Debug.Log("velocity : " + controller.velocity);
-    }
-
-    public void SetXYSpeed()
-    {
-        // 가속 처리
-
+        //if (controller.velocity.x <= controller.velocity.y) // y값 증가 한계선?
+        //{
+        //    Debug.Log("upForce 0");
+        //    upForce = 0;
+        //}
+        //Debug.Log("gravity : " + gravity);
+        //Debug.Log("air : " + airResistance);
+        //Debug.Log("velocity : " + controller.velocity);
     }
 
     public void SetRotSpeed(float currSpeed)

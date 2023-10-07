@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
     {
         if(other.CompareTag("Jump"))
         {
-            // 상태 변경 (Angle -> Gliding)
+            // 상태 변경 (Ready -> Gliding)
             stateMachine.AddState(StateName.Gliding, new StateGliding(this));
             StateGliding stateGliding = (StateGliding)stateMachine.GetState(StateName.Gliding);
             StateReady stateReady = stateMachine.CurrentState as StateReady;
