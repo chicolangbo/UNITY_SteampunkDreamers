@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
         GameObject.FindWithTag("Board").transform.localScale = new Vector3(boardScaleX, boardScaleY, boardScaleZ);
     }
 
+
+
     // 게임 오버 처리
     public void EndGame()
     {

@@ -29,8 +29,6 @@ public class StateGliding : BaseState
     private float upForce;
     private float minUpForce = 0f;
     private float maxUpForce = 40f;
-    private float downForce;
-
 
     public StateGliding(PlayerController controller) : base(controller)
     {
@@ -53,6 +51,8 @@ public class StateGliding : BaseState
 
         // test code
         controller.velocity = direction * controller.maxSpeed;
+
+        //airflowSpwaner.StartCreateAirflow();
     }     
 
     public override void OnExitState()
@@ -108,7 +108,6 @@ public class StateGliding : BaseState
             //    upForce = 0;
             //    isRotPossible = false;
             //}
-
         }
         else
         {
