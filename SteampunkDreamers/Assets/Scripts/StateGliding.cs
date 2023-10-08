@@ -6,6 +6,8 @@ using UnityEngine.WSA;
 
 public class StateGliding : BaseState
 {
+    private AirflowSystem airflow;
+
     public bool launchSuccess = false;
     public float accelerator;
     public Vector3 direction = Vector3.zero;
@@ -66,6 +68,8 @@ public class StateGliding : BaseState
 
         //resistance 값 업데이트
         SetResistance(controller.transform.localEulerAngles);
+       // CheckAirflow();
+
 
         // x speed 예외 처리
         if (controller.velocity.x < 0)
@@ -153,5 +157,19 @@ public class StateGliding : BaseState
     public float EulerToAngle(float z)
     {
         return (z > 180f) ? z - 360f : z;
+    }
+
+    public void CheckAirflow()
+    {
+        //airflow = controller.airflows.First.Value;
+        if(airflow.airflowType == AirflowType.Front)
+        {
+            Debug.Log("front");
+            airResistance = 0f;
+        }
+        else
+        {
+            Debug.Log("reverse");
+        }
     }
 }

@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     public float altitudeRatio = 10f; // 정해야 함
 
     private AirflowSpwaner airflowSpwaner;
-    public List<AirflowSystem> airflows;
+    public LinkedList<GameObject> airflows = new LinkedList<GameObject>();
 
     private void Awake()
     {
@@ -86,6 +86,10 @@ public class PlayerController : MonoBehaviour
             stateMachine.AddState(StateName.Landing, new StateLanding(this));
             stateMachine?.ChangeState(StateName.Landing);
             airflowSpwaner.enabled = false;
+        }
+        if (other.CompareTag("Airflow"))
+        {
+            airflows.AddLast(other.gameObject);
         }
     }
 

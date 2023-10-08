@@ -10,7 +10,7 @@ public class AirflowSpwaner : MonoBehaviour
     private float spawnDelayTime = 2.5f;
     public PlayerController playerController;
 
-    public void Start() // 나중에 수정하기
+    public void Start()
     {
         StartCoroutine(CreateAirflow());
         playerController = GetComponent<PlayerController>();
@@ -37,8 +37,11 @@ public class AirflowSpwaner : MonoBehaviour
             airflow.Setup((AirflowType)Random.Range(0, 2));
             airflow.onDisappear += () =>
             {
-                Destroy(airflow);
-                playerController.airflows.Remove(airflow);
+                if(playerController.airflows.Contains(airflow.gameObject))
+                {
+                    playerController.airflows.Remove(airflow.gameObject);
+                }
+                Destroy(airflow.gameObject);
             };
 
             yield return new WaitForSeconds(spawnDelayTime);

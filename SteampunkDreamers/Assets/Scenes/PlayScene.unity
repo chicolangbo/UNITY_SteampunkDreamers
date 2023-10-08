@@ -2758,7 +2758,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2869,6 +2869,7 @@ MonoBehaviour:
   - {fileID: 763688590}
   - {fileID: 230432761}
   airflowPrefab: {fileID: -4320931091565651623, guid: 7a05cb8dfee5f9b44bab41844090ede1, type: 3}
+  playerController: {fileID: 0}
 --- !u!1 &1707472523
 GameObject:
   m_ObjectHideFlags: 0

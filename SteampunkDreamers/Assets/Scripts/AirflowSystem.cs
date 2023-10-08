@@ -25,7 +25,7 @@ public class AirflowSystem : MonoBehaviour
     public void Awake()
     {
         //Destroy(gameObject, waitTime);
-        Disappear();
+        StartCoroutine(Disappear());
         airflowFront = transform.GetChild(0).gameObject;
         airflowReverse = transform.GetChild(1).gameObject;
         fadeEffect = GetComponent<FadeController>();
@@ -66,19 +66,6 @@ public class AirflowSystem : MonoBehaviour
             fadeEffect.material = airflowReverse.GetComponent<MeshRenderer>().material;
         }
 
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Player"))
-        {
-            if(playerController == null)
-            {
-                playerController = other.gameObject.GetComponent<PlayerController>();
-            }
-
-            playerController.airflows.Add(this);
-        }
     }
 
     public IEnumerator Disappear()
