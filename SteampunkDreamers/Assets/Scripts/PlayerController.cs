@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     public float altitudeRatio = 10f; // 정해야 함
 
     private AirflowSpwaner airflowSpwaner;
-    public LinkedList<GameObject> airflows = new LinkedList<GameObject>();
+    public LinkedList<AirflowSystem> airflows = new LinkedList<AirflowSystem>();
 
     private void Awake()
     {
@@ -89,7 +89,10 @@ public class PlayerController : MonoBehaviour
         }
         if (other.CompareTag("Airflow"))
         {
-            airflows.AddLast(other.gameObject);
+            if(!airflows.Contains(other.GetComponent<AirflowSystem>()))
+            {
+                airflows.AddLast(other.GetComponent<AirflowSystem>());
+            }
         }
     }
 

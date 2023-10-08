@@ -37,9 +37,9 @@ public class AirflowSpwaner : MonoBehaviour
             airflow.Setup((AirflowType)Random.Range(0, 2));
             airflow.onDisappear += () =>
             {
-                if(playerController.airflows.Contains(airflow.gameObject))
+                if(playerController.airflows.Contains(airflow))
                 {
-                    playerController.airflows.Remove(airflow.gameObject);
+                    playerController.airflows.Remove(airflow);
                 }
                 Destroy(airflow.gameObject);
             };
