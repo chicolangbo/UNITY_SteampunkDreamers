@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public enum AirflowType
 {
@@ -17,10 +18,14 @@ public class AirflowSystem : MonoBehaviour
     private GameObject airflowFront;
     private GameObject airflowReverse;
     private FadeController fadeEffect;
+    public event Action onDisappear;
+
+    public PlayerController playerController;
 
     public void Awake()
     {
-        Destroy(gameObject, waitTime);
+        //Destroy(gameObject, waitTime);
+        Disappear();
         airflowFront = transform.GetChild(0).gameObject;
         airflowReverse = transform.GetChild(1).gameObject;
         fadeEffect = GetComponent<FadeController>();
@@ -33,12 +38,16 @@ public class AirflowSystem : MonoBehaviour
 
     public void Update()
     {
+        // fade out
         timer += Time.deltaTime;
         if(timer > waitTime - fadeEffect.fadeTime && once)
         {
             fadeEffect.StartFadeOut();
             once = false;
         }
+
+        // 기류 적용
+
     }
 
     public void Setup(AirflowType type)
@@ -57,5 +66,24 @@ public class AirflowSystem : MonoBehaviour
             fadeEffect.material = airflowReverse.GetComponent<MeshRenderer>().material;
         }
 
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            if(playerController == null)
+            {
+                playerController = other.gameObject.GetComponent<PlayerController>();
+            }
+
+            playerController.airflows.Add(this);
+        }
+    }
+
+    public IEnumerator Disappear()
+    {
+        yield return new WaitForSeconds(waitTime);
+        onDisappear();
     }
 }

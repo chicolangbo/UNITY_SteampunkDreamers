@@ -8,10 +8,12 @@ public class AirflowSpwaner : MonoBehaviour
     private Transform prevPoint;
     public AirflowSystem airflowPrefab;
     private float spawnDelayTime = 2.5f;
+    public PlayerController playerController;
 
     public void Start() // 나중에 수정하기
     {
         StartCoroutine(CreateAirflow());
+        playerController = GetComponent<PlayerController>();
     }
 
     public IEnumerator CreateAirflow()
@@ -32,8 +34,12 @@ public class AirflowSpwaner : MonoBehaviour
             prevPoint = randomPoint;
 
             var airflow = Instantiate(airflowPrefab, randomPoint.position, randomPoint.rotation);
-            Debug.Log("생성");
             airflow.Setup((AirflowType)Random.Range(0, 2));
+            airflow.onDisappear += () =>
+            {
+                Destroy(airflow);
+                playerController.airflows.Remove(airflow);
+            };
 
             yield return new WaitForSeconds(spawnDelayTime);
         }

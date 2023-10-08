@@ -25,7 +25,8 @@ public class PlayerController : MonoBehaviour
     public float altitude = 1f;
     public float altitudeRatio = 10f; // 정해야 함
 
-    AirflowSpwaner airflowSpwaner;
+    private AirflowSpwaner airflowSpwaner;
+    public List<AirflowSystem> airflows;
 
     private void Awake()
     {
