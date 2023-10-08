@@ -100,6 +100,15 @@ public class StateGliding : BaseState
         if (up && launchSuccess && isRotPossible)
         {
             controller.transform.Rotate(Vector3.forward * rotSpeed * Time.deltaTime);
+
+            // 최소값 세팅
+            //if (controller.velocity.x <= controller.velocity.y) // y값 증가 한계
+            //{
+            //    Debug.Log("upForce 0");
+            //    upForce = 0;
+            //    isRotPossible = false;
+            //}
+
         }
         else
         {
@@ -107,6 +116,8 @@ public class StateGliding : BaseState
             controller.transform.Rotate((change.z < 0) ? change : -change);
             upForce = 0;
         }
+
+
 
         ClampRotation(controller.transform.localEulerAngles);
     }
@@ -121,12 +132,6 @@ public class StateGliding : BaseState
         airResistance = anglePercentage / 100 * (maxAirResistance - minAirResistance) + minAirResistance;
         upForce = anglePercentage / 100 * (maxUpForce - minUpForce) + minUpForce;
 
-        // 최소값 세팅
-        //if (controller.velocity.x <= controller.velocity.y) // y값 증가 한계선?
-        //{
-        //    Debug.Log("upForce 0");
-        //    upForce = 0;
-        //}
         //Debug.Log("gravity : " + gravity);
         //Debug.Log("air : " + airResistance);
         //Debug.Log("velocity : " + controller.velocity);

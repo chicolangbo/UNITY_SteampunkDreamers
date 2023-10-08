@@ -1620,7 +1620,7 @@ GameObject:
   m_Component:
   - component: {fileID: 736762028}
   m_Layer: 5
-  m_Name: Controller
+  m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3277,8 +3277,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fillBar: {fileID: 2060166552}
-  controller: {fileID: 736762028}
+  arrow: {fileID: 736762028}
+  playerController: {fileID: 1672137053}
   value: 0
+  accelerator: 0
 --- !u!1 &2055942984
 GameObject:
   m_ObjectHideFlags: 0
@@ -3332,7 +3334,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fillBar: {fileID: 191814715}
-  controller: {fileID: 2136456184}
+  arrow: {fileID: 2136456184}
+  playerController: {fileID: 1672137053}
   value: 0
 --- !u!114 &2055942987
 MonoBehaviour:
@@ -3552,7 +3555,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2136456184}
   m_Layer: 5
-  m_Name: Controller
+  m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
