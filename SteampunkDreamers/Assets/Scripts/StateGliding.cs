@@ -119,9 +119,6 @@ public class StateGliding : BaseState
             controller.transform.Rotate((change.z < 0) ? change : -change);
             upForce = 0;
         }
-
-
-
         ClampRotation(controller.transform.localEulerAngles);
     }
 
@@ -131,9 +128,18 @@ public class StateGliding : BaseState
         localEulerAngle.z = EulerToAngle(localEulerAngle.z);
         var anglePercentage = (localEulerAngle.z - minAngle) / (maxAngle - minAngle) * 100f;
 
-        // ¾Þ±Û - ÀúÇ×°ª, upForce ¸ÊÇÎ
+        // ¾Þ±Û - ÀúÇ×°ª
         airResistance = anglePercentage / 100 * (maxAirResistance - minAirResistance) + minAirResistance;
-        upForce = anglePercentage / 100 * (maxUpForce - minUpForce) + minUpForce;
+
+        // ¾Þ±Û - upForce
+        if(controller.altitude > 20000)
+        {
+            upForce = 0;
+        }
+        else
+        {
+            upForce = anglePercentage / 100 * (maxUpForce - minUpForce) + minUpForce;
+        }
 
         // ±â·ù Àû¿ë
         if (controller.airflows.Count != 0)
@@ -173,12 +179,10 @@ public class StateGliding : BaseState
             // ¼øÇ³ ÃÖ´ñ°ª : airResistance ÃÖ´ñ°ª = direction.x * controller.maxSpeed * 0.4f
             // 0 ~ ¼øÇ³ ÃÖ´ñ°ª lerp, 4ÃÊ
             airResistance = Mathf.Lerp(0, controller.maxSpeed * 0.4f, Time.deltaTime * 10f);
-            //Debug.Log(airResistance);
         }
-        else
+        else // ±âÃ¼ Èçµé¸®´Â ¿¬Ãâ?
         {
             airResistance -= Time.deltaTime * 50f;
-            //Debug.Log("reverse");
         }
     }
 }

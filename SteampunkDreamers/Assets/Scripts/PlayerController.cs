@@ -48,6 +48,11 @@ public class PlayerController : MonoBehaviour
     {
         stateMachine?.FixedUpdateState();
         transform.position += velocity * Time.deltaTime;
+        //if(altitude > 20000)
+        //{
+        //    var tempPos = new Vector3(transform.position.x, 2000f, 0);
+        //    transform.position = tempPos;
+        //}
     }
 
     private void Update()
@@ -80,7 +85,7 @@ public class PlayerController : MonoBehaviour
             // 상태 변경 ( Gliding -> Landing )
             stateMachine.AddState(StateName.Landing, new StateLanding(this));
             stateMachine?.ChangeState(StateName.Landing);
-            airflowSpwaner.enabled = false;
+            airflowSpwaner.spawnStop = true;
         }
         if (other.CompareTag("Airflow"))
         {

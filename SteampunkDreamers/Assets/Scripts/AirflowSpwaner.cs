@@ -9,6 +9,7 @@ public class AirflowSpwaner : MonoBehaviour
     public AirflowSystem airflowPrefab;
     private float spawnDelayTime = 2.5f;
     public PlayerController playerController;
+    public bool spawnStop = false;
 
     public void Start()
     {
@@ -18,7 +19,7 @@ public class AirflowSpwaner : MonoBehaviour
 
     public IEnumerator CreateAirflow()
     {
-        while (true)
+        while (!spawnStop)
         {
             if (GameManager.instance != null && GameManager.instance.isGameover)
             {
