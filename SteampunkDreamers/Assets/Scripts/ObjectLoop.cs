@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ObjectLoop : MonoBehaviour
 {
-    private int loopWave = 0;
-
     private Transform player;
     private Vector3 loopPoint;
 
@@ -20,9 +18,9 @@ public class ObjectLoop : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if(player.position.x > transform.position.x + width)
+        if(player.position.x > transform.position.x + width / 2)
         {
-            loopPoint.x = transform.position.x + width * 2f;
+            loopPoint.x = transform.position.x + width / 4;
             transform.position = loopPoint;
         }
 
