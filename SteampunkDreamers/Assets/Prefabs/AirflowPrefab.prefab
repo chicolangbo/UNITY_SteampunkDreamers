@@ -154,6 +154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   airflowType: 0
   waitTime: 5
+  maxSpeed: 0
+  player: {fileID: 0}
 --- !u!114 &3400895608255306804
 MonoBehaviour:
   m_ObjectHideFlags: 0
