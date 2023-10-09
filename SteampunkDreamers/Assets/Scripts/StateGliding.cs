@@ -52,8 +52,6 @@ public class StateGliding : BaseState
 
         // test code
         //controller.velocity = direction * controller.maxSpeed;
-
-        //airflowSpwaner.StartCreateAirflow();
     }     
 
     public override void OnExitState()
@@ -63,26 +61,6 @@ public class StateGliding : BaseState
     public override void OnFixedUpdateState()
     {
         RotatePlane(Input.GetMouseButton(0));
-
-        ////resistance 값 업데이트
-        //SetResistance(controller.transform.localEulerAngles);
-
-
-        // x speed 예외 처리
-        if (controller.velocity.x < 0)
-        {
-            controller.velocity.x = 0;
-            upForce = 0;
-            isRotPossible = false;
-        }
-        else if(controller.velocity.x > direction.x * controller.maxSpeed)
-        {
-            controller.velocity.x = direction.x * controller.maxSpeed;
-        }
-        else if( controller.velocity.x > 10f)
-        {
-            isRotPossible = true;
-        }
     }
 
     public override void OnUpdateState()
@@ -96,7 +74,21 @@ public class StateGliding : BaseState
         // 앵글 -> 저항값 세팅
         SetResistance(controller.transform.localEulerAngles);
 
-
+        // x speed 예외 처리
+        if (controller.velocity.x < 0)
+        {
+            controller.velocity.x = 0;
+            upForce = 0;
+            isRotPossible = false;
+        }
+        else if (controller.velocity.x > direction.x * controller.maxSpeed)
+        {
+            controller.velocity.x = direction.x * controller.maxSpeed;
+        }
+        else if (controller.velocity.x > 10f)
+        {
+            isRotPossible = true;
+        }
 
         controller.velocity += new Vector3(airResistance, gravity + upForce, 0) * Time.deltaTime;
         controller.distance = controller.transform.position.x - initialPos.x;
