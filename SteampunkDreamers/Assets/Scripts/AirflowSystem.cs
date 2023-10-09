@@ -20,7 +20,7 @@ public class AirflowSystem : MonoBehaviour
     private FadeController fadeEffect;
     public event Action onDisappear;
     public float maxSpeed;
-    public PlayerController playerController;
+    public Transform player;
 
     public void Awake()
     {
@@ -29,6 +29,7 @@ public class AirflowSystem : MonoBehaviour
         airflowFront = transform.GetChild(0).gameObject;
         airflowReverse = transform.GetChild(1).gameObject;
         fadeEffect = GetComponent<FadeController>();
+        player = GameObject.FindWithTag("Player").transform;
     }
 
     public void Start()
@@ -62,6 +63,8 @@ public class AirflowSystem : MonoBehaviour
             airflowReverse.SetActive(true);
             fadeEffect.material = airflowReverse.GetComponent<MeshRenderer>().material;
         }
+        //var tempScale = new Vector3(3000f, player.GetComponent<BoxCollider>().size.y, 1f);
+        //transform.localScale = tempScale;
 
     }
 
