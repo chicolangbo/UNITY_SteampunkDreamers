@@ -23,9 +23,9 @@ public class StateGliding : BaseState
     private float airResistanceFront = 3f;
     private float airResistanceReverse = -5f;
 
-    private float gravity = -15f;
+    private float gravity = -30f;
     private float upForce;
-    private float maxUpForce = 40f;
+    private float maxUpForce = 30f;
 
     public StateGliding(PlayerController controller) : base(controller)
     {
@@ -116,7 +116,7 @@ public class StateGliding : BaseState
         {
             var change = Vector3.forward * -rotSpeed * Time.deltaTime;
             controller.transform.Rotate((change.z < 0) ? change : -change);
-            upForce = 0;
+            //upForce = 0;
         }
         ClampRotation(controller.transform.localEulerAngles);
     }
@@ -185,10 +185,12 @@ public class StateGliding : BaseState
             // ¼øÇ³ ÃÖ´ñ°ª : airResistance ÃÖ´ñ°ª = direction.x * controller.maxSpeed * 0.4f
             // 0 ~ ¼øÇ³ ÃÖ´ñ°ª lerp, 4ÃÊ
             airResistance = Mathf.Lerp(0, controller.maxSpeed * 0.4f, Time.deltaTime * 10f);
+            Debug.Log("¼øÇ³ : " + airResistance);
         }
         else // ±âÃ¼ Èçµé¸®´Â ¿¬Ãâ?
         {
             airResistance -= Time.deltaTime * 100f;
+            Debug.Log("¿ªÇ³ : " + airResistance);
         }
     }
 }

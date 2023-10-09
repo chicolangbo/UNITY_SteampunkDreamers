@@ -40,14 +40,14 @@ public class AirflowSpwaner : MonoBehaviour
                 break;
             }
 
-            if((int)playerController.transform.position.x/3000 != spawnWave)
-            {
-                spawnWave = (int)playerController.transform.position.x / 3000;
-                for (int i = 0; i < spawnPoints.Length; ++i)
-                {
-                    spawnPoints[i].x = 3000f * spawnWave - 20f;
-                }
-            }
+            //if((int)playerController.transform.position.x/3000 != spawnWave)
+            //{
+            //    spawnWave = (int)playerController.transform.position.x / 3000;
+            //    for (int i = 0; i < spawnPoints.Length; ++i)
+            //    {
+            //        spawnPoints[i].x = 3000f * spawnWave - 20f;
+            //    }
+            //}
 
             // 스폰 포인트 순회하면서 플레이어가 속한 기류 인덱스 찾기
             int standardIndex = 0;
@@ -65,7 +65,7 @@ public class AirflowSpwaner : MonoBehaviour
             Vector3 randomPoint;
             do
             {
-                randomPoint = spawnPoints[Random.Range((standardIndex - 2 < 0)? 0 : standardIndex - 2, (standardIndex + 2 > spawnPoints.Length - 1)? spawnPoints.Length -1 : standardIndex + 2)];
+                randomPoint = spawnPoints[Random.Range((standardIndex - 6 < 0)? 0 : standardIndex - 6, (standardIndex + 6 > spawnPoints.Length - 1)? spawnPoints.Length -1 : standardIndex + 6)];
             }
             while (prevPoint == randomPoint);
             prevPoint = randomPoint;

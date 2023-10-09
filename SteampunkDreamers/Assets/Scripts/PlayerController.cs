@@ -96,6 +96,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Airflow"))
+        {
+            if (airflows.Contains(other.GetComponent<AirflowSystem>()))
+            {
+                airflows.Remove(other.GetComponent<AirflowSystem>());
+            }
+        }
+    }
+
     public void InitStateMachine()
     {
         // original code

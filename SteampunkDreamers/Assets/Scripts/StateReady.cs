@@ -60,7 +60,6 @@ public class StateReady : BaseState
             {
                 speedBarController.SetVelocity();
 
-                Debug.Log(controller.initialSpeed);
                 if (controller.velocity.x > controller.initialSpeed - speedBarController.accelerator * transitionTime && !controller.angleBar.active)
                 {
                     StartAngleBar();
