@@ -20,12 +20,11 @@ public class StateGliding : BaseState
     private bool isRotPossible = false;
 
     private float airResistance;
-    private float minAirResistance = 10f;
-    private float maxAirResistance = -15f;
+    private float airResistanceFront = 3f;
+    private float airResistanceReverse = -5f;
 
     private float gravity = -15f;
     private float upForce;
-    private float minUpForce = 0f;
     private float maxUpForce = 40f;
 
     public StateGliding(PlayerController controller) : base(controller)
@@ -74,7 +73,7 @@ public class StateGliding : BaseState
         // 앵글 -> 저항값 세팅
         SetResistance(controller.transform.localEulerAngles);
 
-        // x speed 예외 처리
+        // speed 예외 처리
         if (controller.velocity.x < 0)
         {
             controller.velocity.x = 0;
@@ -88,6 +87,11 @@ public class StateGliding : BaseState
         else if (controller.velocity.x > 10f)
         {
             isRotPossible = true;
+        }
+
+        if(controller.velocity.y > direction.y * controller.maxSpeed)
+        {
+            controller.velocity.y = direction.y * controller.maxSpeed;
         }
 
         controller.velocity += new Vector3(airResistance, gravity + upForce, 0) * Time.deltaTime;
@@ -123,17 +127,24 @@ public class StateGliding : BaseState
         localEulerAngle.z = EulerToAngle(localEulerAngle.z);
         var anglePercentage = (localEulerAngle.z - minAngle) / (maxAngle - minAngle) * 100f;
 
-        // 앵글 - 저항값
-        airResistance = anglePercentage / 100 * (maxAirResistance - minAirResistance) + minAirResistance;
-
-        // 앵글 - upForce
-        if(controller.altitude > 10000)
+        // 앵글 - airResistance
+        if (anglePercentage >= 50)
         {
-            upForce = 0;
+            airResistance = anglePercentage / 50 * airResistanceReverse;
         }
         else
         {
-            upForce = anglePercentage / 100 * (maxUpForce - minUpForce) + minUpForce;
+            airResistance = anglePercentage / 50 * airResistanceFront;
+        }
+
+        // 앵글 - upForce
+        if (controller.altitude > 10000)
+        {
+            upForce = 0;
+        }
+        else if(anglePercentage >= 50)
+        {
+            upForce = anglePercentage / 50 * maxUpForce;
         }
 
         // 기류 적용
@@ -177,7 +188,7 @@ public class StateGliding : BaseState
         }
         else // 기체 흔들리는 연출?
         {
-            airResistance -= Time.deltaTime * 50f;
+            airResistance -= Time.deltaTime * 100f;
         }
     }
 }

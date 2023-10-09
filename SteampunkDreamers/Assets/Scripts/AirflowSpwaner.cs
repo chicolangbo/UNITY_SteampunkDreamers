@@ -17,7 +17,7 @@ public class AirflowSpwaner : MonoBehaviour
     public void Start()
     {
         playerController = GetComponent<PlayerController>();
-        airflowYScale = playerController.gameObject.GetComponent<BoxCollider>().size.y * 10f;
+        airflowYScale = playerController.gameObject.GetComponent<BoxCollider>().size.y * 5f;
         int airflowCount = 10000 / (int)airflowYScale;
         spawnPoints = new Vector3[airflowCount];
 
