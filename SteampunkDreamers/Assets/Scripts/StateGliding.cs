@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.WSA;
+//using UnityEngine.WSA;
 
 public class StateGliding : BaseState
 {
@@ -26,7 +26,7 @@ public class StateGliding : BaseState
     private float gravity = -15f;
     private float upForce;
     private float minUpForce = 0f;
-    private float maxUpForce = 30f;
+    private float maxUpForce = 40f;
 
     public StateGliding(PlayerController controller) : base(controller)
     {
@@ -35,8 +35,11 @@ public class StateGliding : BaseState
     public override void OnEnterState()
     {
         // 초기 각도 세팅
-        //controller.transform.localRotation = Quaternion.Euler(0, 0, EulerToAngle(controller.initialAngle.z));
-        controller.transform.localRotation = Quaternion.Euler(0, 0, EulerToAngle(50f)); // test code
+        controller.transform.localRotation = Quaternion.Euler(0, 0, EulerToAngle(controller.initialAngle.z));
+
+        //test code
+        //controller.transform.localRotation = Quaternion.Euler(0, 0, EulerToAngle(50f));
+
         // velocity 적용 -> 발사
         if (controller.launchSuccess)
         {
@@ -48,7 +51,7 @@ public class StateGliding : BaseState
         maxAngle = controller.maxAngle;
 
         // test code
-        controller.velocity = direction * controller.maxSpeed;
+        //controller.velocity = direction * controller.maxSpeed;
 
         //airflowSpwaner.StartCreateAirflow();
     }     
@@ -132,7 +135,7 @@ public class StateGliding : BaseState
         airResistance = anglePercentage / 100 * (maxAirResistance - minAirResistance) + minAirResistance;
 
         // 앵글 - upForce
-        if(controller.altitude > 20000)
+        if(controller.altitude > 10000)
         {
             upForce = 0;
         }
