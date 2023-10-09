@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed;
 
     public Rigidbody rb { get; private set; } // 충돌 처리만
+    public bool launchSuccess = false;
 
     public GameObject speedBar { get; private set; }
     public GameObject angleBar { get; private set; }
@@ -69,12 +70,6 @@ public class PlayerController : MonoBehaviour
             // 상태 변경 (Ready -> Gliding)
             stateMachine.AddState(StateName.Gliding, new StateGliding(this));
             StateGliding stateGliding = (StateGliding)stateMachine.GetState(StateName.Gliding);
-            StateReady stateReady = stateMachine.CurrentState as StateReady;
-            if (stateReady != null)
-            {
-                stateGliding.launchSuccess = stateReady.selectAngle;
-                stateGliding.accelerator = stateReady.accelerator;
-            }
             angleBar.SetActive(false);
             stateMachine?.ChangeState(StateName.Gliding);
             airflowSpwaner.enabled = true;

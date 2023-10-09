@@ -6,8 +6,6 @@ using UnityEngine.WSA;
 
 public class StateGliding : BaseState
 {
-    public bool launchSuccess = false;
-    public float accelerator;
     public Vector3 direction = Vector3.zero;
 
     private float minAngle;
@@ -28,7 +26,7 @@ public class StateGliding : BaseState
     private float gravity = -15f;
     private float upForce;
     private float minUpForce = 0f;
-    private float maxUpForce = 40f;
+    private float maxUpForce = 30f;
 
     public StateGliding(PlayerController controller) : base(controller)
     {
@@ -40,7 +38,7 @@ public class StateGliding : BaseState
         //controller.transform.localRotation = Quaternion.Euler(0, 0, EulerToAngle(controller.initialAngle.z));
         controller.transform.localRotation = Quaternion.Euler(0, 0, EulerToAngle(50f)); // test code
         // velocity 적용 -> 발사
-        if (launchSuccess)
+        if (controller.launchSuccess)
         {
             direction = controller.transform.right;
             controller.velocity = direction * controller.initialSpeed;
@@ -62,10 +60,9 @@ public class StateGliding : BaseState
     public override void OnFixedUpdateState()
     {
         RotatePlane(Input.GetMouseButton(0));
-        controller.velocity += new Vector3(airResistance, gravity + upForce, 0) * Time.deltaTime;
 
-        //resistance 값 업데이트
-        SetResistance(controller.transform.localEulerAngles);
+        ////resistance 값 업데이트
+        //SetResistance(controller.transform.localEulerAngles);
 
 
         // x speed 예외 처리
@@ -75,11 +72,11 @@ public class StateGliding : BaseState
             upForce = 0;
             isRotPossible = false;
         }
-        else if(controller.velocity.x > controller.maxSpeed)
+        else if(controller.velocity.x > direction.x * controller.maxSpeed)
         {
-            controller.velocity.x = controller.maxSpeed;
+            controller.velocity.x = direction.x * controller.maxSpeed;
         }
-        else if( controller.velocity.x > 5f)
+        else if( controller.velocity.x > 10f)
         {
             isRotPossible = true;
         }
@@ -90,22 +87,21 @@ public class StateGliding : BaseState
         // 방향 업데이트
         direction = controller.transform.right;
 
-        // 회전 속도 업데이트
+        // x축 속도 -> 앵글 회전 속도 업데이트
         SetRotSpeed(controller.velocity.x);
 
-        // 기류 적용
-        if (controller.airflows.Count != 0)
-        {
-            ApplicationAirflow();
-        }
+        // 앵글 -> 저항값 세팅
+        SetResistance(controller.transform.localEulerAngles);
 
 
+
+        controller.velocity += new Vector3(airResistance, gravity + upForce, 0) * Time.deltaTime;
         controller.distance = controller.transform.position.x - initialPos.x;
     }
 
     public void RotatePlane(bool up)
     {   
-        if (up && launchSuccess && isRotPossible)
+        if (up && controller.launchSuccess && isRotPossible)
         {
             controller.transform.Rotate(Vector3.forward * rotSpeed * Time.deltaTime);
 
@@ -139,6 +135,12 @@ public class StateGliding : BaseState
         airResistance = anglePercentage / 100 * (maxAirResistance - minAirResistance) + minAirResistance;
         upForce = anglePercentage / 100 * (maxUpForce - minUpForce) + minUpForce;
 
+        // 기류 적용
+        if (controller.airflows.Count != 0)
+        {
+            ApplicationAirflow();
+        }
+
         //Debug.Log("gravity : " + gravity);
         //Debug.Log("air : " + airResistance);
         //Debug.Log("velocity : " + controller.velocity);
@@ -168,12 +170,15 @@ public class StateGliding : BaseState
         var airflow = controller.airflows.First.Value;
         if(airflow.airflowType == AirflowType.Front)
         {
-            Debug.Log("front");
-            airResistance = 0f;
+            // 순풍 최댓값 : airResistance 최댓값 = direction.x * controller.maxSpeed * 0.4f
+            // 0 ~ 순풍 최댓값 lerp, 4초
+            airResistance = Mathf.Lerp(0, controller.maxSpeed * 0.4f, Time.deltaTime * 10f);
+            //Debug.Log(airResistance);
         }
         else
         {
-            Debug.Log("reverse");
+            airResistance -= Time.deltaTime * 50f;
+            //Debug.Log("reverse");
         }
     }
 }

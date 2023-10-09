@@ -19,7 +19,7 @@ public class AirflowSystem : MonoBehaviour
     private GameObject airflowReverse;
     private FadeController fadeEffect;
     public event Action onDisappear;
-
+    public float maxSpeed;
     public PlayerController playerController;
 
     public void Awake()
@@ -45,9 +45,6 @@ public class AirflowSystem : MonoBehaviour
             fadeEffect.StartFadeOut();
             once = false;
         }
-
-        // 기류 적용
-
     }
 
     public void Setup(AirflowType type)
