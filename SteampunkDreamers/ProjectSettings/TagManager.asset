@@ -9,6 +9,7 @@ TagManager:
   - AngleBar
   - SpeedBar
   - Board
+  - Airflow
   layers:
   - Default
   - TransparentFX

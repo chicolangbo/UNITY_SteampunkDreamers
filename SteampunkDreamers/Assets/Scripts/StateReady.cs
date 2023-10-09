@@ -16,7 +16,6 @@ public class StateReady : BaseState
     //angleBar
     private AngleBarController angleBarController;
     private bool startAngleMove = false;
-    public bool selectAngle = false;
     private float transitionTime = 6f;
 
     public StateReady(PlayerController controller) : base(controller)
@@ -61,7 +60,6 @@ public class StateReady : BaseState
             {
                 speedBarController.SetVelocity();
 
-                Debug.Log(controller.initialSpeed);
                 if (controller.velocity.x > controller.initialSpeed - speedBarController.accelerator * transitionTime && !controller.angleBar.active)
                 {
                     StartAngleBar();
@@ -74,7 +72,7 @@ public class StateReady : BaseState
 
                 if(controller.angleBar.active == true && Input.GetMouseButtonDown(0))
                 {
-                    selectAngle = true;
+                    controller.launchSuccess = true;
                     startAngleMove = false;
                     angleBarController.SetAngle();
                 }

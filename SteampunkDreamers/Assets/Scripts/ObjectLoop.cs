@@ -4,13 +4,30 @@ using UnityEngine;
 
 public class ObjectLoop : MonoBehaviour
 {
-    public Vector3 respawnPos;
+    private Transform player;
+    private Vector3 loopPoint;
 
-    public void OnTriggerEnter(Collider other)
+    private float width;
+
+    public void Start()
     {
-        if(other.CompareTag("Respawn"))
+        player = GameObject.FindWithTag("Player").transform;
+        width = transform.localScale.x;
+        loopPoint = transform.position;
+    }
+
+    public void FixedUpdate()
+    {
+        if(player.position.x > transform.position.x + width / 2)
         {
-            transform.position = respawnPos;
+            loopPoint.x = transform.position.x + width / 4;
+            transform.position = loopPoint;
         }
+
+        //if ((int)player.position.x / 3000 != loopWave)
+        //{
+        //    loopWave = (int)player.position.x / 3000;
+        //    loopPoint.x = 3000f * loopWave - 20f;
+        //}
     }
 }

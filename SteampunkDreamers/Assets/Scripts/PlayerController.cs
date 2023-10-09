@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed;
 
     public Rigidbody rb { get; private set; } // 충돌 처리만
+    public bool launchSuccess = false;
 
     public GameObject speedBar { get; private set; }
     public GameObject angleBar { get; private set; }
@@ -25,12 +26,17 @@ public class PlayerController : MonoBehaviour
     public float altitude = 1f;
     public float altitudeRatio = 10f; // 정해야 함
 
+    private AirflowSpwaner airflowSpwaner;
+    public LinkedList<AirflowSystem> airflows = new LinkedList<AirflowSystem>();
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         speedBar = GameObject.FindWithTag("SpeedBar");
         angleBar = transform.GetChild(transform.childCount - 1).GetChild(transform.childCount - 1).gameObject;
         GameManager.instance.SetBoardLength(maxSpeed);
+        airflowSpwaner = GetComponent<AirflowSpwaner>();
+        airflowSpwaner.enabled = false;
     }
 
     private void Start()
@@ -42,6 +48,11 @@ public class PlayerController : MonoBehaviour
     {
         stateMachine?.FixedUpdateState();
         transform.position += velocity * Time.deltaTime;
+        //if(altitude > 20000)
+        //{
+        //    var tempPos = new Vector3(transform.position.x, 2000f, 0);
+        //    transform.position = tempPos;
+        //}
     }
 
     private void Update()
@@ -50,6 +61,7 @@ public class PlayerController : MonoBehaviour
 
         // 인게임 정보 UI 업데이트
         altitude = transform.position.y * altitudeRatio;
+
         //distance = transform.position.x;
         UIManager.instance.UpdateDistanceText(distance);
         UIManager.instance.UpdateVelocityText(velocity.x);
@@ -63,14 +75,9 @@ public class PlayerController : MonoBehaviour
             // 상태 변경 (Ready -> Gliding)
             stateMachine.AddState(StateName.Gliding, new StateGliding(this));
             StateGliding stateGliding = (StateGliding)stateMachine.GetState(StateName.Gliding);
-            StateReady stateReady = stateMachine.CurrentState as StateReady;
-            if (stateReady != null)
-            {
-                stateGliding.launchSuccess = stateReady.selectAngle;
-                stateGliding.accelerator = stateReady.accelerator;
-            }
             angleBar.SetActive(false);
             stateMachine?.ChangeState(StateName.Gliding);
+            airflowSpwaner.enabled = true;
         }
 
         if (other.CompareTag("Floor"))
@@ -78,6 +85,25 @@ public class PlayerController : MonoBehaviour
             // 상태 변경 ( Gliding -> Landing )
             stateMachine.AddState(StateName.Landing, new StateLanding(this));
             stateMachine?.ChangeState(StateName.Landing);
+            airflowSpwaner.spawnStop = true;
+        }
+        if (other.CompareTag("Airflow"))
+        {
+            if(!airflows.Contains(other.GetComponent<AirflowSystem>()))
+            {
+                airflows.AddLast(other.GetComponent<AirflowSystem>());
+            }
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Airflow"))
+        {
+            if (airflows.Contains(other.GetComponent<AirflowSystem>()))
+            {
+                airflows.Remove(other.GetComponent<AirflowSystem>());
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,10 +29,23 @@ public class GameManager : MonoBehaviour
 
     public bool isGameover { get; private set; } // 게임 오버 상태
 
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            RestartGame();
+        }
+    }
+
     public void SetBoardLength(float initialSpeed)
     {
         boardScaleX = 0.5f * initialSpeed * 6f + 20f;
         GameObject.FindWithTag("Board").transform.localScale = new Vector3(boardScaleX, boardScaleY, boardScaleZ);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     // 게임 오버 처리
