@@ -51,16 +51,16 @@ public class StateReady : BaseState
         {
             // 1초 뒤 속력게이지 비활성화
             timer += Time.deltaTime;
-            if(timer > 1f && controller.speedBar.active)
+            if(timer > 1f && controller.speedBar.activeSelf)
             {
                 controller.speedBar.SetActive(false);
             }
 
-            if(!controller.speedBar.active)
+            if(!controller.speedBar.activeSelf)
             {
                 speedBarController.SetVelocity();
 
-                if (controller.velocity.x > controller.initialSpeed - speedBarController.accelerator * transitionTime && !controller.angleBar.active)
+                if (controller.velocity.x > controller.initialSpeed - speedBarController.accelerator * transitionTime && !controller.angleBar.activeSelf)
                 {
                     StartAngleBar();
                 }
@@ -70,7 +70,7 @@ public class StateReady : BaseState
                     angleBarController.AngleBarMoving();
                 }
 
-                if(controller.angleBar.active == true && Input.GetMouseButtonDown(0))
+                if(controller.angleBar.activeSelf == true && Input.GetMouseButtonDown(0))
                 {
                     controller.launchSuccess = true;
                     startAngleMove = false;

@@ -11,9 +11,10 @@ public class PlayerController : MonoBehaviour
 
     public float initialSpeed;
     public Quaternion initialAngle;
-    public float maxAngle { get; private set; } = 50f;
-    public float minAngle { get; private set; } = -50f;
-    public float maxSpeed;
+    public float maxAngle { get; private set; } = 80f;
+    public float minAngle { get; private set; } = -80f;
+    public float maxSpeed; // 초기 속력 X, 플레이 중 최대 속력
+    public float frontSpeed; // 유동값
 
     public Rigidbody rb { get; private set; } // 충돌 처리만
     public bool launchSuccess = false;
@@ -48,11 +49,6 @@ public class PlayerController : MonoBehaviour
     {
         stateMachine?.FixedUpdateState();
         transform.position += velocity * Time.deltaTime;
-        //if(altitude > 20000)
-        //{
-        //    var tempPos = new Vector3(transform.position.x, 2000f, 0);
-        //    transform.position = tempPos;
-        //}
     }
 
     private void Update()
@@ -61,10 +57,8 @@ public class PlayerController : MonoBehaviour
 
         // 인게임 정보 UI 업데이트
         altitude = transform.position.y * altitudeRatio;
-
-        //distance = transform.position.x;
         UIManager.instance.UpdateDistanceText(distance);
-        UIManager.instance.UpdateVelocityText(velocity.x);
+        UIManager.instance.UpdateVelocityText(frontSpeed);
         UIManager.instance.UpdateAltitudeText(altitude);
     }
 
@@ -87,6 +81,7 @@ public class PlayerController : MonoBehaviour
             stateMachine?.ChangeState(StateName.Landing);
             airflowSpwaner.spawnStop = true;
         }
+
         if (other.CompareTag("Airflow"))
         {
             if(!airflows.Contains(other.GetComponent<AirflowSystem>()))

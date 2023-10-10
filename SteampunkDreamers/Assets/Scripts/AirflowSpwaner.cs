@@ -10,14 +10,13 @@ public class AirflowSpwaner : MonoBehaviour
     private float spawnDelayTime = 2.5f;
     public PlayerController playerController;
     public bool spawnStop = false;
-    private int spawnWave = 0;
 
     private float airflowYScale;
 
     public void Start()
     {
         playerController = GetComponent<PlayerController>();
-        airflowYScale = playerController.gameObject.GetComponent<BoxCollider>().size.y * 5f;
+        airflowYScale = playerController.gameObject.GetComponent<BoxCollider>().size.y * 10f;
         int airflowCount = 10000 / (int)airflowYScale;
         spawnPoints = new Vector3[airflowCount];
 
@@ -39,15 +38,6 @@ public class AirflowSpwaner : MonoBehaviour
             {
                 break;
             }
-
-            //if((int)playerController.transform.position.x/3000 != spawnWave)
-            //{
-            //    spawnWave = (int)playerController.transform.position.x / 3000;
-            //    for (int i = 0; i < spawnPoints.Length; ++i)
-            //    {
-            //        spawnPoints[i].x = 3000f * spawnWave - 20f;
-            //    }
-            //}
 
             // 스폰 포인트 순회하면서 플레이어가 속한 기류 인덱스 찾기
             int standardIndex = 0;
