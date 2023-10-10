@@ -79,6 +79,7 @@ public class StateGliding : BaseState
     {   
         if (up && controller.launchSuccess && isRotPossible)
         {
+            controller.fuelTimer -= Time.deltaTime;
             controller.transform.Rotate(Vector3.forward * rotSpeed * Time.deltaTime);
         }
         else
@@ -106,8 +107,9 @@ public class StateGliding : BaseState
         }
 
         // 입력 제한
-        if (controller.frontSpeed + airResistance <= inputLimit)
+        if (controller.fuelTimer <= 0 || controller.frontSpeed + airResistance <= inputLimit)
         {
+            controller.fuelTimer = 0;
             isRotPossible = false;
         }
         else if(controller.frontSpeed + airResistance >= inputLimitRelease)
@@ -126,7 +128,6 @@ public class StateGliding : BaseState
     {
         float speedRatio = currSpeed / controller.maxSpeed; // 0~1
         rotSpeed = Mathf.Clamp(maxRotSpeed * (1 - speedRatio), minRotSpeed, maxRotSpeed);
-        Debug.Log("speed:" + controller.frontSpeed + "/ rotSpeed:" +  rotSpeed);
     }
 
     public void ClampRotation(Vector3 localEulerAngle)

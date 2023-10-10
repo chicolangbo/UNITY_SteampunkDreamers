@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public float distance = 0f;
     public float altitude = 1f;
     public float altitudeRatio = 10f; // 정해야 함
+    public float fuelTimer = 5f;
 
     private AirflowSpwaner airflowSpwaner;
     public LinkedList<AirflowSystem> airflows = new LinkedList<AirflowSystem>();
