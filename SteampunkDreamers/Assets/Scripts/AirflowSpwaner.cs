@@ -7,6 +7,7 @@ public class AirflowSpwaner : MonoBehaviour
     private Vector3[] spawnPoints;
     private Vector3 prevPoint;
     public AirflowSystem airflowPrefab;
+    public float planeMultipleHeight;
     private float spawnDelayTime = 2.5f;
     public PlayerController playerController;
     public bool spawnStop = false;
@@ -16,7 +17,7 @@ public class AirflowSpwaner : MonoBehaviour
     public void Start()
     {
         playerController = GetComponent<PlayerController>();
-        airflowYScale = playerController.gameObject.GetComponent<BoxCollider>().size.y * 10f;
+        airflowYScale = playerController.gameObject.GetComponent<BoxCollider>().size.y * planeMultipleHeight;
         int airflowCount = 10000 / (int)airflowYScale;
         spawnPoints = new Vector3[airflowCount];
 

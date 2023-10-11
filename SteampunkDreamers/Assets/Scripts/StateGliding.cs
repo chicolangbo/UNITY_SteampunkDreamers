@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using Unity.VisualScripting;
 using UnityEngine;
 //using UnityEngine.WSA;
@@ -10,7 +11,8 @@ public class StateGliding : BaseState
 
     private float minAngle;
     private float maxAngle;
-    private float minRotSpeed = 10f; // 비행체 회전 속도 minimum
+    private float minRotSpeed = 5f; // 비행체 회전 속도 minimum
+    private float standardRotSpeed = 10;
     private float maxRotSpeed = 50f; // 비행체 회전 속도 maximum
     private float rotSpeed;
     private Vector3 initialPos;
@@ -21,8 +23,13 @@ public class StateGliding : BaseState
     private float airResistanceDown = 5f; // 비행체 앵글이 50% 이하일 시 내려가는 가속도
     private float airResistanceUp = -20f; // 비행체 앵글이 50% 이상일 시 올라가는 감속도
 
+    private float minFrontSpeed = 5f;
     private float inputLimit = 5f; // frontSpeed가 inputLimit 이하일 시 클릭 제한
     private float inputLimitRelease = 15f; // frontSpeed가 inputLimitRelease 이상일 시 클릭 제한 해제
+
+    // airflow
+    private float airflowFrontRatio = 10; // 순풍
+    private float airflowReverseRatio = 100; // 역풍 ( airResistance -= dt*airflowReverseRatio로 적용되어 있음 )
 
     public StateGliding(PlayerController controller) : base(controller)
     {
@@ -60,13 +67,21 @@ public class StateGliding : BaseState
 
         // 비행체 속도 업데이트
         controller.frontSpeed += airResistance * Time.deltaTime;
+        if(controller.frontSpeed > controller.maxSpeed)
+        {
+            controller.frontSpeed = controller.maxSpeed;
+        }
+        else if(controller.frontSpeed < minFrontSpeed)
+        {
+            controller.frontSpeed = minFrontSpeed;
+        }
         controller.velocity = direction * ((controller.frontSpeed <= 0f)? 0f : controller.frontSpeed);
         
         // 비행체 회전
         RotatePlane(Input.GetMouseButton(0));
 
         // frontSpeed -> 앵글 회전 속도 업데이트
-        SetRotSpeed(controller.frontSpeed);
+        SetRotSpeed(controller.transform.localEulerAngles);
 
         // 앵글 -> 저항값 세팅
         SetResistance(controller.transform.localEulerAngles);
@@ -80,7 +95,11 @@ public class StateGliding : BaseState
         if (up && controller.launchSuccess && isRotPossible)
         {
             controller.fuelTimer -= Time.deltaTime;
-            controller.transform.Rotate(Vector3.forward * rotSpeed * Time.deltaTime);
+            if( controller.fuelTimer <= 0f )
+            {
+                controller.fuelTimer = 0f;
+            }
+            controller.transform.Rotate(Vector3.forward * rotSpeed * 1.5f * Time.deltaTime);
         }
         else
         {
@@ -95,21 +114,21 @@ public class StateGliding : BaseState
         // 앵글 -> 백분율
         localEulerAngle.z = EulerToAngle(localEulerAngle.z);
         var anglePercentage = (localEulerAngle.z - minAngle) / (maxAngle - minAngle) * 100f;
+        //Debug.Log(anglePercentage + "% // 속력: " + controller.frontSpeed);
 
         // 앵글 - airResistance
         if (anglePercentage >= 50)
         {
-            airResistance = (anglePercentage - 50) / 50 * airResistanceUp;
+            airResistance = (anglePercentage - 50) / 50 * airResistanceUp; // -
         }
         else
         {
-            airResistance = (1 - anglePercentage / 50) * airResistanceDown;
+            airResistance = (1 - anglePercentage / 50) * airResistanceDown; // +
         }
 
         // 입력 제한
         if (controller.fuelTimer <= 0 || controller.frontSpeed + airResistance <= inputLimit)
         {
-            controller.fuelTimer = 0;
             isRotPossible = false;
         }
         else if(controller.frontSpeed + airResistance >= inputLimitRelease)
@@ -124,10 +143,20 @@ public class StateGliding : BaseState
         }
     }
 
-    public void SetRotSpeed(float currSpeed)
+    public void SetRotSpeed(Vector3 localEulerAngle)
     {
-        float speedRatio = currSpeed / controller.maxSpeed; // 0~1
-        rotSpeed = Mathf.Clamp(maxRotSpeed * (1 - speedRatio), minRotSpeed, maxRotSpeed);
+        localEulerAngle.z = EulerToAngle(localEulerAngle.z);
+        var anglePercentage = (localEulerAngle.z - minAngle) / (maxAngle - minAngle) * 100f; // 0~1
+
+        if (anglePercentage > 50)
+        {
+            rotSpeed = standardRotSpeed + (anglePercentage - 50) / 50 * maxRotSpeed; // -
+        }
+        else
+        {
+            rotSpeed = standardRotSpeed + (1 - anglePercentage / 50) * minRotSpeed; // +
+        }
+        Debug.Log(rotSpeed);
     }
 
     public void ClampRotation(Vector3 localEulerAngle)
@@ -148,11 +177,11 @@ public class StateGliding : BaseState
         var airflow = controller.airflows.First.Value;
         if(airflow.airflowType == AirflowType.Front)
         {
-            airResistance = Mathf.Lerp(0, controller.maxSpeed * 0.4f, Time.deltaTime * 10f);
+            airResistance = Mathf.Lerp(0, controller.maxSpeed * 0.4f, Time.deltaTime * airflowFrontRatio);
         }
         else // 기체 흔들리는 연출?
         {
-            airResistance -= Time.deltaTime * 100f;
+            airResistance -= Time.deltaTime * airflowReverseRatio;
         }
     }
 }
