@@ -30,7 +30,6 @@ public class ObstacleSpawner : Spawner
 
             FindPlayerIndex();
             GetRandomSpawnIndex();
-            Debug.Log(playerIndex);
             Obstacle go = ObjectPoolManager.instance.GetGo(prefab.name).GetComponent<Obstacle>();
             // speed
             var randomValue = Random.Range(minSpeed, maxSpeed);

@@ -30,6 +30,7 @@ public class StateGliding : BaseState
     // airflow
     private float airflowFrontRatio = 10; // 순풍
     private float airflowReverseRatio = 100; // 역풍 ( airResistance -= dt*airflowReverseRatio로 적용되어 있음 )
+    private float gravity = 10f;
 
     public StateGliding(PlayerController controller) : base(controller)
     {
@@ -81,9 +82,11 @@ public class StateGliding : BaseState
 
         // frontSpeed -> 앵글 회전 속도 업데이트
         SetRotSpeed(controller.transform.localEulerAngles);
+        //controller.velocity += Vector3.down * gravity;
 
         // 앵글 -> 저항값 세팅
         SetResistance(controller.transform.localEulerAngles);
+
 
         // distance 업데이트
         controller.distance = controller.transform.position.x - initialPos.x;
@@ -113,7 +116,6 @@ public class StateGliding : BaseState
         // 앵글 -> 백분율
         localEulerAngle.z = Utils.EulerToAngle(localEulerAngle.z);
         var anglePercentage = (localEulerAngle.z - minAngle) / (maxAngle - minAngle) * 100f;
-        //Debug.Log(anglePercentage + "% // 속력: " + controller.frontSpeed);
 
         // 앵글 - airResistance
         if (anglePercentage >= 50)
@@ -156,19 +158,6 @@ public class StateGliding : BaseState
             rotSpeed = standardRotSpeed + (1 - anglePercentage / 50) * minRotSpeed; // +
         }
     }
-
-    //public void ClampRotation(Vector3 localEulerAngle)
-    //{
-    //    //Vector3 targetAngles = controller.transform.localEulerAngles;
-    //    localEulerAngle.z = EulerToAngle(localEulerAngle.z);
-    //    localEulerAngle.z = Mathf.Clamp(localEulerAngle.z, minAngle, maxAngle);
-    //    controller.transform.localRotation = Quaternion.Euler(localEulerAngle);
-    //}
-
-    //public float EulerToAngle(float z)
-    //{
-    //    return (z > 180f) ? z - 360f : z;
-    //}
 
     public void ApplicationAirflow()
     {

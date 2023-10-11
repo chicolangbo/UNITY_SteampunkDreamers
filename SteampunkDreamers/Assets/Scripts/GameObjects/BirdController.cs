@@ -17,13 +17,12 @@ public class BirdController : Obstacle
         audioSource.PlayOneShot(birdCryAudioClip);
         audioSource.PlayOneShot(bumpAudioClip);
 
-        //if()
-        //var tempSpeed = playerController.frontSpeed - playerController.maxSpeed * effectStrength;
-        //playerController.frontSpeed = (tempSpeed < 0)? 0 : tempSpeed;
+        // 속도 -= 맥스속도의 40%
     }
 
     public override void OnDie()
     {
+        Debug.Log("충돌");
         ReleaseObject();
     }
 
