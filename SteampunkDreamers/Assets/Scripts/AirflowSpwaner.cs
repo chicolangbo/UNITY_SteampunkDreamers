@@ -1,33 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class AirflowSpwaner : MonoBehaviour
+public class AirflowSpwaner : Spawner
 {
-    private Vector3[] spawnPoints;
-    private Vector3 prevPoint;
     public AirflowSystem airflowPrefab;
-    public float planeMultipleHeight;
-    private float spawnDelayTime = 2.5f;
-    public PlayerController playerController;
-    public bool spawnStop = false;
-
-    private float airflowYScale;
+    float xScale;
 
     public void Start()
     {
-        playerController = GetComponent<PlayerController>();
-        airflowYScale = playerController.gameObject.GetComponent<BoxCollider>().size.y * planeMultipleHeight;
-        int airflowCount = 10000 / (int)airflowYScale;
-        spawnPoints = new Vector3[airflowCount];
-
-        // 스폰 포인트 생성 
-        for (int i = 0; i < spawnPoints.Length; ++i)
-        {
-            var tempPos = new Vector3(-20f, airflowYScale / 2f + airflowYScale * i - 0.5f);
-            spawnPoints[i] = tempPos;
-        }
-
+        xScale = 3000f;
+        spawnRangeValue = 3;
+        spawnDelayTime = 2.5f;
         StartCoroutine(CreateAirflow());
     }
 
@@ -40,30 +25,12 @@ public class AirflowSpwaner : MonoBehaviour
                 break;
             }
 
-            // 스폰 포인트 순회하면서 플레이어가 속한 기류 인덱스 찾기
-            int standardIndex = 0;
-            float minValue = 1000f;
-            for(int i = 0; i < spawnPoints.Length; ++i)
-            {
-                var intValue = Mathf.Abs(spawnPoints[i].y - playerController.transform.position.y);
-                if(minValue > intValue)
-                {
-                    minValue = intValue;
-                    standardIndex = i;
-                }
-            }
+            FindPlayerIndex();
+            GetRandomSpawnIndex();
 
-            Vector3 randomPoint;
-            do
-            {
-                randomPoint = spawnPoints[Random.Range((standardIndex - 6 < 0)? 0 : standardIndex - 6, (standardIndex + 6 > spawnPoints.Length - 1)? spawnPoints.Length -1 : standardIndex + 6)];
-            }
-            while (prevPoint == randomPoint);
-            prevPoint = randomPoint;
-
-            var airflow = Instantiate(airflowPrefab, randomPoint, Quaternion.identity);
+            var airflow = Instantiate(airflowPrefab, selectedPoint, Quaternion.identity);
             airflow.Setup((AirflowType)Random.Range(0, 2));
-            var tempScale = new Vector3(3000f, airflowYScale, 1f);
+            var tempScale = new Vector3(xScale, yScale, 1f);
             airflow.transform.localScale = tempScale;
             airflow.onDisappear += () =>
             {

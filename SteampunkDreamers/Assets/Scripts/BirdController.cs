@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BirdController : MonoBehaviour
+public class BirdController : Obstacle
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        name = "Bird";
+        type = EffectType.Speed;
+        effectStrength = 0.3f;
     }
 }

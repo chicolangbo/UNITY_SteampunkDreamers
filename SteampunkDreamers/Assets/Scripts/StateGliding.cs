@@ -44,10 +44,9 @@ public class StateGliding : BaseState
         if (controller.launchSuccess)
         {
             direction = controller.transform.right;
-            controller.frontSpeed = controller.initialSpeed;
-            //controller.velocity = direction * controller.frontSpeed;
             initialPos = controller.transform.position;
         }
+        controller.frontSpeed = controller.initialSpeed;
         minAngle = controller.minAngle;
         maxAngle = controller.maxAngle;
     }     
@@ -156,7 +155,6 @@ public class StateGliding : BaseState
         {
             rotSpeed = standardRotSpeed + (1 - anglePercentage / 50) * minRotSpeed; // +
         }
-        Debug.Log(rotSpeed);
     }
 
     public void ClampRotation(Vector3 localEulerAngle)
