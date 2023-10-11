@@ -11,9 +11,9 @@ public class StateGliding : BaseState
 
     private float minAngle;
     private float maxAngle;
-    private float minRotSpeed = 5f; // 비행체 회전 속도 minimum
-    private float standardRotSpeed = 10;
-    private float maxRotSpeed = 50f; // 비행체 회전 속도 maximum
+    private float minRotSpeed = 5f; // 비행체 회전 속도 minimum, 각도 높아질 때
+    private float standardRotSpeed = 10; // 비행체 회전 속도 기준값
+    private float maxRotSpeed = 50f; // 비행체 회전 속도 maximum, 각도 낮아질 때
     private float rotSpeed;
     private Vector3 initialPos;
 
