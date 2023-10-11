@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public float fuelTimer = 5f;
 
     private AirflowSpwaner airflowSpwaner;
+    private BirdSpawner birdSpawner;
     public LinkedList<AirflowSystem> airflows = new LinkedList<AirflowSystem>();
 
     private void Awake()
@@ -38,6 +39,8 @@ public class PlayerController : MonoBehaviour
         angleBar = transform.GetChild(transform.childCount - 1).GetChild(transform.childCount - 1).gameObject;
         GameManager.instance.SetBoardLength(maxSpeed);
         airflowSpwaner = GetComponent<AirflowSpwaner>();
+        birdSpawner = GetComponent<BirdSpawner>();
+        birdSpawner.enabled = false;
         airflowSpwaner.enabled = false;
     }
 
@@ -73,6 +76,7 @@ public class PlayerController : MonoBehaviour
             angleBar.SetActive(false);
             stateMachine?.ChangeState(StateName.Gliding);
             airflowSpwaner.enabled = true;
+            birdSpawner.enabled = true;
         }
 
         if (other.CompareTag("Floor"))
@@ -81,6 +85,7 @@ public class PlayerController : MonoBehaviour
             stateMachine.AddState(StateName.Landing, new StateLanding(this));
             stateMachine?.ChangeState(StateName.Landing);
             airflowSpwaner.spawnStop = true;
+            birdSpawner.spawnStop = true;
         }
 
         if (other.CompareTag("Airflow"))

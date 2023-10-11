@@ -27,6 +27,11 @@ public class Obstacle : PoolAble
         rb = GetComponent<Rigidbody>();
     }
 
+    public void FixedUpdate()
+    {
+        rb.AddForce(speed,0,0);
+    }
+
     public void ActivateEffect()
     {
 
