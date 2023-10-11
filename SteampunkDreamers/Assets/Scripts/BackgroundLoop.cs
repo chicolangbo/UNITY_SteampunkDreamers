@@ -5,12 +5,19 @@ using UnityEngine;
 public class BackgroundLoop : MonoBehaviour
 {
     private float width;
-    private int spawnWave = 1;
+    public bool child;
     private Transform player;
 
     public void Awake()
     {
-        width = GetComponent<BoxCollider>().size.x;
+        if(child)
+        {
+            width = GetComponentInChildren<Transform>().localScale.x;
+        }
+        else
+        {
+            width = GetComponent<BoxCollider>().size.x;
+        }
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
