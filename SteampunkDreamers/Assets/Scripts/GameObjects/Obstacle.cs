@@ -4,27 +4,31 @@ using UnityEngine;
 
 public enum EffectType
 {
+    None,
     Speed,
     Angle,
     NoControll
 }
 
-public class Obstacle : PoolAble
+public abstract class Obstacle : PoolAble
 {
     [SerializeField]
-    public string name;
+    public new string name;
     public float speed;
     public EffectType type;
     public float effectTimer;
     public float effectStrength;
     public ParticleSystem particle;
     public AudioSource audioSource;
-    public AudioClip audioClip;
     public Rigidbody rb;
+
+    public PlayerController playerController;
 
     public void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     public void FixedUpdate()
@@ -32,13 +36,16 @@ public class Obstacle : PoolAble
         rb.AddForce(speed,0,0);
     }
 
-    public void ActivateEffect()
+    public void OnTriggerEnter(Collider other)
     {
-
+        if(other.CompareTag("Player"))
+        {
+            CollideEffect();
+            OnDie();
+        }
     }
 
-    public void Effect()
-    {
+    public abstract void CollideEffect();
 
-    }
+    public abstract void OnDie();
 }

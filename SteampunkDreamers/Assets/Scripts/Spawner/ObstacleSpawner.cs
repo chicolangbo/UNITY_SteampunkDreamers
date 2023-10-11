@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BirdSpawner : Spawner
+public class ObstacleSpawner : Spawner
 {
-    public BirdController birdPrefab;
-    public float playerBehindLength = 10f;
-    private float minSpeed = 0.4f;
-    private float maxSpeed = 0.6f;
+    public Obstacle prefab;
+    public float playerBehindLength;
+    public float minSpeed;
+    public float maxSpeed;
+    public float minSpawnDelayTime;
+    public float maxSpawnDelayTime;
 
     public void Start()
     {
@@ -29,16 +31,16 @@ public class BirdSpawner : Spawner
             FindPlayerIndex();
             GetRandomSpawnIndex();
             Debug.Log(playerIndex);
-            BirdController birdGo = ObjectPoolManager.instance.GetGo("Bird").GetComponent<BirdController>();
+            Obstacle go = ObjectPoolManager.instance.GetGo(prefab.name).GetComponent<Obstacle>();
             // speed
             var randomValue = Random.Range(minSpeed, maxSpeed);
-            birdGo.speed = playerController.frontSpeed * randomValue;
+            go.speed = playerController.frontSpeed * randomValue;
             // position
             selectedPoint.x = playerController.transform.position.x - playerBehindLength;
-            birdGo.rb.position = selectedPoint;
+            go.rb.position = selectedPoint;
 
             yield return new WaitForSeconds(spawnDelayTime);
-            spawnDelayTime = Random.Range(0.3f, 4f);
+            spawnDelayTime = Random.Range(minSpawnDelayTime, maxSpawnDelayTime);
         }
     }
 }

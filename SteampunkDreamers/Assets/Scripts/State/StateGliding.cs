@@ -38,7 +38,7 @@ public class StateGliding : BaseState
     public override void OnEnterState()
     {
         // 초기 각도 세팅
-        controller.transform.localRotation = Quaternion.Euler(0, 0, EulerToAngle(controller.initialAngle.z));
+        controller.transform.localRotation = Quaternion.Euler(0, 0, Utils.EulerToAngle(controller.initialAngle.z));
 
         // velocity 적용 -> 발사
         if (controller.launchSuccess)
@@ -105,13 +105,13 @@ public class StateGliding : BaseState
             var change = Vector3.forward * -rotSpeed * Time.deltaTime;
             controller.transform.Rotate((change.z < 0) ? change : -change);
         }
-        ClampRotation(controller.transform.localEulerAngles);
+        controller.transform.localRotation = Utils.ClampRotation(controller.transform.localEulerAngles, minAngle, maxAngle);
     }
 
     public void SetResistance(Vector3 localEulerAngle)
     {
         // 앵글 -> 백분율
-        localEulerAngle.z = EulerToAngle(localEulerAngle.z);
+        localEulerAngle.z = Utils.EulerToAngle(localEulerAngle.z);
         var anglePercentage = (localEulerAngle.z - minAngle) / (maxAngle - minAngle) * 100f;
         //Debug.Log(anglePercentage + "% // 속력: " + controller.frontSpeed);
 
@@ -144,7 +144,7 @@ public class StateGliding : BaseState
 
     public void SetRotSpeed(Vector3 localEulerAngle)
     {
-        localEulerAngle.z = EulerToAngle(localEulerAngle.z);
+        localEulerAngle.z = Utils.EulerToAngle(localEulerAngle.z);
         var anglePercentage = (localEulerAngle.z - minAngle) / (maxAngle - minAngle) * 100f; // 0~1
 
         if (anglePercentage > 50)
@@ -157,18 +157,18 @@ public class StateGliding : BaseState
         }
     }
 
-    public void ClampRotation(Vector3 localEulerAngle)
-    {
-        //Vector3 targetAngles = controller.transform.localEulerAngles;
-        localEulerAngle.z = EulerToAngle(localEulerAngle.z);
-        localEulerAngle.z = Mathf.Clamp(localEulerAngle.z, minAngle, maxAngle);
-        controller.transform.localRotation = Quaternion.Euler(localEulerAngle);
-    }
+    //public void ClampRotation(Vector3 localEulerAngle)
+    //{
+    //    //Vector3 targetAngles = controller.transform.localEulerAngles;
+    //    localEulerAngle.z = EulerToAngle(localEulerAngle.z);
+    //    localEulerAngle.z = Mathf.Clamp(localEulerAngle.z, minAngle, maxAngle);
+    //    controller.transform.localRotation = Quaternion.Euler(localEulerAngle);
+    //}
 
-    public float EulerToAngle(float z)
-    {
-        return (z > 180f) ? z - 360f : z;
-    }
+    //public float EulerToAngle(float z)
+    //{
+    //    return (z > 180f) ? z - 360f : z;
+    //}
 
     public void ApplicationAirflow()
     {
