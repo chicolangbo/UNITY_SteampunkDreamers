@@ -8,11 +8,17 @@ public class ObjectLoop : MonoBehaviour
     private Vector3 loopPoint;
 
     private float width;
+    public bool colliderOff = false;
 
     public void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
         width = transform.localScale.x;
+        if(colliderOff)
+        {
+            width = GetComponent<BoxCollider>().size.x;
+            GetComponent<BoxCollider>().enabled = false;
+        }
         loopPoint = transform.position;
     }
 
