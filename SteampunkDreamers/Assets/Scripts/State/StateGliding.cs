@@ -67,14 +67,6 @@ public class StateGliding : BaseState
 
     public override void OnUpdateState()
     {
-        // birdDrop 시간 제한
-        //if(controller.isCollideBird && !firstBirdDrop)
-        //{
-        //    firstBirdDrop = true;
-            
-        //}
-        //else if(controller.isCollideBird && firstBirdDrop)
-
         // 방향 업데이트
         direction = controller.transform.right;
 
@@ -94,7 +86,7 @@ public class StateGliding : BaseState
         RotatePlane(Input.GetMouseButton(0));
 
         // frontSpeed -> 앵글 회전 속도 업데이트
-        SetRotSpeed(controller.transform.localEulerAngles, controller.isCollideBird);
+        SetRotSpeed(controller.transform.localEulerAngles);
         //controller.velocity += Vector3.down * gravity;
 
         // 앵글 -> 저항값 세팅
@@ -139,7 +131,6 @@ public class StateGliding : BaseState
         {
             if(firstDown == false && anglePercentage < 49)
             {
-                Debug.Log("true");
                 firstDown = true;
             }
             airResistance = (1 - anglePercentage / 50) * airResistanceDown; // +
@@ -162,7 +153,7 @@ public class StateGliding : BaseState
         }
     }
 
-    public void SetRotSpeed(Vector3 localEulerAngle, bool isCollideBird)
+    public void SetRotSpeed(Vector3 localEulerAngle)
     {
         localEulerAngle.z = Utils.EulerToAngle(localEulerAngle.z);
         var anglePercentage = (localEulerAngle.z - minAngle) / (maxAngle - minAngle) * 100f; // 0~1
@@ -170,19 +161,10 @@ public class StateGliding : BaseState
         if (anglePercentage > 50)
         {
             rotSpeed = standardRotSpeed + (anglePercentage - 50) / 50 * maxRotSpeed; // -
-            if(isCollideBird)
-            {
-                //rotSpeed = standardRotSpeed + (1 - anglePercentage / 50) * minRotSpeed;
-                rotSpeed -= birdDrop;
-            }
         }
         else
         {
             rotSpeed = standardRotSpeed + (1 - anglePercentage / 50) * minRotSpeed; // +
-            if (isCollideBird)
-            {
-                rotSpeed += birdDrop;
-            }
         }
     }
 

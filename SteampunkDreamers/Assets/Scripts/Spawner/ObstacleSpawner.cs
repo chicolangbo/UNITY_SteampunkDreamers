@@ -6,7 +6,7 @@ using UnityEngine;
 public class ObstacleSpawner : Spawner
 {
     public Obstacle prefab;
-    public float playerBehindLength;
+    public float playerGapLength;
     public float minSpeed;
     public float maxSpeed;
     public float minSpawnDelayTime;
@@ -35,8 +35,15 @@ public class ObstacleSpawner : Spawner
             var randomValue = Random.Range(minSpeed, maxSpeed);
             go.speed = playerController.frontSpeed * randomValue;
             // position
-            selectedPoint.x = playerController.transform.position.x - playerBehindLength;
+            selectedPoint.x = playerController.transform.position.x + playerGapLength;
             go.rb.position = selectedPoint;
+            // onDie
+            go.onDisappear += () =>
+            {
+                // 없어질 때 효과
+                Debug.Log("충돌 시 삭제");
+                go.ReleaseObject();
+            };
 
             yield return new WaitForSeconds(spawnDelayTime);
             spawnDelayTime = Random.Range(minSpawnDelayTime, maxSpawnDelayTime);

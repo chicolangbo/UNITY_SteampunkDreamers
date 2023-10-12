@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff49a42fc2e531541b8b3472d2847a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bg1: {fileID: 0}
   name: Bird
   speed: 0
   type: 0
@@ -129,6 +130,8 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   rb: {fileID: 0}
   playerController: {fileID: 0}
+  planeSpeedDownRatio: 0.2
+  planeSpeedUpRatio: 0.4
 --- !u!54 &-1113006157087708522
 Rigidbody:
   m_ObjectHideFlags: 0

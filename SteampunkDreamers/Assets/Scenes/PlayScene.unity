@@ -2682,7 +2682,7 @@ GameObject:
   - component: {fileID: 1317181246}
   m_Layer: 0
   m_Name: testBg1
-  m_TagString: Untagged
+  m_TagString: Bg1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3108,14 +3108,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialSpeed: 0
   initialAngle: {x: 0, y: 0, z: 0, w: 0}
-  maxSpeed: 40
+  maxSpeed: 100
   frontSpeed: 0
   launchSuccess: 0
   velocity: {x: 0, y: 0, z: 0}
   distance: 0
   altitude: 1
   altitudeRatio: 10
-  fuelTimer: 5
+  fuelTimer: 50
 --- !u!114 &1672137054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3164,9 +3164,9 @@ MonoBehaviour:
   spawnDelayTime: 0
   spawnRangeValue: 0
   prefab: {fileID: 3166645595989774842, guid: 39a0e1e5824081f48bb9568ec582dd1a, type: 3}
-  playerBehindLength: 10
-  minSpeed: 0.4
-  maxSpeed: 0.6
+  playerGapLength: 100
+  minSpeed: 0.1
+  maxSpeed: 0.2
   minSpawnDelayTime: 0.3
   maxSpawnDelayTime: 4
 --- !u!1 &1707472523
@@ -3688,7 +3688,7 @@ GameObject:
   - component: {fileID: 1888263413}
   m_Layer: 0
   m_Name: testBg2
-  m_TagString: Untagged
+  m_TagString: Bg2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3705,7 +3705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dde539af33ca734fb7f4f5eebe7fac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  child: 0
+  child: 1
 --- !u!65 &1888263414
 BoxCollider:
   m_ObjectHideFlags: 0

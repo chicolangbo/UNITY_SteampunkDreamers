@@ -11,6 +11,8 @@ TagManager:
   - Board
   - Airflow
   - Bird
+  - Bg1
+  - Bg2
   layers:
   - Default
   - TransparentFX

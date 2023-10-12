@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
     public float altitudeRatio = 10f; // 정해야 함
     public float fuelTimer = 5f;
 
-    public bool isCollideBird;
 
     private AirflowSpwaner airflowSpwaner;
     private ObstacleSpawner birdSpawner;
@@ -117,16 +116,5 @@ public class PlayerController : MonoBehaviour
         stateMachine = new StateMachine(StateName.Ready, new StateReady(this));
 
         
-    }
-
-    public void BirdCollideEffectStop()
-    {
-        isCollideBird = false;
-        Debug.Log("stop");
-    }
-
-    public void SetFalseEffect()
-    {
-        Invoke("BirdCollideEffectStop", 1.5f);
     }
 }
