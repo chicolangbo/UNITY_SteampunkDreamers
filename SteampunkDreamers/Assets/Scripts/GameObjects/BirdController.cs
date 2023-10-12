@@ -13,6 +13,11 @@ public class BirdController : Obstacle
     public void Start()
     {
         // 오디오클립 할당
+
+        onDisappear += () =>
+        {
+            ReleaseObject();
+        };
     }
 
     public override void CollideEffect()
@@ -23,7 +28,7 @@ public class BirdController : Obstacle
         // 1번 테스트
         // 각도 - 30~80 현재 속도 -= 맥스속도의 40 %
         // 각도 - 80~-30 현재 속도 += 맥스 속도의 40 %
-       var angle = Utils.EulerToAngle(playerController.transform.localEulerAngles.z);
+        var angle = Utils.EulerToAngle(playerController.transform.localEulerAngles.z);
         var anglePercentage = (angle - playerController.minAngle) / (playerController.maxAngle - playerController.minAngle) * 100f;
 
         if (anglePercentage >= 30)

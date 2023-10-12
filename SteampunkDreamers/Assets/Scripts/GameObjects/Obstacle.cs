@@ -11,7 +11,7 @@ public enum EffectType
     NoControll
 }
 
-public abstract class Obstacle : PoolAble
+public class Obstacle : PoolAble
 {
     [SerializeField]
     private Transform bg1;
@@ -65,5 +65,8 @@ public abstract class Obstacle : PoolAble
         }
     }
 
-    public abstract void CollideEffect();
+    public virtual void CollideEffect()
+    {
+
+    }
 }

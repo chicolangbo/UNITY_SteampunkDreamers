@@ -16,10 +16,10 @@ public class ObstacleSpawner : Spawner
     {
         spawnRangeValue = 3;
         spawnDelayTime = 3f;
-        StartCoroutine(CreateBird());
+        StartCoroutine(CreateObstacle());
     }
 
-    public IEnumerator CreateBird()
+    public IEnumerator CreateObstacle()
     {
         while (!spawnStop)
         {
@@ -36,13 +36,14 @@ public class ObstacleSpawner : Spawner
             go.speed = playerController.frontSpeed * randomValue;
             // position
             selectedPoint.x = playerController.transform.position.x + playerGapLength;
+            selectedPoint.z = prefab.transform.position.z;
             go.rb.position = selectedPoint;
             // onDie
             go.onDisappear += () =>
             {
                 // 없어질 때 효과
                 Debug.Log("충돌 시 삭제");
-                go.ReleaseObject();
+                //go.ReleaseObject();
             };
 
             yield return new WaitForSeconds(spawnDelayTime);

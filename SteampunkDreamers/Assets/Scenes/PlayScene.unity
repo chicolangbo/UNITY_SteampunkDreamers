@@ -185,7 +185,10 @@ MonoBehaviour:
   objectInfos:
   - objectName: Bird
     perfab: {fileID: 8431483608445492516, guid: 39a0e1e5824081f48bb9568ec582dd1a, type: 3}
-    count: 10
+    count: 100
+  - objectName: Cloud
+    perfab: {fileID: 4143530077142466765, guid: 85cbfe1ba5efb96479c7fceaa892ad2e, type: 3}
+    count: 100
 --- !u!1 &26449155
 GameObject:
   m_ObjectHideFlags: 0
@@ -2972,6 +2975,7 @@ GameObject:
   - component: {fileID: 1672137053}
   - component: {fileID: 1672137054}
   - component: {fileID: 1672137055}
+  - component: {fileID: 1672137056}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3167,7 +3171,36 @@ MonoBehaviour:
   playerGapLength: 100
   minSpeed: 0.1
   maxSpeed: 0.2
-  minSpawnDelayTime: 0.3
+  minSpawnDelayTime: 0.5
+  maxSpawnDelayTime: 4
+--- !u!114 &1672137056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672137047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92e55c531345591409849b991807be09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoints: []
+  prevPoint: {x: 0, y: 0, z: 0}
+  selectedPoint: {x: 0, y: 0, z: 0}
+  playerController: {fileID: 0}
+  yScale: 0
+  planeMultipleHeight: 15
+  spawnStop: 0
+  spawnPointCount: 0
+  playerIndex: 0
+  spawnDelayTime: 0
+  spawnRangeValue: 0
+  prefab: {fileID: 5576859574702632721, guid: 85cbfe1ba5efb96479c7fceaa892ad2e, type: 3}
+  playerGapLength: 100
+  minSpeed: 0.02
+  maxSpeed: 0.02
+  minSpawnDelayTime: 0.5
   maxSpawnDelayTime: 4
 --- !u!1 &1707472523
 GameObject:
