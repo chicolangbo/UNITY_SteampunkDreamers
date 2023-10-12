@@ -27,12 +27,15 @@ public class StateGliding : BaseState
     private float inputLimit = 5f; // frontSpeed가 inputLimit 이하일 시 클릭 제한
     private float inputLimitRelease = 15f; // frontSpeed가 inputLimitRelease 이상일 시 클릭 제한 해제
 
+    private float birdDrop = 50f;
+    private float birdDropTimer = 3f;
+
     // airflow
     private float airflowFrontRatio = 10; // 순풍
     private float airflowReverseRatio = 100; // 역풍 ( airResistance -= dt*airflowReverseRatio로 적용되어 있음 )
-    private float gravity = 10f;
 
     private bool firstDown;
+    private bool firstBirdDrop;
 
     public StateGliding(PlayerController controller) : base(controller)
     {
@@ -64,6 +67,14 @@ public class StateGliding : BaseState
 
     public override void OnUpdateState()
     {
+        // birdDrop 시간 제한
+        //if(controller.isCollideBird && !firstBirdDrop)
+        //{
+        //    firstBirdDrop = true;
+            
+        //}
+        //else if(controller.isCollideBird && firstBirdDrop)
+
         // 방향 업데이트
         direction = controller.transform.right;
 
@@ -83,7 +94,7 @@ public class StateGliding : BaseState
         RotatePlane(Input.GetMouseButton(0));
 
         // frontSpeed -> 앵글 회전 속도 업데이트
-        SetRotSpeed(controller.transform.localEulerAngles);
+        SetRotSpeed(controller.transform.localEulerAngles, controller.isCollideBird);
         //controller.velocity += Vector3.down * gravity;
 
         // 앵글 -> 저항값 세팅
@@ -151,7 +162,7 @@ public class StateGliding : BaseState
         }
     }
 
-    public void SetRotSpeed(Vector3 localEulerAngle)
+    public void SetRotSpeed(Vector3 localEulerAngle, bool isCollideBird)
     {
         localEulerAngle.z = Utils.EulerToAngle(localEulerAngle.z);
         var anglePercentage = (localEulerAngle.z - minAngle) / (maxAngle - minAngle) * 100f; // 0~1
@@ -159,10 +170,19 @@ public class StateGliding : BaseState
         if (anglePercentage > 50)
         {
             rotSpeed = standardRotSpeed + (anglePercentage - 50) / 50 * maxRotSpeed; // -
+            if(isCollideBird)
+            {
+                //rotSpeed = standardRotSpeed + (1 - anglePercentage / 50) * minRotSpeed;
+                rotSpeed -= birdDrop;
+            }
         }
         else
         {
             rotSpeed = standardRotSpeed + (1 - anglePercentage / 50) * minRotSpeed; // +
+            if (isCollideBird)
+            {
+                rotSpeed += birdDrop;
+            }
         }
     }
 

@@ -10,6 +10,7 @@ TagManager:
   - SpeedBar
   - Board
   - Airflow
+  - Bird
   layers:
   - Default
   - TransparentFX

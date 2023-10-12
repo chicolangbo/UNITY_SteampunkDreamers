@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -27,6 +28,8 @@ public class PlayerController : MonoBehaviour
     public float altitude = 1f;
     public float altitudeRatio = 10f; // 정해야 함
     public float fuelTimer = 5f;
+
+    public bool isCollideBird;
 
     private AirflowSpwaner airflowSpwaner;
     private ObstacleSpawner birdSpawner;
@@ -62,7 +65,7 @@ public class PlayerController : MonoBehaviour
         // 인게임 정보 UI 업데이트
         altitude = transform.position.y * altitudeRatio;
         UIManager.instance.UpdateDistanceText(distance);
-        UIManager.instance.UpdateVelocityText(frontSpeed);
+        UIManager.instance.UpdateVelocityText(velocity.x);
         UIManager.instance.UpdateAltitudeText(altitude);
     }
 
@@ -112,5 +115,18 @@ public class PlayerController : MonoBehaviour
     {
         // original code
         stateMachine = new StateMachine(StateName.Ready, new StateReady(this));
+
+        
+    }
+
+    public void BirdCollideEffectStop()
+    {
+        isCollideBird = false;
+        Debug.Log("stop");
+    }
+
+    public void SetFalseEffect()
+    {
+        Invoke("BirdCollideEffectStop", 1.5f);
     }
 }

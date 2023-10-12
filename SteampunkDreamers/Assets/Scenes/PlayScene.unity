@@ -3134,7 +3134,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   yScale: 0
   planeMultipleHeight: 15
-  spawnStop: 0
+  spawnStop: 1
   spawnPointCount: 0
   playerIndex: 0
   spawnDelayTime: 2.5
