@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
     private AirflowSpwaner airflowSpwaner;
     private ObstacleSpawner birdSpawner;
+    private ObstacleSpawner cloudSpawner;
+
     public LinkedList<AirflowSystem> airflows = new LinkedList<AirflowSystem>();
 
     private void Awake()
@@ -42,6 +44,7 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.SetBoardLength(maxSpeed);
         airflowSpwaner = GetComponent<AirflowSpwaner>();
         birdSpawner = GetComponent<ObstacleSpawner>();
+        
         birdSpawner.enabled = false;
         airflowSpwaner.enabled = false;
     }
