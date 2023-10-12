@@ -20,8 +20,8 @@ public class StateGliding : BaseState
     // Resistance & Speed
     private bool isRotPossible = true;
     private float airResistance;
-    private float airResistanceDown = 5f; // 비행체 앵글이 50% 이하일 시 내려가는 가속도
-    private float airResistanceUp = -20f; // 비행체 앵글이 50% 이상일 시 올라가는 감속도
+    private float airResistanceDown = 20f; // 비행체 앵글이 50% 이하일 시 내려가는 가속도
+    private float airResistanceUp = -50f; // 비행체 앵글이 50% 이상일 시 올라가는 감속도
 
     private float minFrontSpeed = 5f;
     private float inputLimit = 5f; // frontSpeed가 inputLimit 이하일 시 클릭 제한
@@ -31,6 +31,8 @@ public class StateGliding : BaseState
     private float airflowFrontRatio = 10; // 순풍
     private float airflowReverseRatio = 100; // 역풍 ( airResistance -= dt*airflowReverseRatio로 적용되어 있음 )
     private float gravity = 10f;
+
+    private bool firstDown;
 
     public StateGliding(PlayerController controller) : base(controller)
     {
@@ -93,7 +95,7 @@ public class StateGliding : BaseState
     }
 
     public void RotatePlane(bool up)
-    {   
+    {
         if (up && controller.launchSuccess && isRotPossible)
         {
             controller.fuelTimer -= Time.deltaTime;
@@ -118,12 +120,17 @@ public class StateGliding : BaseState
         var anglePercentage = (localEulerAngle.z - minAngle) / (maxAngle - minAngle) * 100f;
 
         // 앵글 - airResistance
-        if (anglePercentage >= 50)
+        if (anglePercentage >= 50 && firstDown)
         {
             airResistance = (anglePercentage - 50) / 50 * airResistanceUp; // -
         }
         else
         {
+            if(firstDown == false && anglePercentage < 49)
+            {
+                Debug.Log("true");
+                firstDown = true;
+            }
             airResistance = (1 - anglePercentage / 50) * airResistanceDown; // +
         }
 
