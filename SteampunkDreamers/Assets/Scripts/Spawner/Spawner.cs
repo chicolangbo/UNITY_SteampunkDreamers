@@ -8,6 +8,7 @@ public class Spawner : MonoBehaviour
     public Vector3[] spawnPoints;
     public Vector3 prevPoint;
     public Vector3 selectedPoint;
+    public float minHeight;
     public PlayerController playerController;
     public float yScale;
     public float planeMultipleHeight;
@@ -19,7 +20,7 @@ public class Spawner : MonoBehaviour
 
     public void Awake()
     {
-        playerController = GetComponent<PlayerController>();
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         yScale = playerController.gameObject.GetComponent<BoxCollider>().size.y * planeMultipleHeight;
         spawnPointCount = 10000 / (int)yScale;
         spawnPoints = new Vector3[spawnPointCount];
@@ -27,7 +28,7 @@ public class Spawner : MonoBehaviour
         // 스폰 포인트 생성 
         for (int i = 0; i < spawnPoints.Length; ++i)
         {
-            var tempPos = new Vector3(-20f, yScale / 2f + yScale * i - 0.5f);
+            var tempPos = new Vector3(-20f, yScale / 2f + yScale * i - 0.5f + minHeight);
             spawnPoints[i] = tempPos;
         }
     }

@@ -29,12 +29,11 @@ public class PlayerController : MonoBehaviour
     public float altitudeRatio = 10f; // 정해야 함
     public float fuelTimer = 5f;
 
-
-    private AirflowSpwaner airflowSpwaner;
-    private ObstacleSpawner birdSpawner;
-    private ObstacleSpawner cloudSpawner;
-
     public LinkedList<AirflowSystem> airflows = new LinkedList<AirflowSystem>();
+
+    //AirflowSpwaner airflowSpwaner = new AirflowSpwaner();
+    //ObstacleSpawner[] obstacleSpawner = new ObstacleSpawner[4];
+    private List<Spawner> spawners = new List<Spawner>();
 
     private void Awake()
     {
@@ -42,11 +41,15 @@ public class PlayerController : MonoBehaviour
         speedBar = GameObject.FindWithTag("SpeedBar");
         angleBar = transform.GetChild(transform.childCount - 1).GetChild(transform.childCount - 1).gameObject;
         GameManager.instance.SetBoardLength(maxSpeed);
-        airflowSpwaner = GetComponent<AirflowSpwaner>();
-        birdSpawner = GetComponent<ObstacleSpawner>();
-        
-        birdSpawner.enabled = false;
-        airflowSpwaner.enabled = false;
+
+        var count = GameManager.instance.GetComponents<ObstacleSpawner>().Length;
+        spawners.Add(GameManager.instance.GetComponent<AirflowSpwaner>());
+        spawners[0].enabled = false;
+        for(int i = 1; i< count+1; ++i)
+        {
+            spawners.Add(GameManager.instance.GetComponents<ObstacleSpawner>()[i - 1]);
+            spawners[i].enabled = false;
+        }
     }
 
     private void Start()
@@ -80,8 +83,10 @@ public class PlayerController : MonoBehaviour
             StateGliding stateGliding = (StateGliding)stateMachine.GetState(StateName.Gliding);
             angleBar.SetActive(false);
             stateMachine?.ChangeState(StateName.Gliding);
-            airflowSpwaner.enabled = true;
-            birdSpawner.enabled = true;
+            foreach(var s in spawners)
+            {
+                s.enabled = true;
+            }
         }
 
         if (other.CompareTag("Floor"))
@@ -89,8 +94,10 @@ public class PlayerController : MonoBehaviour
             // 상태 변경 ( Gliding -> Landing )
             stateMachine.AddState(StateName.Landing, new StateLanding(this));
             stateMachine?.ChangeState(StateName.Landing);
-            airflowSpwaner.spawnStop = true;
-            birdSpawner.spawnStop = true;
+            foreach (var s in spawners)
+            {
+                s.spawnStop = true;
+            }
         }
 
         if (other.CompareTag("Airflow"))

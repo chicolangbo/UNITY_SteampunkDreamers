@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -134,6 +134,9 @@ GameObject:
   - component: {fileID: 10005654}
   - component: {fileID: 10005653}
   - component: {fileID: 10005655}
+  - component: {fileID: 10005658}
+  - component: {fileID: 10005657}
+  - component: {fileID: 10005656}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -189,6 +192,91 @@ MonoBehaviour:
   - objectName: Cloud
     perfab: {fileID: 4143530077142466765, guid: 85cbfe1ba5efb96479c7fceaa892ad2e, type: 3}
     count: 100
+--- !u!114 &10005656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10005652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92e55c531345591409849b991807be09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoints: []
+  prevPoint: {x: 0, y: 0, z: 0}
+  selectedPoint: {x: 0, y: 0, z: 0}
+  minHeight: 30
+  playerController: {fileID: 0}
+  yScale: 0
+  planeMultipleHeight: 15
+  spawnStop: 0
+  spawnPointCount: 0
+  playerIndex: 0
+  spawnDelayTime: 0
+  spawnRangeValue: 0
+  prefab: {fileID: 5576859574702632721, guid: 85cbfe1ba5efb96479c7fceaa892ad2e, type: 3}
+  playerGapLength: 100
+  minSpeed: 0.02
+  maxSpeed: 0.02
+  minSpawnDelayTime: 0.5
+  maxSpawnDelayTime: 4
+--- !u!114 &10005657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10005652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92e55c531345591409849b991807be09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoints: []
+  prevPoint: {x: 0, y: 0, z: 0}
+  selectedPoint: {x: 0, y: 0, z: 0}
+  minHeight: 0
+  playerController: {fileID: 0}
+  yScale: 0
+  planeMultipleHeight: 15
+  spawnStop: 0
+  spawnPointCount: 0
+  playerIndex: 0
+  spawnDelayTime: 0
+  spawnRangeValue: 0
+  prefab: {fileID: 3166645595989774842, guid: 39a0e1e5824081f48bb9568ec582dd1a, type: 3}
+  playerGapLength: 100
+  minSpeed: 0.1
+  maxSpeed: 0.2
+  minSpawnDelayTime: 0.5
+  maxSpawnDelayTime: 4
+--- !u!114 &10005658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10005652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da171ad3d026264bb2721bd3434bcd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoints: []
+  prevPoint: {x: 0, y: 0, z: 0}
+  selectedPoint: {x: 0, y: 0, z: 0}
+  minHeight: 0
+  playerController: {fileID: 0}
+  yScale: 0
+  planeMultipleHeight: 15
+  spawnStop: 1
+  spawnPointCount: 0
+  playerIndex: 0
+  spawnDelayTime: 2.5
+  spawnRangeValue: 0
+  airflowPrefab: {fileID: -4320931091565651623, guid: 7a05cb8dfee5f9b44bab41844090ede1, type: 3}
 --- !u!1 &26449155
 GameObject:
   m_ObjectHideFlags: 0
@@ -2973,9 +3061,6 @@ GameObject:
   - component: {fileID: 1672137049}
   - component: {fileID: 1672137048}
   - component: {fileID: 1672137053}
-  - component: {fileID: 1672137054}
-  - component: {fileID: 1672137055}
-  - component: {fileID: 1672137056}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3120,88 +3205,6 @@ MonoBehaviour:
   altitude: 1
   altitudeRatio: 10
   fuelTimer: 50
---- !u!114 &1672137054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1672137047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6da171ad3d026264bb2721bd3434bcd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPoints: []
-  prevPoint: {x: 0, y: 0, z: 0}
-  selectedPoint: {x: 0, y: 0, z: 0}
-  playerController: {fileID: 0}
-  yScale: 0
-  planeMultipleHeight: 15
-  spawnStop: 1
-  spawnPointCount: 0
-  playerIndex: 0
-  spawnDelayTime: 2.5
-  spawnRangeValue: 0
-  airflowPrefab: {fileID: -4320931091565651623, guid: 7a05cb8dfee5f9b44bab41844090ede1, type: 3}
---- !u!114 &1672137055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1672137047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92e55c531345591409849b991807be09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPoints: []
-  prevPoint: {x: 0, y: 0, z: 0}
-  selectedPoint: {x: 0, y: 0, z: 0}
-  playerController: {fileID: 0}
-  yScale: 0
-  planeMultipleHeight: 15
-  spawnStop: 0
-  spawnPointCount: 0
-  playerIndex: 0
-  spawnDelayTime: 0
-  spawnRangeValue: 0
-  prefab: {fileID: 3166645595989774842, guid: 39a0e1e5824081f48bb9568ec582dd1a, type: 3}
-  playerGapLength: 100
-  minSpeed: 0.1
-  maxSpeed: 0.2
-  minSpawnDelayTime: 0.5
-  maxSpawnDelayTime: 4
---- !u!114 &1672137056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1672137047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92e55c531345591409849b991807be09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPoints: []
-  prevPoint: {x: 0, y: 0, z: 0}
-  selectedPoint: {x: 0, y: 0, z: 0}
-  playerController: {fileID: 0}
-  yScale: 0
-  planeMultipleHeight: 15
-  spawnStop: 0
-  spawnPointCount: 0
-  playerIndex: 0
-  spawnDelayTime: 0
-  spawnRangeValue: 0
-  prefab: {fileID: 5576859574702632721, guid: 85cbfe1ba5efb96479c7fceaa892ad2e, type: 3}
-  playerGapLength: 100
-  minSpeed: 0.02
-  maxSpeed: 0.02
-  minSpawnDelayTime: 0.5
-  maxSpawnDelayTime: 4
 --- !u!1 &1707472523
 GameObject:
   m_ObjectHideFlags: 0
