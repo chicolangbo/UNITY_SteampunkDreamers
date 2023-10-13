@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class StateReady : BaseState
 {
-    private Transform player;
-
     //speedBar
     private SpeedBarController speedBarController;
     private bool selectSpeed = false;
@@ -24,7 +22,6 @@ public class StateReady : BaseState
 
     public override void OnEnterState()
     {
-        player = controller.transform;
         speedBarController = controller.speedBar.GetComponent<SpeedBarController>();
         angleBarController = controller.angleBar.GetComponent<AngleBarController>();
     }

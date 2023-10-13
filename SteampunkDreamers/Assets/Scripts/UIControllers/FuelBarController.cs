@@ -5,19 +5,19 @@ using UnityEngine;
 public class FuelBarController : MonoBehaviour
 {
     private RectTransform fuelBar;
-    private PlayerController player;
+    private PlayerController playerController;
     private float initialFuelValue;
 
     public void Awake()
     {
         fuelBar = GetComponent<RectTransform>();
-        player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        initialFuelValue = player.fuelTimer;
+        playerController = GameManager.instance.player.GetComponent<PlayerController>();
+        initialFuelValue = playerController.fuelTimer;
     }
 
     public void Update()
     {
-        var scaleX = player.fuelTimer / initialFuelValue;
+        var scaleX = playerController.fuelTimer / initialFuelValue;
         fuelBar.localScale = new Vector3(scaleX, fuelBar.localScale.y, fuelBar.localScale.z);
     }
 }

@@ -7,11 +7,16 @@ public class SpeedBarController : MonoBehaviour
 {
     public Image fillBar;
     public RectTransform arrow;
-    public PlayerController playerController;
+    private PlayerController playerController;
     public float value = 0;
     public float accelerator;
     private bool toRight;
     private float controllSpeed = 66.67f;
+
+    private void Start()
+    {
+        playerController = GameManager.instance.player.GetComponent<PlayerController>();
+    }
 
     public void Update()
     {
