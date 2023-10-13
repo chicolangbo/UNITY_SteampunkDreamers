@@ -11,6 +11,15 @@ public class ButtonController : MonoBehaviour
     {
         SceneManager.LoadScene("PlayScene");
     }
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("Main Menu Scene");
+    }
+    public void Upgrade()
+    {
+        SceneManager.LoadScene("Upgrade Scene");
+    }
+
 
 
 
@@ -18,7 +27,6 @@ public class ButtonController : MonoBehaviour
     void Start()
     {
         button = GetComponent<Button>();
-        button.onClick.AddListener(GameStart);
     }
 
     // Update is called once per frame
