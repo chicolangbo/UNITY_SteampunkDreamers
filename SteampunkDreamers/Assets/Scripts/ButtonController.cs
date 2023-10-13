@@ -19,6 +19,10 @@ public class ButtonController : MonoBehaviour
     {
         SceneManager.LoadScene("Upgrade Scene");
     }
+    public void Option()
+    {
+        SceneManager.LoadScene("Option Scene");
+    }
 
 
 
