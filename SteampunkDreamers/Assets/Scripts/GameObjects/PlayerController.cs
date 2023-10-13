@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
     public Rigidbody rb { get; private set; } // 충돌 처리만
     public bool launchSuccess = false;
+    public bool airshipColiide = false;
 
     public GameObject speedBar { get; private set; }
     public GameObject angleBar { get; private set; }
@@ -28,6 +29,10 @@ public class PlayerController : MonoBehaviour
     public float altitude = 1f;
     public float altitudeRatio = 10f; // 정해야 함
     public float fuelTimer = 5f;
+
+    public ParticleSystem electronicParticle; // Nimbus collide
+    public ParticleSystem explosionParticle; // Airship collide
+    public ParticleSystem fireParticle; // Airship collide
 
     public LinkedList<AirflowSystem> airflows = new LinkedList<AirflowSystem>();
 
@@ -124,7 +129,5 @@ public class PlayerController : MonoBehaviour
     {
         // original code
         stateMachine = new StateMachine(StateName.Ready, new StateReady(this));
-
-        
     }
 }

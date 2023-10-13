@@ -5,32 +5,31 @@ using UnityEngine;
 public class NimbusController : Obstacle
 {
     public AudioClip electronicAudioClip;
-    public ParticleSystem electronicParticle;
+
     public int effectMaxCount;
+
+    public float duration;
+    private float elapsedTime = 0.0f;
 
     public override void CollideEffect()
     {
-        if(effectMaxCount != 0)
-        {
-            effectMaxCount--;
-
-        }
+        StartCoroutine(PlaneRotImpossible());
     }
 
     private IEnumerator PlaneRotImpossible()
     {
-        while(effectMaxCount > 0)
+        StateGliding stateGliding = (StateGliding)playerController.stateMachine.CurrentState;
+
+        if (stateGliding != null)
         {
-            string stateName = playerController.stateMachine.GetCurrentState();
-
-            if(playerController.stateMachine.currentSatateName == "Gliding")
+            while (elapsedTime < duration)
             {
-                StateGliding stateGliding = (StateGliding)playerController.stateMachine.CurrentState;
+                Debug.Log("로테이션 막음");
                 stateGliding.isRotPossible = false;
+                yield return null;
+                elapsedTime += Time.deltaTime;
             }
-
-            yield return null;
-            ++effectMaxCount;
         }
+        stateGliding.isRotPossible = true;
     }
 }

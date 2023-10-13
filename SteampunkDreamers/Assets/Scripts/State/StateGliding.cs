@@ -64,6 +64,11 @@ public class StateGliding : BaseState
 
     public override void OnUpdateState()
     {
+        if(controller.airshipColiide)
+        {
+            isRotPossible = false;
+        }
+
         // 방향 업데이트
         direction = controller.transform.right;
 
