@@ -29,7 +29,7 @@ public class AirflowSystem : MonoBehaviour
         airflowFront = transform.GetChild(0).gameObject;
         airflowReverse = transform.GetChild(1).gameObject;
         fadeEffect = GetComponent<FadeController>();
-        player = GameObject.FindWithTag("Player").transform;
+        player = GameManager.instance.player.transform;
     }
 
     public void Start()

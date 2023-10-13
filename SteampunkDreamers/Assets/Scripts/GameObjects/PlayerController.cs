@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
     public Rigidbody rb { get; private set; } // 충돌 처리만
     public bool launchSuccess = false;
+    public bool airshipColiide = false;
 
     public GameObject speedBar { get; private set; }
     public GameObject angleBar { get; private set; }
@@ -28,8 +30,15 @@ public class PlayerController : MonoBehaviour
     public float altitudeRatio = 10f; // 정해야 함
     public float fuelTimer = 5f;
 
-    private AirflowSpwaner airflowSpwaner;
+    public ParticleSystem electronicParticle; // Nimbus collide
+    public ParticleSystem explosionParticle; // Airship collide
+    public ParticleSystem fireParticle; // Airship collide
+
     public LinkedList<AirflowSystem> airflows = new LinkedList<AirflowSystem>();
+
+    //AirflowSpwaner airflowSpwaner = new AirflowSpwaner();
+    //ObstacleSpawner[] obstacleSpawner = new ObstacleSpawner[4];
+    private List<Spawner> spawners = new List<Spawner>();
 
     private void Awake()
     {
@@ -37,8 +46,15 @@ public class PlayerController : MonoBehaviour
         speedBar = GameObject.FindWithTag("SpeedBar");
         angleBar = transform.GetChild(transform.childCount - 1).GetChild(transform.childCount - 1).gameObject;
         GameManager.instance.SetBoardLength(maxSpeed);
-        airflowSpwaner = GetComponent<AirflowSpwaner>();
-        airflowSpwaner.enabled = false;
+
+        var count = GameManager.instance.GetComponents<ObstacleSpawner>().Length;
+        spawners.Add(GameManager.instance.GetComponent<AirflowSpwaner>());
+        spawners[0].enabled = false;
+        for(int i = 1; i< count+1; ++i)
+        {
+            spawners.Add(GameManager.instance.GetComponents<ObstacleSpawner>()[i - 1]);
+            spawners[i].enabled = false;
+        }
     }
 
     private void Start()
@@ -59,7 +75,7 @@ public class PlayerController : MonoBehaviour
         // 인게임 정보 UI 업데이트
         altitude = transform.position.y * altitudeRatio;
         UIManager.instance.UpdateDistanceText(distance);
-        UIManager.instance.UpdateVelocityText(frontSpeed);
+        UIManager.instance.UpdateVelocityText(velocity.x);
         UIManager.instance.UpdateAltitudeText(altitude);
     }
 
@@ -72,7 +88,10 @@ public class PlayerController : MonoBehaviour
             StateGliding stateGliding = (StateGliding)stateMachine.GetState(StateName.Gliding);
             angleBar.SetActive(false);
             stateMachine?.ChangeState(StateName.Gliding);
-            airflowSpwaner.enabled = true;
+            foreach(var s in spawners)
+            {
+                s.enabled = true;
+            }
         }
 
         if (other.CompareTag("Floor"))
@@ -80,7 +99,10 @@ public class PlayerController : MonoBehaviour
             // 상태 변경 ( Gliding -> Landing )
             stateMachine.AddState(StateName.Landing, new StateLanding(this));
             stateMachine?.ChangeState(StateName.Landing);
-            airflowSpwaner.spawnStop = true;
+            foreach (var s in spawners)
+            {
+                s.spawnStop = true;
+            }
         }
 
         if (other.CompareTag("Airflow"))
