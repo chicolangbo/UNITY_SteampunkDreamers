@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public float boardScaleX { get; private set; }
     public float boardScaleY;
     public float boardScaleZ;
+    public GameObject player { get; private set; }
 
     public static GameManager instance
     {
@@ -28,6 +29,11 @@ public class GameManager : MonoBehaviour
     private static GameManager m_instance; // 싱글톤이 할당될 static 변수
 
     public bool isGameover { get; private set; } // 게임 오버 상태
+
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     public void Update()
     {

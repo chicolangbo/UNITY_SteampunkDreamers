@@ -188,10 +188,13 @@ MonoBehaviour:
   objectInfos:
   - objectName: Bird
     perfab: {fileID: 8431483608445492516, guid: 39a0e1e5824081f48bb9568ec582dd1a, type: 3}
-    count: 100
+    count: 10
   - objectName: Cloud
     perfab: {fileID: 4143530077142466765, guid: 85cbfe1ba5efb96479c7fceaa892ad2e, type: 3}
-    count: 100
+    count: 10
+  - objectName: Nimbus
+    perfab: {fileID: 4143530077142466765, guid: 5548e4b7565788b409dcf680c9ea1325, type: 3}
+    count: 10
 --- !u!114 &10005656
 MonoBehaviour:
   m_ObjectHideFlags: 0

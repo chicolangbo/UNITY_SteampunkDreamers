@@ -38,7 +38,7 @@ public class Obstacle : PoolAble
         bgWidth = GameObject.FindGameObjectWithTag("Bg1").GetComponent<BoxCollider>().size.x;
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        playerController = GameManager.instance.player.GetComponent<PlayerController>();
     }
 
     public void FixedUpdate()

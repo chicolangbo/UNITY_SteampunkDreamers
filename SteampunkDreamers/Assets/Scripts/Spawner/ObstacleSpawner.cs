@@ -12,8 +12,10 @@ public class ObstacleSpawner : Spawner
     public float minSpawnDelayTime;
     public float maxSpawnDelayTime;
 
-    public void Start()
+    public new void Start()
     {
+        base.Start();
+
         spawnRangeValue = 3;
         spawnDelayTime = 3f;
         StartCoroutine(CreateObstacle());

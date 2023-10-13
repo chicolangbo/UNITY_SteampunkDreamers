@@ -18,9 +18,9 @@ public class Spawner : MonoBehaviour
     public float spawnDelayTime;
     public int spawnRangeValue;
 
-    public void Awake()
+    public void Start()
     {
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        playerController = GameManager.instance.player.GetComponent<PlayerController>();
         yScale = playerController.gameObject.GetComponent<BoxCollider>().size.y * planeMultipleHeight;
         spawnPointCount = 10000 / (int)yScale;
         spawnPoints = new Vector3[spawnPointCount];

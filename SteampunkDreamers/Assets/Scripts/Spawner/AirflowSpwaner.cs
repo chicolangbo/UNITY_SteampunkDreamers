@@ -8,8 +8,10 @@ public class AirflowSpwaner : Spawner
     public AirflowSystem airflowPrefab;
     float xScale;
 
-    public void Start()
+    public new void Start()
     {
+        base.Start();
+
         xScale = 3000f;
         spawnRangeValue = 3;
         spawnDelayTime = 2.5f;

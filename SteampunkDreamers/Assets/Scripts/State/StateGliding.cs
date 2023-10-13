@@ -18,7 +18,7 @@ public class StateGliding : BaseState
     private Vector3 initialPos;
 
     // Resistance & Speed
-    private bool isRotPossible = true;
+    public bool isRotPossible = true;
     private float airResistance;
     private float airResistanceDown = 20f; // 비행체 앵글이 50% 이하일 시 내려가는 가속도
     private float airResistanceUp = -50f; // 비행체 앵글이 50% 이상일 시 올라가는 감속도
@@ -26,9 +26,6 @@ public class StateGliding : BaseState
     private float minFrontSpeed = 5f;
     private float inputLimit = 5f; // frontSpeed가 inputLimit 이하일 시 클릭 제한
     private float inputLimitRelease = 15f; // frontSpeed가 inputLimitRelease 이상일 시 클릭 제한 해제
-
-    private float birdDrop = 50f;
-    private float birdDropTimer = 3f;
 
     // airflow
     private float airflowFrontRatio = 10; // 순풍

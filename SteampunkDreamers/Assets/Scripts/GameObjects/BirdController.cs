@@ -5,15 +5,13 @@ using System;
 
 public class BirdController : Obstacle
 {
-    private AudioClip birdCryAudioClip;
-    private AudioClip bumpAudioClip;
+    public AudioClip birdCryAudioClip;
+    public AudioClip bumpAudioClip;
     public float planeSpeedDownRatio;
     public float planeSpeedUpRatio;
 
     public void Start()
     {
-        // 오디오클립 할당
-
         onDisappear += () =>
         {
             ReleaseObject();
