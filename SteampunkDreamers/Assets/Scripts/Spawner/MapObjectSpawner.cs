@@ -39,14 +39,8 @@ public class MapObjectSpawner : Spawner
             // position
             selectedPoint.x = playerController.transform.position.x + playerGapLength;
             selectedPoint.z = prefab.transform.position.z;
-            go.rb.position = selectedPoint;
-            // onDie
-            go.onDisappear += () =>
-            {
-                // 없어질 때 효과
-                Debug.Log("충돌 시 삭제");
-                //go.ReleaseObject();
-            };
+            //go.rb.position = selectedPoint;
+            go.transform.position = selectedPoint;
 
             yield return new WaitForSeconds(spawnDelayTime);
             spawnDelayTime = Random.Range(minSpawnDelayTime, maxSpawnDelayTime);

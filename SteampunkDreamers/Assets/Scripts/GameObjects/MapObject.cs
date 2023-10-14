@@ -33,7 +33,9 @@ public class MapObject : PoolAble
 
     public void FixedUpdate()
     {
-        rb.AddForce(speed,0,0);
+        //rb.AddForce(speed,0,0);
+        var tempPos = new Vector3(speed, 0, 0);
+        transform.position += tempPos * Time.deltaTime;
     }
 
     private void Update()

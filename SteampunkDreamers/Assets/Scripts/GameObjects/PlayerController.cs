@@ -40,7 +40,10 @@ public class PlayerController : MonoBehaviour
     //ObstacleSpawner[] obstacleSpawner = new ObstacleSpawner[4];
     private List<Spawner> spawners = new List<Spawner>();
     public bool shieldOn;
-    private GameObject shield;
+    public GameObject shield;
+
+    public float boosterSpeed;
+    public bool boosterOn;
 
     private void Awake()
     {
@@ -78,10 +81,17 @@ public class PlayerController : MonoBehaviour
         if(shieldOn)
         {
             shield.SetActive(true);
+            Invoke("ShieldRemove", 5f);
         }
         else
         {
             shield.SetActive(false);
+        }
+
+        if(boosterOn)
+        {
+            Booster(boosterSpeed);
+            Invoke("BoosterRemove", 5f);
         }
 
         // 인게임 정보 UI 업데이트
@@ -141,5 +151,20 @@ public class PlayerController : MonoBehaviour
     {
         // original code
         stateMachine = new StateMachine(StateName.Ready, new StateReady(this));
+    }
+
+    public void ShieldRemove()
+    {
+        shieldOn = false;
+    }
+
+    public void Booster(float boosterSpeed)
+    {
+        frontSpeed += boosterSpeed;
+    }
+
+    public void BoosterRemove()
+    {
+        boosterOn = false;
     }
 }

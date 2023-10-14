@@ -176,8 +176,9 @@ public class StateGliding : BaseState
         {
             airResistance = Mathf.Lerp(0, controller.maxSpeed * 0.4f, Time.deltaTime * airflowFrontRatio);
         }
-        else // 기체 흔들리는 연출?
+        else
         {
+            Debug.Log("역풍");
             airResistance -= Time.deltaTime * airflowReverseRatio;
         }
     }

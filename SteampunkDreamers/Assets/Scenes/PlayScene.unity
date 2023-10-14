@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 10005659}
   - component: {fileID: 10005660}
   - component: {fileID: 10005661}
+  - component: {fileID: 10005662}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -204,6 +205,9 @@ MonoBehaviour:
   - objectName: Shield
     perfab: {fileID: 5471917136895871308, guid: 9034688d66ef4d446bb6ce581ff14032, type: 3}
     count: 10
+  - objectName: Booster
+    perfab: {fileID: 5471917136895871308, guid: 896d5fb8858d14e439ff8cbd6eaf9277, type: 3}
+    count: 10
 --- !u!114 &10005656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,7 +227,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   yScale: 0
   planeMultipleHeight: 15
-  spawnStop: 1
+  spawnStop: 0
   spawnPointCount: 0
   playerIndex: 0
   spawnDelayTime: 0
@@ -283,7 +287,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   yScale: 0
   planeMultipleHeight: 15
-  spawnStop: 1
+  spawnStop: 0
   spawnPointCount: 0
   playerIndex: 0
   spawnDelayTime: 2.5
@@ -308,7 +312,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   yScale: 0
   planeMultipleHeight: 15
-  spawnStop: 1
+  spawnStop: 0
   spawnPointCount: 0
   playerIndex: 0
   spawnDelayTime: 0
@@ -338,7 +342,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   yScale: 0
   planeMultipleHeight: 15
-  spawnStop: 1
+  spawnStop: 0
   spawnPointCount: 0
   playerIndex: 0
   spawnDelayTime: 0
@@ -374,6 +378,36 @@ MonoBehaviour:
   spawnDelayTime: 0
   spawnRangeValue: 0
   prefab: {fileID: -1465217943458818128, guid: 9034688d66ef4d446bb6ce581ff14032, type: 3}
+  playerGapLength: -100
+  minSpeed: 0.5
+  maxSpeed: 0.5
+  minSpawnDelayTime: 0.5
+  maxSpawnDelayTime: 4
+--- !u!114 &10005662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10005652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92e55c531345591409849b991807be09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoints: []
+  prevPoint: {x: 0, y: 0, z: 0}
+  selectedPoint: {x: 0, y: 0, z: 0}
+  minHeight: 30
+  playerController: {fileID: 0}
+  yScale: 0
+  planeMultipleHeight: 15
+  spawnStop: 0
+  spawnPointCount: 0
+  playerIndex: 0
+  spawnDelayTime: 0
+  spawnRangeValue: 0
+  prefab: {fileID: 7746701863533056917, guid: 896d5fb8858d14e439ff8cbd6eaf9277, type: 3}
   playerGapLength: -100
   minSpeed: 0.5
   maxSpeed: 0.5
@@ -4789,6 +4823,9 @@ MonoBehaviour:
   explosionParticle: {fileID: 0}
   fireParticle: {fileID: 0}
   shieldOn: 0
+  shield: {fileID: 0}
+  boosterSpeed: 0
+  boosterOn: 0
 --- !u!1 &1707472523
 GameObject:
   m_ObjectHideFlags: 0
@@ -5351,7 +5388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dde539af33ca734fb7f4f5eebe7fac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  child: 1
+  child: 0
 --- !u!65 &1888263414
 BoxCollider:
   m_ObjectHideFlags: 0
