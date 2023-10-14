@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 9194723478514506566}
   - component: {fileID: 560503604774852626}
   - component: {fileID: 4582538063680326024}
-  - component: {fileID: 5576859574702632721}
   - component: {fileID: -7542847721164438333}
+  - component: {fileID: 8966800284565517716}
   m_Layer: 0
   m_Name: Cloud
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -3}
-  m_LocalScale: {x: 22, y: 6, z: 1}
+  m_LocalScale: {x: 22, y: 6, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,28 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5576859574702632721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4143530077142466765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f20582b8633916947a49111e46fdf422, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bg1: {fileID: 0}
-  name: Cloud
-  speed: 0
-  type: 0
-  effectTimer: 0
-  effectStrength: 0
-  particle: {fileID: 0}
-  audioSource: {fileID: 0}
-  rb: {fileID: 0}
-  playerController: {fileID: 0}
 --- !u!54 &-7542847721164438333
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -134,3 +112,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8966800284565517716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4143530077142466765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dd1af0b1aca11a4eb7ab38126434b69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bg1: {fileID: 0}
+  name: Cloud
+  speed: 0
+  effectTimer: 0
+  effectStrength: 0
+  audioSource: {fileID: 0}
+  rb: {fileID: 0}
+  playerController: {fileID: 0}

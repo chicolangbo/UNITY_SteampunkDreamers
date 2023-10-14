@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AirshipController : Obstacle
+public class AirshipController : MapObject
 {
     public AudioClip fireAudioClip;
     public AudioClip explisionAudioClip;
@@ -16,9 +16,16 @@ public class AirshipController : Obstacle
 
     public override void CollideEffect()
     {
-        playerController.airshipColiide = true;
+        if(!playerController.shieldOn)
+        {
+            playerController.airshipColiide = true;
 
-        StartCoroutine(ClickImpossible());
+            StartCoroutine(ClickImpossible());
+        }
+        else
+        {
+            playerController.shieldOn = false;
+        }
     }
 
     private IEnumerator ClickImpossible()

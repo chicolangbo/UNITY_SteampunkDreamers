@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ObstacleSpawner : Spawner
+public class MapObjectSpawner : Spawner
 {
-    public Obstacle prefab;
+    public MapObject prefab;
     public float playerGapLength;
     public float minSpeed;
     public float maxSpeed;
@@ -32,7 +32,7 @@ public class ObstacleSpawner : Spawner
 
             FindPlayerIndex();
             GetRandomSpawnIndex();
-            Obstacle go = ObjectPoolManager.instance.GetGo(prefab.name).GetComponent<Obstacle>();
+            MapObject go = ObjectPoolManager.instance.GetGo(prefab.name).GetComponent<MapObject>();
             // speed
             var randomValue = Random.Range(minSpeed, maxSpeed);
             go.speed = playerController.frontSpeed * randomValue;

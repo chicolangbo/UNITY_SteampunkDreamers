@@ -3,15 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum EffectType
-{
-    None,
-    Speed,
-    Angle,
-    NoControll
-}
-
-public class Obstacle : PoolAble
+public class MapObject : PoolAble
 {
     [SerializeField]
     private Transform bg1;
@@ -20,10 +12,8 @@ public class Obstacle : PoolAble
     private float borderX;
     public new string name;
     public float speed;
-    public EffectType type;
     public float effectTimer;
     public float effectStrength;
-    public ParticleSystem particle;
     public AudioSource audioSource;
     public Rigidbody rb;
 
@@ -58,7 +48,7 @@ public class Obstacle : PoolAble
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Player") || other.CompareTag("Shield"))
         {
             CollideEffect();
             onDisappear();

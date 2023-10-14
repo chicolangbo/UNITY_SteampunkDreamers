@@ -39,20 +39,23 @@ public class PlayerController : MonoBehaviour
     //AirflowSpwaner airflowSpwaner = new AirflowSpwaner();
     //ObstacleSpawner[] obstacleSpawner = new ObstacleSpawner[4];
     private List<Spawner> spawners = new List<Spawner>();
+    public bool shieldOn;
+    private GameObject shield;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        speedBar = GameObject.FindWithTag("SpeedBar");
-        angleBar = transform.GetChild(transform.childCount - 1).GetChild(transform.childCount - 1).gameObject;
+        speedBar = GameObject.FindGameObjectWithTag("SpeedBar");
+        angleBar = transform.GetChild(transform.childCount - 2).GetChild(transform.childCount - 2).gameObject;
         GameManager.instance.SetBoardLength(maxSpeed);
+        shield = transform.GetChild(transform.childCount - 1).gameObject;
 
-        var count = GameManager.instance.GetComponents<ObstacleSpawner>().Length;
+        var count = GameManager.instance.GetComponents<MapObjectSpawner>().Length;
         spawners.Add(GameManager.instance.GetComponent<AirflowSpwaner>());
         spawners[0].enabled = false;
         for(int i = 1; i< count+1; ++i)
         {
-            spawners.Add(GameManager.instance.GetComponents<ObstacleSpawner>()[i - 1]);
+            spawners.Add(GameManager.instance.GetComponents<MapObjectSpawner>()[i - 1]);
             spawners[i].enabled = false;
         }
     }
@@ -71,6 +74,15 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         stateMachine?.UpdateState();
+
+        if(shieldOn)
+        {
+            shield.SetActive(true);
+        }
+        else
+        {
+            shield.SetActive(false);
+        }
 
         // 인게임 정보 UI 업데이트
         altitude = transform.position.y * altitudeRatio;
