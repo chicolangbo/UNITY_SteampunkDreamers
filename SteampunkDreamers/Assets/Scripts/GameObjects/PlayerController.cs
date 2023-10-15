@@ -36,8 +36,6 @@ public class PlayerController : MonoBehaviour
 
     public LinkedList<AirflowSystem> airflows = new LinkedList<AirflowSystem>();
 
-    //AirflowSpwaner airflowSpwaner = new AirflowSpwaner();
-    //ObstacleSpawner[] obstacleSpawner = new ObstacleSpawner[4];
     private List<Spawner> spawners = new List<Spawner>();
     public bool shieldOn;
     public GameObject shield;
@@ -45,7 +43,11 @@ public class PlayerController : MonoBehaviour
     public float boosterSpeed;
     public bool boosterOn;
 
+    // 점수
     public int coinCount;
+    public float maxSpeedReached;
+    public float maxAltitudeReached;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -95,6 +97,15 @@ public class PlayerController : MonoBehaviour
         {
             Booster(boosterSpeed);
             Invoke("BoosterRemove", 5f);
+        }
+
+        if(velocity.x > maxSpeedReached)
+        {
+            maxSpeedReached = velocity.x;
+        }
+        if(altitude > maxAltitudeReached)
+        {
+            maxAltitudeReached = altitude;
         }
 
         // 인게임 정보 UI 업데이트
