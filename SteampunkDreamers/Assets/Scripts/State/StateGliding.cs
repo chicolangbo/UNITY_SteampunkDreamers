@@ -32,7 +32,6 @@ public class StateGliding : BaseState
     private float airflowReverseRatio = 100; // 역풍 ( airResistance -= dt*airflowReverseRatio로 적용되어 있음 )
 
     private bool firstDown;
-    private bool firstBirdDrop;
 
     public StateGliding(PlayerController controller) : base(controller)
     {
@@ -177,7 +176,7 @@ public class StateGliding : BaseState
         {
             airResistance = Mathf.Lerp(0, controller.maxSpeed * 0.4f, Time.deltaTime * airflowFrontRatio);
         }
-        else // 기체 흔들리는 연출?
+        else
         {
             airResistance -= Time.deltaTime * airflowReverseRatio;
         }

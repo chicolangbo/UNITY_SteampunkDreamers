@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public float boardScaleY;
     public float boardScaleZ;
     public GameObject player { get; private set; }
+    public float coinScore;
+    public float basicScore;
+    public float bonusScore;
 
     public static GameManager instance
     {

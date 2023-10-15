@@ -13,6 +13,7 @@ TagManager:
   - Bird
   - Bg1
   - Bg2
+  - Shield
   layers:
   - Default
   - TransparentFX

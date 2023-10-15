@@ -1,23 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FuelBarController : MonoBehaviour
 {
-    private RectTransform fuelBar;
+    //private RectTransform fuelBar;
+    private Slider fuelBar;
     private PlayerController playerController;
     private float initialFuelValue;
 
-    public void Awake()
+    public void Start()
     {
-        fuelBar = GetComponent<RectTransform>();
+        fuelBar = GetComponent<Slider>();
         playerController = GameManager.instance.player.GetComponent<PlayerController>();
         initialFuelValue = playerController.fuelTimer;
     }
 
     public void Update()
     {
-        var scaleX = playerController.fuelTimer / initialFuelValue;
-        fuelBar.localScale = new Vector3(scaleX, fuelBar.localScale.y, fuelBar.localScale.z);
+        fuelBar.value = playerController.fuelTimer / initialFuelValue;
     }
 }

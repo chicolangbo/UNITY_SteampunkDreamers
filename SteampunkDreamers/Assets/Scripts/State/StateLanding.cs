@@ -44,5 +44,11 @@ public class StateLanding : BaseState
 
     public override void OnUpdateState()
     {
+        if(controller.velocity.x < 0.5) 
+        {
+            GameManager.instance.coinScore = controller.coinCount * 5;
+            GameManager.instance.basicScore = controller.distance / 2.5f;
+            GameManager.instance.bonusScore = (controller.distance + controller.maxSpeedReached + controller.maxAltitudeReached) / 2.5f;
+        }
     }
 }

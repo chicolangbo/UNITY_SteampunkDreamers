@@ -3,15 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum EffectType
-{
-    None,
-    Speed,
-    Angle,
-    NoControll
-}
-
-public class Obstacle : PoolAble
+public class MapObject : PoolAble
 {
     [SerializeField]
     private Transform bg1;
@@ -20,12 +12,9 @@ public class Obstacle : PoolAble
     private float borderX;
     public new string name;
     public float speed;
-    public EffectType type;
     public float effectTimer;
     public float effectStrength;
-    public ParticleSystem particle;
     public AudioSource audioSource;
-    public Rigidbody rb;
 
     public PlayerController playerController;
 
@@ -36,14 +25,15 @@ public class Obstacle : PoolAble
         bg1 = GameObject.FindGameObjectWithTag("Bg1").transform;
         bg2 = GameObject.FindGameObjectWithTag("Bg2").transform;
         bgWidth = GameObject.FindGameObjectWithTag("Bg1").GetComponent<BoxCollider>().size.x;
-        rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
         playerController = GameManager.instance.player.GetComponent<PlayerController>();
     }
 
     public void FixedUpdate()
     {
-        rb.AddForce(speed,0,0);
+        //rb.AddForce(speed,0,0);
+        var tempPos = new Vector3(speed, 0, 0);
+        transform.position += tempPos * Time.deltaTime;
     }
 
     private void Update()
@@ -58,10 +48,13 @@ public class Obstacle : PoolAble
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Player") || other.CompareTag("Shield"))
         {
             CollideEffect();
-            onDisappear();
+            if(onDisappear!=null)
+            {
+                onDisappear();
+            }
         }
     }
 

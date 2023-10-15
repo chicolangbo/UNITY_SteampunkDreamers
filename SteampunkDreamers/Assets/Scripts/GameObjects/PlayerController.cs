@@ -36,25 +36,36 @@ public class PlayerController : MonoBehaviour
 
     public LinkedList<AirflowSystem> airflows = new LinkedList<AirflowSystem>();
 
-    //AirflowSpwaner airflowSpwaner = new AirflowSpwaner();
-    //ObstacleSpawner[] obstacleSpawner = new ObstacleSpawner[4];
     private List<Spawner> spawners = new List<Spawner>();
+    public bool shieldOn;
+    public GameObject shield;
+
+    public float boosterSpeed;
+    public bool boosterOn;
+
+    // 점수
+    public int coinCount;
+    public float maxSpeedReached;
+    public float maxAltitudeReached;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        speedBar = GameObject.FindWithTag("SpeedBar");
-        angleBar = transform.GetChild(transform.childCount - 1).GetChild(transform.childCount - 1).gameObject;
+        speedBar = GameObject.FindGameObjectWithTag("SpeedBar");
+        angleBar = transform.GetChild(transform.childCount - 2).GetChild(transform.childCount - 2).gameObject;
         GameManager.instance.SetBoardLength(maxSpeed);
+        shield = transform.GetChild(transform.childCount - 1).gameObject;
 
-        var count = GameManager.instance.GetComponents<ObstacleSpawner>().Length;
+        var mapObjectCount = GameManager.instance.GetComponents<MapObjectSpawner>().Length;
         spawners.Add(GameManager.instance.GetComponent<AirflowSpwaner>());
         spawners[0].enabled = false;
-        for(int i = 1; i< count+1; ++i)
+        for(int i = 1; i< mapObjectCount+1; ++i)
         {
-            spawners.Add(GameManager.instance.GetComponents<ObstacleSpawner>()[i - 1]);
+            spawners.Add(GameManager.instance.GetComponents<MapObjectSpawner>()[i - 1]);
             spawners[i].enabled = false;
         }
+        spawners.Add(GameManager.instance.GetComponent<CoinSpawner>());
+        spawners[spawners.Count - 1].enabled = false;
     }
 
     private void Start()
@@ -71,6 +82,31 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         stateMachine?.UpdateState();
+
+        if(shieldOn)
+        {
+            shield.SetActive(true);
+            Invoke("ShieldRemove", 5f);
+        }
+        else
+        {
+            shield.SetActive(false);
+        }
+
+        if(boosterOn)
+        {
+            Booster(boosterSpeed);
+            Invoke("BoosterRemove", 5f);
+        }
+
+        if(velocity.x > maxSpeedReached)
+        {
+            maxSpeedReached = velocity.x;
+        }
+        if(altitude > maxAltitudeReached)
+        {
+            maxAltitudeReached = altitude;
+        }
 
         // 인게임 정보 UI 업데이트
         altitude = transform.position.y * altitudeRatio;
@@ -129,5 +165,20 @@ public class PlayerController : MonoBehaviour
     {
         // original code
         stateMachine = new StateMachine(StateName.Ready, new StateReady(this));
+    }
+
+    public void ShieldRemove()
+    {
+        shieldOn = false;
+    }
+
+    public void Booster(float boosterSpeed)
+    {
+        frontSpeed += boosterSpeed;
+    }
+
+    public void BoosterRemove()
+    {
+        boosterOn = false;
     }
 }

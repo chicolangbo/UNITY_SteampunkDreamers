@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NimbusController : Obstacle
+public class NimbusController : MapObject
 {
     public AudioClip electronicAudioClip;
 
@@ -20,7 +20,7 @@ public class NimbusController : Obstacle
     {
         StateGliding stateGliding = (StateGliding)playerController.stateMachine.CurrentState;
 
-        if (stateGliding != null)
+        if (stateGliding != null && !playerController.shieldOn)
         {
             while (elapsedTime < duration)
             {
@@ -29,7 +29,12 @@ public class NimbusController : Obstacle
                 yield return null;
                 elapsedTime += Time.deltaTime;
             }
+            stateGliding.isRotPossible = true;
         }
-        stateGliding.isRotPossible = true;
+        else
+        {
+            playerController.shieldOn = false;
+        }
+
     }
 }
