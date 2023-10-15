@@ -10,6 +10,7 @@ public class CoinController : MapObject
     {
         onDisappear += () =>
         {
+            playerController.coinCount++;
             ReleaseObject();
         };
     }
