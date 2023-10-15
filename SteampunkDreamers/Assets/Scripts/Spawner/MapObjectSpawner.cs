@@ -39,7 +39,6 @@ public class MapObjectSpawner : Spawner
             // position
             selectedPoint.x = playerController.transform.position.x + playerGapLength;
             selectedPoint.z = prefab.transform.position.z;
-            //go.rb.position = selectedPoint;
             go.transform.position = selectedPoint;
 
             yield return new WaitForSeconds(spawnDelayTime);

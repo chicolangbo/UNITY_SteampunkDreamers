@@ -15,7 +15,6 @@ public class MapObject : PoolAble
     public float effectTimer;
     public float effectStrength;
     public AudioSource audioSource;
-    public Rigidbody rb;
 
     public PlayerController playerController;
 
@@ -26,7 +25,6 @@ public class MapObject : PoolAble
         bg1 = GameObject.FindGameObjectWithTag("Bg1").transform;
         bg2 = GameObject.FindGameObjectWithTag("Bg2").transform;
         bgWidth = GameObject.FindGameObjectWithTag("Bg1").GetComponent<BoxCollider>().size.x;
-        rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
         playerController = GameManager.instance.player.GetComponent<PlayerController>();
     }
@@ -53,7 +51,10 @@ public class MapObject : PoolAble
         if(other.CompareTag("Player") || other.CompareTag("Shield"))
         {
             CollideEffect();
-            onDisappear();
+            if(onDisappear!=null)
+            {
+                onDisappear();
+            }
         }
     }
 

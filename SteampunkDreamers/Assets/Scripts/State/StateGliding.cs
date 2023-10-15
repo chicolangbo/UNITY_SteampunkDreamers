@@ -178,7 +178,6 @@ public class StateGliding : BaseState
         }
         else
         {
-            Debug.Log("¿ªÇ³");
             airResistance -= Time.deltaTime * airflowReverseRatio;
         }
     }

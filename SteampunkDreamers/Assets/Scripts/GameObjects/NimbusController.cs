@@ -29,12 +29,12 @@ public class NimbusController : MapObject
                 yield return null;
                 elapsedTime += Time.deltaTime;
             }
+            stateGliding.isRotPossible = true;
         }
         else
         {
             playerController.shieldOn = false;
         }
 
-        stateGliding.isRotPossible = true;
     }
 }

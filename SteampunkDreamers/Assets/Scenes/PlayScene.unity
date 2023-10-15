@@ -227,15 +227,15 @@ MonoBehaviour:
   playerController: {fileID: 0}
   yScale: 0
   planeMultipleHeight: 15
-  spawnStop: 0
+  spawnStop: 1
   spawnPointCount: 0
   playerIndex: 0
   spawnDelayTime: 0
   spawnRangeValue: 0
   prefab: {fileID: 8966800284565517716, guid: 85cbfe1ba5efb96479c7fceaa892ad2e, type: 3}
   playerGapLength: 100
-  minSpeed: 0.02
-  maxSpeed: 0.02
+  minSpeed: 0.2
+  maxSpeed: 0.3
   minSpawnDelayTime: 0.5
   maxSpawnDelayTime: 4
 --- !u!114 &10005657
@@ -253,19 +253,19 @@ MonoBehaviour:
   spawnPoints: []
   prevPoint: {x: 0, y: 0, z: 0}
   selectedPoint: {x: 0, y: 0, z: 0}
-  minHeight: 0
+  minHeight: 30
   playerController: {fileID: 0}
   yScale: 0
   planeMultipleHeight: 15
-  spawnStop: 0
+  spawnStop: 1
   spawnPointCount: 0
   playerIndex: 0
   spawnDelayTime: 0
   spawnRangeValue: 0
   prefab: {fileID: 3166645595989774842, guid: 39a0e1e5824081f48bb9568ec582dd1a, type: 3}
   playerGapLength: 100
-  minSpeed: 0.1
-  maxSpeed: 0.2
+  minSpeed: 0.4
+  maxSpeed: 0.6
   minSpawnDelayTime: 0.5
   maxSpawnDelayTime: 4
 --- !u!114 &10005658
@@ -308,7 +308,7 @@ MonoBehaviour:
   spawnPoints: []
   prevPoint: {x: 0, y: 0, z: 0}
   selectedPoint: {x: 0, y: 0, z: 0}
-  minHeight: 40
+  minHeight: 30
   playerController: {fileID: 0}
   yScale: 0
   planeMultipleHeight: 15
@@ -319,8 +319,8 @@ MonoBehaviour:
   spawnRangeValue: 0
   prefab: {fileID: -8649507679459068696, guid: 5548e4b7565788b409dcf680c9ea1325, type: 3}
   playerGapLength: 100
-  minSpeed: 0.02
-  maxSpeed: 0.02
+  minSpeed: 0.3
+  maxSpeed: 0.4
   minSpawnDelayTime: 0.5
   maxSpawnDelayTime: 4
 --- !u!114 &10005660
@@ -342,15 +342,15 @@ MonoBehaviour:
   playerController: {fileID: 0}
   yScale: 0
   planeMultipleHeight: 15
-  spawnStop: 0
+  spawnStop: 1
   spawnPointCount: 0
   playerIndex: 0
   spawnDelayTime: 0
   spawnRangeValue: 0
   prefab: {fileID: 9151302787237761293, guid: 90150a5652195d74c99464b366d1b481, type: 3}
   playerGapLength: 100
-  minSpeed: 0.02
-  maxSpeed: 0.02
+  minSpeed: 0.3
+  maxSpeed: 0.5
   minSpawnDelayTime: 0.5
   maxSpawnDelayTime: 4
 --- !u!114 &10005661
@@ -372,7 +372,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   yScale: 0
   planeMultipleHeight: 15
-  spawnStop: 0
+  spawnStop: 1
   spawnPointCount: 0
   playerIndex: 0
   spawnDelayTime: 0
@@ -402,7 +402,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   yScale: 0
   planeMultipleHeight: 15
-  spawnStop: 0
+  spawnStop: 1
   spawnPointCount: 0
   playerIndex: 0
   spawnDelayTime: 0
