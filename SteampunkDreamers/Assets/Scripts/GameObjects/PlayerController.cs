@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     public float boosterSpeed;
     public bool boosterOn;
 
+    public int coinCount;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -53,14 +54,16 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.SetBoardLength(maxSpeed);
         shield = transform.GetChild(transform.childCount - 1).gameObject;
 
-        var count = GameManager.instance.GetComponents<MapObjectSpawner>().Length;
+        var mapObjectCount = GameManager.instance.GetComponents<MapObjectSpawner>().Length;
         spawners.Add(GameManager.instance.GetComponent<AirflowSpwaner>());
         spawners[0].enabled = false;
-        for(int i = 1; i< count+1; ++i)
+        for(int i = 1; i< mapObjectCount+1; ++i)
         {
             spawners.Add(GameManager.instance.GetComponents<MapObjectSpawner>()[i - 1]);
             spawners[i].enabled = false;
         }
+        spawners.Add(GameManager.instance.GetComponent<CoinSpawner>());
+        spawners[spawners.Count - 1].enabled = false;
     }
 
     private void Start()

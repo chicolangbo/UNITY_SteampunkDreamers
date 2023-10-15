@@ -25,6 +25,9 @@ public class MapObjectSpawner : Spawner
     {
         while (!spawnStop)
         {
+            yield return new WaitForSeconds(spawnDelayTime);
+            spawnDelayTime = Random.Range(minSpawnDelayTime, maxSpawnDelayTime);
+
             if (GameManager.instance != null && GameManager.instance.isGameover)
             {
                 break;
@@ -40,9 +43,6 @@ public class MapObjectSpawner : Spawner
             selectedPoint.x = playerController.transform.position.x + playerGapLength;
             selectedPoint.z = prefab.transform.position.z;
             go.transform.position = selectedPoint;
-
-            yield return new WaitForSeconds(spawnDelayTime);
-            spawnDelayTime = Random.Range(minSpawnDelayTime, maxSpawnDelayTime);
         }
     }
 }
