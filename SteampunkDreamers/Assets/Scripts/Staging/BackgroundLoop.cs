@@ -6,6 +6,7 @@ public class BackgroundLoop : MonoBehaviour
 {
     private float width;
     public bool child;
+    public bool bg;
     private Transform player;
 
     public void Awake()
@@ -23,10 +24,21 @@ public class BackgroundLoop : MonoBehaviour
 
     public void Update()
     {
-        if(player.position.x - transform.position.x > width * 1.5f)
+        if(bg)
         {
-            var tempPos = new Vector3(transform.position.x + 2 * width, transform.position.y, transform.position.z);
-            transform.position = tempPos;
+            if (player.position.x - transform.position.x > width)
+            {
+                var tempPos = new Vector3(transform.position.x + 2 * width, transform.position.y, transform.position.z);
+                transform.position = tempPos;
+            }
+        }
+        else
+        {
+            if (player.position.x - transform.position.x > width * 1.5f)
+            {
+                var tempPos = new Vector3(transform.position.x + 2 * width, transform.position.y, transform.position.z);
+                transform.position = tempPos;
+            }
         }
     }
 }

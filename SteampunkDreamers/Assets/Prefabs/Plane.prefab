@@ -301,7 +301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2868876960587297445}
   m_Layer: 0
-  m_Name: light_plane_yellow
+  m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
