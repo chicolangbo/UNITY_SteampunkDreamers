@@ -52,9 +52,9 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         speedBar = GameObject.FindGameObjectWithTag("SpeedBar");
-        angleBar = transform.GetChild(transform.childCount - 2).GetChild(transform.childCount - 2).gameObject;
+        angleBar = transform.GetChild(0).GetChild(1).gameObject;
         GameManager.instance.SetBoardLength(maxSpeed);
-        shield = transform.GetChild(transform.childCount - 1).gameObject;
+        shield = transform.GetChild(transform.childCount - 2).gameObject;
 
         var mapObjectCount = GameManager.instance.GetComponents<MapObjectSpawner>().Length;
         spawners.Add(GameManager.instance.GetComponent<AirflowSpwaner>());
