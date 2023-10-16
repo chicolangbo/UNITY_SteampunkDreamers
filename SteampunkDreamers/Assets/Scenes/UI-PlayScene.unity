@@ -154,6 +154,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boardScaleY: 50
   boardScaleZ: 1
+  coinScore: 0
+  basicScore: 0
+  bonusScore: 0
 --- !u!4 &10005654
 Transform:
   m_ObjectHideFlags: 0
@@ -4603,11 +4606,22 @@ MonoBehaviour:
   maxSpeed: 50
   frontSpeed: 0
   launchSuccess: 0
+  airshipColiide: 0
   velocity: {x: 0, y: 0, z: 0}
   distance: 0
   altitude: 1
   altitudeRatio: 10
   fuelTimer: 5
+  electronicParticle: {fileID: 0}
+  explosionParticle: {fileID: 0}
+  fireParticle: {fileID: 0}
+  shieldOn: 0
+  shield: {fileID: 0}
+  boosterSpeed: 0
+  boosterOn: 0
+  coinCount: 0
+  maxSpeedReached: 0
+  maxAltitudeReached: 0
 --- !u!114 &1672137054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4620,9 +4634,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da171ad3d026264bb2721bd3434bcd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  airflowPrefab: {fileID: -4320931091565651623, guid: 7a05cb8dfee5f9b44bab41844090ede1, type: 3}
+  spawnPoints: []
+  prevPoint: {x: 0, y: 0, z: 0}
+  selectedPoint: {x: 0, y: 0, z: 0}
+  minHeight: 0
   playerController: {fileID: 0}
+  yScale: 0
+  planeMultipleHeight: 0
   spawnStop: 0
+  spawnPointCount: 0
+  playerIndex: 0
+  spawnDelayTime: 0
+  spawnRangeValue: 0
+  airflowPrefab: {fileID: -4320931091565651623, guid: 7a05cb8dfee5f9b44bab41844090ede1, type: 3}
 --- !u!1 &1707472523
 GameObject:
   m_ObjectHideFlags: 0
@@ -5314,7 +5338,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillBar: {fileID: 2060166552}
   arrow: {fileID: 736762028}
-  playerController: {fileID: 1672137053}
   value: 0
   accelerator: 0
 --- !u!1 &2017333999
@@ -5402,7 +5425,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillBar: {fileID: 191814715}
   arrow: {fileID: 2136456184}
-  playerController: {fileID: 1672137053}
   value: 0
 --- !u!114 &2055942987
 MonoBehaviour:
