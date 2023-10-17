@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
         {
             RestartGame();
         }
+
+        Debug.Log(player.transform.eulerAngles.z);
     }
 
     public void SetBoardLength(float initialSpeed)

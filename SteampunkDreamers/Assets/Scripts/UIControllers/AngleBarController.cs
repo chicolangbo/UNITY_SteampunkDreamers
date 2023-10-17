@@ -46,9 +46,11 @@ public class AngleBarController : MonoBehaviour
     public void SetAngle()
     {
         // 최초 각도 세팅
-        // value 0~60, 91~100 : 1부터 시작
-        // value 61~70, 81~90
-        // value 71~80
-        playerController.initialAngle = new Quaternion(0, 0, (fillBar.value < 0.1) ? 1f - 30f : fillBar.value * 100f - 30f, 1);
+        // value 0~0.6, 0.9~1 : 1부터 시작
+        // value 0.6~0.7, 0.8~0.9
+        // value 0.7~0.8
+        var initialZ = (fillBar.value * (playerController.maxAngle - playerController.minAngle)) + playerController.minAngle;
+        playerController.initialAngle = Quaternion.Euler(0f, 0f, initialZ);
+        //playerController.initialAngle = new Quaternion(0, 0, initialZ < 0.01f ? playerController.minAngle : initialZ, 1);
     }
 }

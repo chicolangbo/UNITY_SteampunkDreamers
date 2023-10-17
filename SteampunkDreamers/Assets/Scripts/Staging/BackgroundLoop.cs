@@ -5,26 +5,26 @@ using UnityEngine;
 public class BackgroundLoop : MonoBehaviour
 {
     private float width;
-    public bool child;
-    public bool bg;
+    public bool pivotL;
+    public bool pivotM;
     private Transform player;
 
-    public void Awake()
+    public void Start()
     {
-        if(child)
+        if(pivotL)
         {
-            width = GetComponentInChildren<Transform>().localScale.x;
+            width = GetComponent<Transform>().localScale.x;
         }
         else
         {
             width = GetComponent<BoxCollider>().size.x;
         }
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameManager.instance.player.transform;
     }
 
     public void Update()
     {
-        if(bg)
+        if(pivotM)
         {
             if (player.position.x - transform.position.x > width)
             {

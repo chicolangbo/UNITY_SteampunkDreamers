@@ -42,8 +42,6 @@ public class SpeedBarController : MonoBehaviour
                 toRight = true;
             }
         }
-
-        Debug.Log(fillBar.value);
     }
 
     public void SetVelocity()
