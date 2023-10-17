@@ -66,7 +66,7 @@ public class StateGliding : BaseState
 
     public override void OnFixedUpdateState()
     {
-        if (!jump)
+        if (!jump && controller.launchSuccess)
         {
             Jump(jumpTargetAngle, jumpRotateTime);
         }
@@ -76,7 +76,7 @@ public class StateGliding : BaseState
     {
         direction = controller.transform.right;
 
-        if(jump)
+        if(jump || !controller.launchSuccess)
         {
 
             if (controller.airshipColiide)
