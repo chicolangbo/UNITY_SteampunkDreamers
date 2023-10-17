@@ -1,0 +1,61 @@
+﻿ID,NAME,LEVEL,PRICE,VALUE,DESCRIPTION
+1,StartSpeedUpgrade,1,1500,4,처음 게이지로 초기 속력을 결정할 때 기본 속력을 증가시킵니다.
+2,StartSpeedUpgrade,2,2000,7,처음 게이지로 초기 속력을 결정할 때 기본 속력을 증가시킵니다.
+3,StartSpeedUpgrade,3,2500,10,처음 게이지로 초기 속력을 결정할 때 기본 속력을 증가시킵니다.
+4,StartSpeedUpgrade,4,3000,13,처음 게이지로 초기 속력을 결정할 때 기본 속력을 증가시킵니다.
+5,StartSpeedUpgrade,5,3500,16,처음 게이지로 초기 속력을 결정할 때 기본 속력을 증가시킵니다.
+6,StartSpeedUpgrade,6,4000,20,처음 게이지로 초기 속력을 결정할 때 기본 속력을 증가시킵니다.
+7,StartSpeedUpgrade,7,5500,23,처음 게이지로 초기 속력을 결정할 때 기본 속력을 증가시킵니다.
+8,StartSpeedUpgrade,8,7000,24,처음 게이지로 초기 속력을 결정할 때 기본 속력을 증가시킵니다.
+9,StartSpeedUpgrade,9,8500,27,처음 게이지로 초기 속력을 결정할 때 기본 속력을 증가시킵니다.
+10,StartSpeedUpgrade,10,9000,30,처음 게이지로 초기 속력을 결정할 때 기본 속력을 증가시킵니다.
+11,RotateSpeedUpgrade,1,1500,7,"버튼을 입력했을 때, 비행기의 머리가 상승하는 속도를 높입니다."
+12,RotateSpeedUpgrade,2,2000,10,"버튼을 입력했을 때, 비행기의 머리가 상승하는 속도를 높입니다."
+13,RotateSpeedUpgrade,3,2500,12,"버튼을 입력했을 때, 비행기의 머리가 상승하는 속도를 높입니다."
+14,RotateSpeedUpgrade,4,3000,14,"버튼을 입력했을 때, 비행기의 머리가 상승하는 속도를 높입니다."
+15,RotateSpeedUpgrade,5,3500,17,"버튼을 입력했을 때, 비행기의 머리가 상승하는 속도를 높입니다."
+16,RotateSpeedUpgrade,6,4000,19,"버튼을 입력했을 때, 비행기의 머리가 상승하는 속도를 높입니다."
+17,RotateSpeedUpgrade,7,5500,21,"버튼을 입력했을 때, 비행기의 머리가 상승하는 속도를 높입니다."
+18,RotateSpeedUpgrade,8,7000,23,"버튼을 입력했을 때, 비행기의 머리가 상승하는 속도를 높입니다."
+19,RotateSpeedUpgrade,9,8500,26,"버튼을 입력했을 때, 비행기의 머리가 상승하는 속도를 높입니다."
+20,RotateSpeedUpgrade,10,9000,30,"버튼을 입력했을 때, 비행기의 머리가 상승하는 속도를 높입니다."
+21,CoinBonusUpgrade,1,2500,8,"코인을 획득했을 때, 얻는 Brass의 양을 늘립니다."
+22,CoinBonusUpgrade,2,4000,10,"코인을 획득했을 때, 얻는 Brass의 양을 늘립니다."
+23,CoinBonusUpgrade,3,5500,12,"코인을 획득했을 때, 얻는 Brass의 양을 늘립니다."
+24,CoinBonusUpgrade,4,7000,14,"코인을 획득했을 때, 얻는 Brass의 양을 늘립니다."
+25,CoinBonusUpgrade,5,8500,17,"코인을 획득했을 때, 얻는 Brass의 양을 늘립니다."
+26,CoinBonusUpgrade,6,10000,19,"코인을 획득했을 때, 얻는 Brass의 양을 늘립니다."
+27,CoinBonusUpgrade,7,11500,21,"코인을 획득했을 때, 얻는 Brass의 양을 늘립니다."
+28,CoinBonusUpgrade,8,13000,24,"코인을 획득했을 때, 얻는 Brass의 양을 늘립니다."
+29,CoinBonusUpgrade,9,14500,27,"코인을 획득했을 때, 얻는 Brass의 양을 늘립니다."
+30,CoinBonusUpgrade,10,16000,30,"코인을 획득했을 때, 얻는 Brass의 양을 늘립니다."
+31,WeightLessUpgrade,1,1500,46,비행기의 무게를 줄여서 비행기의 각도를 천천히 내려가게 합니다.
+32,WeightLessUpgrade,2,3500,43,비행기의 무게를 줄여서 비행기의 각도를 천천히 내려가게 합니다.
+33,WeightLessUpgrade,3,4000,40,비행기의 무게를 줄여서 비행기의 각도를 천천히 내려가게 합니다.
+34,WeightLessUpgrade,4,4500,38,비행기의 무게를 줄여서 비행기의 각도를 천천히 내려가게 합니다.
+35,WeightLessUpgrade,5,6500,35,비행기의 무게를 줄여서 비행기의 각도를 천천히 내려가게 합니다.
+36,WeightLessUpgrade,6,7500,32,비행기의 무게를 줄여서 비행기의 각도를 천천히 내려가게 합니다.
+37,WeightLessUpgrade,7,9000,30,비행기의 무게를 줄여서 비행기의 각도를 천천히 내려가게 합니다.
+38,WeightLessUpgrade,8,10000,27,비행기의 무게를 줄여서 비행기의 각도를 천천히 내려가게 합니다.
+39,WeightLessUpgrade,9,11500,24,비행기의 무게를 줄여서 비행기의 각도를 천천히 내려가게 합니다.
+40,WeightLessUpgrade,10,13000,20,비행기의 무게를 줄여서 비행기의 각도를 천천히 내려가게 합니다.
+41,AeroBoostUpgrade,1,1500,3,공기의 저항을 줄여서 비행기의 속도가 천천히 감속하게 합니다.
+42,AeroBoostUpgrade,2,3500,7,공기의 저항을 줄여서 비행기의 속도가 천천히 감속하게 합니다.
+43,AeroBoostUpgrade,3,4000,10,공기의 저항을 줄여서 비행기의 속도가 천천히 감속하게 합니다.
+44,AeroBoostUpgrade,4,4500,13,공기의 저항을 줄여서 비행기의 속도가 천천히 감속하게 합니다.
+45,AeroBoostUpgrade,5,6500,15,공기의 저항을 줄여서 비행기의 속도가 천천히 감속하게 합니다.
+46,AeroBoostUpgrade,6,7500,18,공기의 저항을 줄여서 비행기의 속도가 천천히 감속하게 합니다.
+47,AeroBoostUpgrade,7,9000,20,공기의 저항을 줄여서 비행기의 속도가 천천히 감속하게 합니다.
+48,AeroBoostUpgrade,8,10000,24,공기의 저항을 줄여서 비행기의 속도가 천천히 감속하게 합니다.
+49,AeroBoostUpgrade,9,11500,27,공기의 저항을 줄여서 비행기의 속도가 천천히 감속하게 합니다.
+50,AeroBoostUpgrade,10,13000,30,공기의 저항을 줄여서 비행기의 속도가 천천히 감속하게 합니다.
+51,MoreFuelUpgrade,1,2500,15,비행기를 상승시키기 위한 연료의 소모 속도를 낮춥니다.
+52,MoreFuelUpgrade,2,4000,20,비행기를 상승시키기 위한 연료의 소모 속도를 낮춥니다.
+53,MoreFuelUpgrade,3,5500,25,비행기를 상승시키기 위한 연료의 소모 속도를 낮춥니다.
+54,MoreFuelUpgrade,4,7000,30,비행기를 상승시키기 위한 연료의 소모 속도를 낮춥니다.
+55,MoreFuelUpgrade,5,8500,35,비행기를 상승시키기 위한 연료의 소모 속도를 낮춥니다.
+56,MoreFuelUpgrade,6,10000,40,비행기를 상승시키기 위한 연료의 소모 속도를 낮춥니다.
+57,MoreFuelUpgrade,7,11500,45,비행기를 상승시키기 위한 연료의 소모 속도를 낮춥니다.
+58,MoreFuelUpgrade,8,13000,50,비행기를 상승시키기 위한 연료의 소모 속도를 낮춥니다.
+59,MoreFuelUpgrade,9,14500,55,비행기를 상승시키기 위한 연료의 소모 속도를 낮춥니다.
+60,MoreFuelUpgrade,10,16000,60,비행기를 상승시키기 위한 연료의 소모 속도를 낮춥니다.
