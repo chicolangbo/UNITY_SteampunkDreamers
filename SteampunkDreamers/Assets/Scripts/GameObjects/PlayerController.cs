@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed; // 초기 속력 X, 플레이 중 최대 속력
     public float frontSpeed; // 유동값
 
-    public Rigidbody rb { get; private set; } // 충돌 처리만
+    public Rigidbody rb { get; private set; } // 충돌 처리만S
     public bool launchSuccess = false;
     public bool airshipColiide = false;
 
@@ -48,6 +48,9 @@ public class PlayerController : MonoBehaviour
     public float maxSpeedReached;
     public float maxAltitudeReached;
 
+    public float propellerSpeed { get; private set; }
+    private Transform propeller;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -55,6 +58,7 @@ public class PlayerController : MonoBehaviour
         angleBar = transform.GetChild(0).GetChild(1).gameObject;
         GameManager.instance.SetBoardLength(maxSpeed);
         shield = transform.GetChild(transform.childCount - 2).gameObject;
+        propeller = transform.GetChild(2).GetChild(2).transform;
 
         var mapObjectCount = GameManager.instance.GetComponents<MapObjectSpawner>().Length;
         spawners.Add(GameManager.instance.GetComponent<AirflowSpwaner>());
@@ -77,6 +81,7 @@ public class PlayerController : MonoBehaviour
     {
         stateMachine?.FixedUpdateState();
         transform.position += velocity * Time.deltaTime;
+        RotatePropeller();
     }
 
     private void Update()
@@ -180,5 +185,15 @@ public class PlayerController : MonoBehaviour
     public void BoosterRemove()
     {
         boosterOn = false;
+    }
+
+    public void RotatePropeller()
+    {
+        propeller.Rotate(0, 0, propellerSpeed * Time.deltaTime);
+    }
+
+    public void ChangePropellerSpeed(float speed)
+    {
+        propellerSpeed = speed;
     }
 }

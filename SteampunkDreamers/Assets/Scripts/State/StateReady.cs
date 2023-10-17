@@ -18,7 +18,8 @@ public class StateReady : BaseState
     private bool startAngleMove = false;
     private float transitionTime = 6f;
 
-    private Button pauseIcon;
+    private float propellerSpeed = 10f;
+    private float propellerSpeedMax = 3000f;
 
     public StateReady(PlayerController controller) : base(controller)
     {
@@ -28,7 +29,6 @@ public class StateReady : BaseState
     {
         speedBarController = controller.speedBar.GetComponent<SpeedBarController>();
         angleBarController = controller.angleBar.GetComponent<AngleBarController>();
-        pauseIcon = GameObject.FindGameObjectWithTag("PauseIcon").GetComponent<Button>();
     }
 
     public override void OnExitState()
@@ -79,6 +79,12 @@ public class StateReady : BaseState
                     angleBarController.SetAngle();
                 }
             }
+        }
+
+        if(propellerSpeed < propellerSpeedMax)
+        {
+            propellerSpeed += propellerSpeed * Time.deltaTime;
+            controller.ChangePropellerSpeed(propellerSpeed);
         }
     }
 
