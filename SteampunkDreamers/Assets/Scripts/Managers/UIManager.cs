@@ -28,6 +28,9 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI distance;
     public TextMeshProUGUI velocity;
     public TextMeshProUGUI altitude;
+    public TextMeshProUGUI coinScoreText;
+    public TextMeshProUGUI basicScoreText;
+    public TextMeshProUGUI bonusScoreText;
     public GameObject gameoverUI; // 게임 오버시 활성화할 UI 
 
     public void UpdateDistanceText(float d)
@@ -52,6 +55,21 @@ public class UIManager : MonoBehaviour
         sb.Append(a.ToString("F2"));
         sb.Append(" m");
         altitude.text = sb.ToString();
+    }
+
+    public void UpdateCoinScoreText(int num)
+    {
+        coinScoreText.text = num.ToString();
+    }
+
+    public void UpdateBasicScoreText(float num)
+    {
+        basicScoreText.text = num.ToString("F2");
+    }
+
+    public void UpdateBonusScoreText(float num)
+    {
+        bonusScoreText.text = num.ToString("F2");
     }
 
     // 게임 오버 UI 활성화

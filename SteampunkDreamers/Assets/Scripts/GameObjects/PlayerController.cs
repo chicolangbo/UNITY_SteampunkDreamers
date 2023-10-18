@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.instance.SetPlayer(this.gameObject);
         rb = GetComponent<Rigidbody>();
         speedBar = GameObject.FindGameObjectWithTag("SpeedBar");
         angleBar = transform.GetChild(0).GetChild(1).gameObject;

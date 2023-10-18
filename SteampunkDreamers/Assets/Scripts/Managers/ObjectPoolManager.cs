@@ -42,9 +42,13 @@ public class ObjectPoolManager : MonoBehaviour
         else
             Destroy(this.gameObject);
 
-        Init();
     }
 
+    private void Start()
+    {
+        Init();
+        Debug.Log("오브젝트풀 init");
+    }
 
     private void Init()
     {

@@ -13,39 +13,38 @@ public class GameManager : MonoBehaviour
     public float boardScaleY;
     public float boardScaleZ;
     public GameObject player { get; private set; }
-    public float coinScore;
+    public int coinScore;
     public float basicScore;
     public float bonusScore;
-    public float money = 5000;
+    public float money = 0;
 
     private TextMeshProUGUI fps;
 
-    public static GameManager instance
-    {
-        get
-        {
-            // 만약 싱글톤 변수에 아직 오브젝트가 할당되지 않았다면
-            if (m_instance == null)
-            {
-                // 씬에서 GameManager 오브젝트를 찾아 할당
-                m_instance = FindObjectOfType<GameManager>();
-            }
-            // 싱글톤 오브젝트를 반환
-            return m_instance;
-        }
-    }
-
-    private static GameManager m_instance = null; // 싱글톤이 할당될 static 변수
+    public static GameManager instance = null;
 
     public bool isGameover { get; private set; } // 게임 오버 상태
 
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+
         DontDestroyOnLoad(instance);
 
         player = GameObject.FindGameObjectWithTag("Player");
         var inGameUI = GameObject.FindGameObjectWithTag("InGameUI");
-        fps = inGameUI.transform.GetChild(inGameUI.transform.childCount - 1).GetComponent<TextMeshProUGUI>();
+        fps = inGameUI.transform.GetChild(inGameUI.transform.childCount - 2).GetComponent<TextMeshProUGUI>();
+    }
+
+    private void Start()
+    {
     }
 
     public void Update()
@@ -55,12 +54,6 @@ public class GameManager : MonoBehaviour
             RestartGame();
         }
         fps.text = "FPS : " + (1f / Time.deltaTime).ToString();
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Debug.Log("ggg");
-        }
-
     }
 
     public void SetBoardLength(float initialSpeed)
@@ -74,12 +67,32 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void UpdateMoney() // 점수 집계 시 호출
+    {
+        money = coinScore + basicScore + bonusScore;
+    }
+
+    public void SetPlayer(GameObject pl)
+    {
+        if (pl != null)
+        {
+            player = pl;
+        }
+        else
+        {
+            Debug.Log("player == null");
+        }
+    }
+
     // 게임 오버 처리
     public void EndGame()
     {
         // 게임 오버 상태를 참으로 변경
         isGameover = true;
         // 게임 오버 UI를 활성화
-        // UIManager.instance.SetActiveGameoverUI(true);
+        UIManager.instance.SetActiveGameoverUI(true);
+        UIManager.instance.UpdateCoinScoreText(coinScore);
+        UIManager.instance.UpdateBasicScoreText(basicScore);
+        UIManager.instance.UpdateBonusScoreText(bonusScore);
     }
 }
