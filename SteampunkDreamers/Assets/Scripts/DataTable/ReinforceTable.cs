@@ -19,11 +19,11 @@ public class ReinforceTable : DataTable
         public string DESCRIPTION { get; set; }
     }
 
-    protected List<ReinforceData> reinforceDatas = new List<ReinforceData>();
+    public List<ReinforceData> reinforceDatas = new List<ReinforceData>();
 
     public ReinforceTable()
     {
-        path = "ReinforceTable";
+        path = "ReinforceTable.csv";
         Load();
     }
 

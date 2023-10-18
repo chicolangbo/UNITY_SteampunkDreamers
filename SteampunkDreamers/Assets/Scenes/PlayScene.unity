@@ -161,11 +161,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d28d0684b3893d429167614eb3436e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 10005652}
   boardScaleY: 51.3
   boardScaleZ: 4.5
   coinScore: 0
   basicScore: 0
   bonusScore: 0
+  money: 5000
 --- !u!4 &10005654
 Transform:
   m_ObjectHideFlags: 0
@@ -239,7 +241,7 @@ MonoBehaviour:
   playerIndex: 0
   spawnDelayTime: 0
   spawnRangeValue: 0
-  prefab: {fileID: -3999815493527274805, guid: decc2ba5add7b984aab134a07b436422, type: 3}
+  prefab: {fileID: -3999815493527274805, guid: a48780f77d814544aa40963426cde4c4, type: 3}
   playerGapLength: 100
   minSpeed: 0.2
   maxSpeed: 0.3
@@ -269,7 +271,7 @@ MonoBehaviour:
   playerIndex: 0
   spawnDelayTime: 0
   spawnRangeValue: 0
-  prefab: {fileID: 448885254555749307, guid: 8a98dc7c3255b1f43b1885fecabf80f2, type: 3}
+  prefab: {fileID: 448885254555749307, guid: 904860db1ffc07e45a8141b5aba06a1b, type: 3}
   playerGapLength: 100
   minSpeed: 0.4
   maxSpeed: 0.6
@@ -324,7 +326,7 @@ MonoBehaviour:
   playerIndex: 0
   spawnDelayTime: 0
   spawnRangeValue: 0
-  prefab: {fileID: 3303558230294587880, guid: 7a7ada80b7910bb47aa7c5434361abb6, type: 3}
+  prefab: {fileID: 3303558230294587880, guid: f26f47c607c4dcf49bce4ea9e9637ecd, type: 3}
   playerGapLength: 100
   minSpeed: 0.3
   maxSpeed: 0.4
@@ -384,7 +386,7 @@ MonoBehaviour:
   playerIndex: 0
   spawnDelayTime: 0
   spawnRangeValue: 0
-  prefab: {fileID: -5757362607105488388, guid: 18ed84bba105fb0419e3b2b89496b375, type: 3}
+  prefab: {fileID: -5757362607105488388, guid: a48ff331d483a4e409f51533401e7a68, type: 3}
   playerGapLength: -50
   minSpeed: 0.5
   maxSpeed: 0.5
@@ -925,8 +927,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'FPS : '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ba14134c6004ee7469d0ffe7deb39618, type: 2}
+  m_sharedMaterial: {fileID: -8093585016159945106, guid: ba14134c6004ee7469d0ffe7deb39618, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -986,7 +988,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -771.8175, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

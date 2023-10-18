@@ -7,6 +7,8 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject gameManager;
+
     public float boardScaleX { get; private set; }
     public float boardScaleY;
     public float boardScaleZ;
@@ -14,6 +16,7 @@ public class GameManager : MonoBehaviour
     public float coinScore;
     public float basicScore;
     public float bonusScore;
+    public float money = 5000;
 
     private TextMeshProUGUI fps;
 
@@ -27,18 +30,19 @@ public class GameManager : MonoBehaviour
                 // 씬에서 GameManager 오브젝트를 찾아 할당
                 m_instance = FindObjectOfType<GameManager>();
             }
-
             // 싱글톤 오브젝트를 반환
             return m_instance;
         }
     }
 
-    private static GameManager m_instance; // 싱글톤이 할당될 static 변수
+    private static GameManager m_instance = null; // 싱글톤이 할당될 static 변수
 
     public bool isGameover { get; private set; } // 게임 오버 상태
 
     private void Awake()
     {
+        DontDestroyOnLoad(instance);
+
         player = GameObject.FindGameObjectWithTag("Player");
         var inGameUI = GameObject.FindGameObjectWithTag("InGameUI");
         fps = inGameUI.transform.GetChild(inGameUI.transform.childCount - 1).GetComponent<TextMeshProUGUI>();
@@ -50,9 +54,13 @@ public class GameManager : MonoBehaviour
         {
             RestartGame();
         }
-
-        Debug.Log(player.transform.eulerAngles.z);
         fps.text = "FPS : " + (1f / Time.deltaTime).ToString();
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Debug.Log("ggg");
+        }
+
     }
 
     public void SetBoardLength(float initialSpeed)
