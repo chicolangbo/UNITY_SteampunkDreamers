@@ -5,56 +5,39 @@ using UnityEngine.UI;
 
 public class SpeedBarController : MonoBehaviour
 {
-    public Image fillBar;
-    public RectTransform arrow;
+    //public Image fillBar;
+    private Slider fillBar;
     private PlayerController playerController;
     public float value = 0;
     public float accelerator;
     private bool toRight;
-    private float controllSpeed = 66.67f;
+    private float controllSpeed = 0.66f;
 
     private void Start()
     {
+        fillBar = GetComponent<Slider>();
         playerController = GameManager.instance.player.GetComponent<PlayerController>();
     }
-
-    public void Update()
-    {
-        SpeedChange(value);
-    }
-
-    public void SpeedChange(float value)
-    {
-        if (value > 100 || value < 0)
-            return;
-
-        float amount = (value / 100.0f) * 180.0f / 360;
-        fillBar.fillAmount = amount;
-
-        float controllerAngle = amount * 360;
-        arrow.localEulerAngles = new Vector3(0,0,-controllerAngle);
-    }
-
     public void SpeedBarMoving()
     {
         if (toRight)
         {
             // 1.5초 도달
-            float tempValue = value;
-            value = Mathf.Clamp(tempValue + Time.deltaTime * controllSpeed, 0, 100f);
+            float tempValue = fillBar.value;
+            fillBar.value = Mathf.Clamp(tempValue + Time.deltaTime * controllSpeed, 0, 1f);
 
-            if (value >= 100f)
+            if (fillBar.value >= 1f)
             {
                 toRight = false;
             }
         }
-        // 100->0
+        // 1->0
         else
         {
-            float tempValue = value;
-            value = Mathf.Clamp(tempValue - Time.deltaTime * controllSpeed, 0, 100f);
+            float tempValue = fillBar.value;
+            fillBar.value = Mathf.Clamp(tempValue - Time.deltaTime * controllSpeed, 0, 1f);
 
-            if (value <= 0)
+            if (fillBar.value <= 0)
             {
                 toRight = true;
             }
@@ -67,15 +50,15 @@ public class SpeedBarController : MonoBehaviour
         // value 0~70 : 최대 속력의 50%
         // value 70~80, 90~100 : 최대 속력의 70%
         // vlaue 80~90 : 최대 속력의 90%
-        if (value < 70)
+        if (fillBar.value < 0.7)
         {
             playerController.initialSpeed = playerController.maxSpeed * 0.5f;
         }
-        else if ((value >= 70 && value < 80) || (value >= 90 && value <= 100))
+        else if ((fillBar.value >= 0.7 && fillBar.value < 0.8) || (fillBar.value >= 0.9 && fillBar.value <= 1))
         {
             playerController.initialSpeed = playerController.maxSpeed * 0.7f;
         }
-        else if (value >= 80 && value < 90)
+        else if (fillBar.value >= 0.8 && fillBar.value < 0.9)
         {
             playerController.initialSpeed = playerController.maxSpeed * 0.9f;
         }

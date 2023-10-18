@@ -5,28 +5,40 @@ using UnityEngine;
 public class BackgroundLoop : MonoBehaviour
 {
     private float width;
-    public bool child;
+    public bool pivotL;
+    public bool pivotM;
     private Transform player;
 
-    public void Awake()
+    public void Start()
     {
-        if(child)
+        if(pivotL)
         {
-            width = GetComponentInChildren<Transform>().localScale.x;
+            width = GetComponent<Transform>().localScale.x;
         }
         else
         {
             width = GetComponent<BoxCollider>().size.x;
         }
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameManager.instance.player.transform;
     }
 
     public void Update()
     {
-        if(player.position.x - transform.position.x > width * 1.5f)
+        if(pivotM)
         {
-            var tempPos = new Vector3(transform.position.x + 2 * width, transform.position.y, transform.position.z);
-            transform.position = tempPos;
+            if (player.position.x - transform.position.x > width)
+            {
+                var tempPos = new Vector3(transform.position.x + 2 * width, transform.position.y, transform.position.z);
+                transform.position = tempPos;
+            }
+        }
+        else
+        {
+            if (player.position.x - transform.position.x > width * 1.5f)
+            {
+                var tempPos = new Vector3(transform.position.x + 2 * width, transform.position.y, transform.position.z);
+                transform.position = tempPos;
+            }
         }
     }
 }

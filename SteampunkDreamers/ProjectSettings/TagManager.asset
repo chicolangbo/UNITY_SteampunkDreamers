@@ -14,6 +14,9 @@ TagManager:
   - Bg1
   - Bg2
   - Shield
+  - Laser
+  - PauseIcon
+  - InGameUI
   layers:
   - Default
   - TransparentFX

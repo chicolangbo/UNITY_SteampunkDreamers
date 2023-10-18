@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class GameManager : MonoBehaviour
     public float coinScore;
     public float basicScore;
     public float bonusScore;
+
+    private TextMeshProUGUI fps;
 
     public static GameManager instance
     {
@@ -36,6 +40,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        var inGameUI = GameObject.FindGameObjectWithTag("InGameUI");
+        fps = inGameUI.transform.GetChild(inGameUI.transform.childCount - 1).GetComponent<TextMeshProUGUI>();
     }
 
     public void Update()
@@ -44,6 +50,9 @@ public class GameManager : MonoBehaviour
         {
             RestartGame();
         }
+
+        Debug.Log(player.transform.eulerAngles.z);
+        fps.text = "FPS : " + (1f / Time.deltaTime).ToString();
     }
 
     public void SetBoardLength(float initialSpeed)

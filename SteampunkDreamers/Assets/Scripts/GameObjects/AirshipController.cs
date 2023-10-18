@@ -34,8 +34,6 @@ public class AirshipController : MapObject
         {
             StateGliding stateGliding = (StateGliding)playerController.stateMachine.CurrentState;
 
-            Debug.Log(playerController.stateMachine.GetCurrentState());
-
             if (stateGliding != null)
             {
                 stateGliding.isRotPossible = false;

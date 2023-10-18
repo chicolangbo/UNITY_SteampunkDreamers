@@ -5,54 +5,40 @@ using UnityEngine.UI;
 
 public class AngleBarController : MonoBehaviour
 {
-    public Image fillBar;
-    public RectTransform arrow;
+    private Slider fillBar;
     private PlayerController playerController;
     public float value = 0;
     private bool toRight;
-    private float controllSpeed = 33.33f;
+    private float controllSpeed = 0.33f;
 
     private void Start()
     {
         playerController = GameManager.instance.player.GetComponent<PlayerController>();
-    }
-
-    public void Update()
-    {
-        AngleChange(value);
-    }
-
-    public void AngleChange(float value)
-    {
-        if (value > 100 || value < 0)
-            return;
-
-        float amount = (value / 100.0f) * 120.0f / 360;
-        fillBar.fillAmount = amount;
-
-        float controllerAngle = amount * 360;
-        arrow.localEulerAngles = new Vector3(0, 0, controllerAngle);
+        fillBar = gameObject.GetComponent<Slider>();
     }
 
     public void AngleBarMoving()
     {
         // 3초 도달
-        if (!toRight)
+        if (fillBar != null)
         {
-            float tempValue = value;
-            value = Mathf.Clamp(tempValue + Time.deltaTime * controllSpeed, 0, 100f);
-            if (value >= 100f)
+            if (!toRight)
             {
-                toRight = true;
+                float tempValue = fillBar.value;
+                fillBar.value = Mathf.Clamp(tempValue + Time.deltaTime * controllSpeed, 0, 1f);
+                if (fillBar.value >= 1f)
+                {
+                    toRight = true;
+                }
             }
-        }
-        else
-        {
-            float tempValue = value;
-            value = Mathf.Clamp(tempValue - Time.deltaTime * controllSpeed, 0, 100f);
-            if (value <= 0f) // 순회 완료
+            else
             {
-                gameObject.SetActive(false);
+                float tempValue = fillBar.value;
+                fillBar.value = Mathf.Clamp(tempValue - Time.deltaTime * controllSpeed, 0, 1f);
+                if (fillBar.value <= 0f) // 순회 완료
+                {
+                    gameObject.SetActive(false);
+                }
             }
         }
     }
@@ -60,9 +46,11 @@ public class AngleBarController : MonoBehaviour
     public void SetAngle()
     {
         // 최초 각도 세팅
-        // value 0~60, 91~100 : 1부터 시작
-        // value 61~70, 81~90
-        // value 71~80
-        playerController.initialAngle = new Quaternion(0, 0, (value < 1) ? 1f - 30f : value - 30f, 1);
+        // value 0~0.6, 0.9~1 : 1부터 시작
+        // value 0.6~0.7, 0.8~0.9
+        // value 0.7~0.8
+        var initialZ = (fillBar.value * (playerController.maxAngle - playerController.minAngle)) + playerController.minAngle;
+        playerController.initialAngle = Quaternion.Euler(0f, 0f, initialZ);
+        //playerController.initialAngle = new Quaternion(0, 0, initialZ < 0.01f ? playerController.minAngle : initialZ, 1);
     }
 }

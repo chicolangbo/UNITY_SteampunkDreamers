@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class StateLanding : BaseState
 {
+    private float propellerSpeed;
+
+
     public StateLanding(PlayerController controller) : base(controller)
     {
     }
@@ -12,7 +15,7 @@ public class StateLanding : BaseState
     public override void OnEnterState()
     {
         controller.velocity.y = 0f;
-
+        propellerSpeed = controller.propellerSpeed;
     }
 
     public override void OnExitState()
@@ -49,6 +52,12 @@ public class StateLanding : BaseState
             GameManager.instance.coinScore = controller.coinCount * 5;
             GameManager.instance.basicScore = controller.distance / 2.5f;
             GameManager.instance.bonusScore = (controller.distance + controller.maxSpeedReached + controller.maxAltitudeReached) / 2.5f;
+        }
+
+        if (propellerSpeed > 0f)
+        {
+            propellerSpeed -= propellerSpeed * Time.deltaTime;
+            controller.ChangePropellerSpeed(propellerSpeed);
         }
     }
 }
