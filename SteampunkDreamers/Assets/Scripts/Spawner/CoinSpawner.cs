@@ -25,6 +25,7 @@ public class CoinSpawner : Spawner
     {
         while (!spawnStop)
         {
+            Debug.Log("coin spawn!!!");
             yield return new WaitForSeconds(spawnDelayTime);
             spawnDelayTime = Random.Range(minSpawnDelayTime, maxSpawnDelayTime);
 

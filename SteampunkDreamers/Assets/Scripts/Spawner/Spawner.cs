@@ -20,17 +20,7 @@ public class Spawner : MonoBehaviour
 
     public void Start()
     {
-        playerController = GameManager.instance.player.GetComponent<PlayerController>();
-        yScale = playerController.gameObject.GetComponent<BoxCollider>().size.y * planeMultipleHeight;
-        spawnPointCount = 10000 / (int)yScale;
-        spawnPoints = new Vector3[spawnPointCount];
-
-        // 스폰 포인트 생성 
-        for (int i = 0; i < spawnPoints.Length; ++i)
-        {
-            var tempPos = new Vector3(-20f, yScale / 2f + yScale * i - 0.5f + minHeight);
-            spawnPoints[i] = tempPos;
-        }
+        Init();
     }
 
     public void FindPlayerIndex()
@@ -58,5 +48,20 @@ public class Spawner : MonoBehaviour
         }
         while (prevPoint == selectedPoint);
         prevPoint = selectedPoint;
+    }
+
+    public void Init()
+    {
+        playerController = GameManager.instance.player.GetComponent<PlayerController>();
+        yScale = playerController.gameObject.GetComponent<BoxCollider>().size.y * planeMultipleHeight;
+        spawnPointCount = 10000 / (int)yScale;
+        spawnPoints = new Vector3[spawnPointCount];
+
+        // 스폰 포인트 생성 
+        for (int i = 0; i < spawnPoints.Length; ++i)
+        {
+            var tempPos = new Vector3(-20f, yScale / 2f + yScale * i - 0.5f + minHeight);
+            spawnPoints[i] = tempPos;
+        }
     }
 }

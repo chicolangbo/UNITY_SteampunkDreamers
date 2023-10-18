@@ -14,6 +14,7 @@ public class StateLanding : BaseState
 
     public override void OnEnterState()
     {
+        Time.timeScale = 1f;
         controller.velocity.y = 0f;
         propellerSpeed = controller.propellerSpeed;
     }
@@ -47,7 +48,7 @@ public class StateLanding : BaseState
 
     public override void OnUpdateState()
     {
-        if(controller.velocity.x < 0.5f) 
+        if(controller.velocity.x < 0.5f && !GameManager.instance.isGameover) 
         {
             GameManager.instance.coinScore = controller.coinCount * 5;
             GameManager.instance.basicScore = controller.distance / 2.5f;

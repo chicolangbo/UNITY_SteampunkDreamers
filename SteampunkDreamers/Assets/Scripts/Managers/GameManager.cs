@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public int coinScore;
     public float basicScore;
     public float bonusScore;
-    public float money = 0;
+    public static int money { get; private set; } = 0;
 
     private TextMeshProUGUI fps;
 
@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Init();
+
         if (instance == null)
         {
             instance = this;
@@ -69,7 +71,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdateMoney() // 점수 집계 시 호출
     {
-        money = coinScore + basicScore + bonusScore;
+        money += coinScore + (int)basicScore + (int)bonusScore;
     }
 
     public void SetPlayer(GameObject pl)
@@ -90,9 +92,25 @@ public class GameManager : MonoBehaviour
         // 게임 오버 상태를 참으로 변경
         isGameover = true;
         // 게임 오버 UI를 활성화
+        Time.timeScale = 0f;
         UIManager.instance.SetActiveGameoverUI(true);
         UIManager.instance.UpdateCoinScoreText(coinScore);
         UIManager.instance.UpdateBasicScoreText(basicScore);
         UIManager.instance.UpdateBonusScoreText(bonusScore);
+        UpdateMoney();
+    }
+
+    public void Init()
+    {
+        isGameover = false;
+        coinScore = 0;
+        basicScore = 0f;
+        bonusScore = 0f;
+        // 돈 초기화
+    }
+
+    public void MoneyChange(int diff)
+    {
+        money += diff;
     }
 }

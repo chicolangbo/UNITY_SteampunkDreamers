@@ -53,7 +53,10 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        maxSpeedReached = 0;
+        maxAltitudeReached = 0;
         GameManager.instance.SetPlayer(this.gameObject);
+        GameManager.instance.Init();
         rb = GetComponent<Rigidbody>();
         speedBar = GameObject.FindGameObjectWithTag("SpeedBar");
         angleBar = transform.GetChild(0).GetChild(1).gameObject;
@@ -61,15 +64,16 @@ public class PlayerController : MonoBehaviour
         shield = transform.GetChild(transform.childCount - 2).gameObject;
         propeller = transform.GetChild(2).GetChild(2).transform;
 
-        var mapObjectCount = GameManager.instance.GetComponents<MapObjectSpawner>().Length;
-        spawners.Add(GameManager.instance.GetComponent<AirflowSpwaner>());
+        var mapObjectCount = ObjectPoolManager.instance.GetComponents<MapObjectSpawner>().Length;
+        spawners.Add(ObjectPoolManager.instance.GetComponent<AirflowSpwaner>());
         spawners[0].enabled = false;
         for(int i = 1; i< mapObjectCount+1; ++i)
         {
-            spawners.Add(GameManager.instance.GetComponents<MapObjectSpawner>()[i - 1]);
+            spawners.Add(ObjectPoolManager.instance.GetComponents<MapObjectSpawner>()[i - 1]);
             spawners[i].enabled = false;
+            spawners[i].spawnStop = false;
         }
-        spawners.Add(GameManager.instance.GetComponent<CoinSpawner>());
+        spawners.Add(ObjectPoolManager.instance.GetComponent<CoinSpawner>());
         spawners[spawners.Count - 1].enabled = false;
     }
 
@@ -133,6 +137,7 @@ public class PlayerController : MonoBehaviour
             foreach(var s in spawners)
             {
                 s.enabled = true;
+                s.spawnStop = false;
             }
         }
 

@@ -25,25 +25,22 @@ public class UpgradeManager : MonoBehaviour
 
     public GameObject upgradeManager;
 
-    public static UpgradeManager instance
-    {
-        get
-        {
-            // 만약 싱글톤 변수에 아직 오브젝트가 할당되지 않았다면
-            if (m_instance == null)
-            {
-                // 씬에서 GameManager 오브젝트를 찾아 할당
-                m_instance = FindObjectOfType<UpgradeManager>();
-            }
-
-            // 싱글톤 오브젝트를 반환
-            return m_instance;
-        }
-    }
-
+    public static UpgradeManager instance = null;
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+
         DontDestroyOnLoad(instance);
+
+        Time.timeScale = 1.0f;
         currentMoneyUI = GameObject.FindGameObjectWithTag("Money").GetComponent<TextMeshProUGUI>();
         table = DataTableMgr.GetTable<ReinforceTable>();
         for (int i = 0; i < window.Length; i++)
@@ -106,14 +103,15 @@ public class UpgradeManager : MonoBehaviour
 
     private void Update()
     {
-        currentMoneyUI.text = GameManager.instance.money.ToString();
+        currentMoneyUI.text = GameManager.money.ToString();
+        Debug.Log(GameManager.money);
     }
 
     public void StartSpeedUpgrade()
     {
         if(CheckUpgrade("StartSpeedUpgrade"))
         {
-            GameManager.instance.money -= table.GetData(currentReinforceDatas[0].id + 1).PRICE;
+            GameManager.instance.MoneyChange(- table.GetData(currentReinforceDatas[0].id + 1).PRICE);
             currentReinforceDatas[0].level++;
             currentReinforceDatas[0].id++;
             CheckUpgrade("StartSpeedUpgrade");
@@ -124,7 +122,7 @@ public class UpgradeManager : MonoBehaviour
     {
         if (CheckUpgrade("RotateSpeedUpgrade"))
         {
-            GameManager.instance.money -= table.GetData(currentReinforceDatas[1].id + 1).PRICE;
+            GameManager.instance.MoneyChange(- table.GetData(currentReinforceDatas[1].id + 1).PRICE);
             currentReinforceDatas[1].level++;
             currentReinforceDatas[1].id++;
             CheckUpgrade("RotateSpeedUpgrade");
@@ -135,7 +133,7 @@ public class UpgradeManager : MonoBehaviour
     {
         if (CheckUpgrade("CoinBonusUpgrade"))
         {
-            GameManager.instance.money -= table.GetData(currentReinforceDatas[2].id + 1).PRICE;
+            GameManager.instance.MoneyChange(-table.GetData(currentReinforceDatas[2].id + 1).PRICE);
             currentReinforceDatas[2].level++;
             currentReinforceDatas[2].id++;
             CheckUpgrade("CoinBonusUpgrade");
@@ -146,7 +144,7 @@ public class UpgradeManager : MonoBehaviour
     {
         if (CheckUpgrade("WeightLessUpgrade"))
         {
-            GameManager.instance.money -= table.GetData(currentReinforceDatas[3].id + 1).PRICE;
+            GameManager.instance.MoneyChange(- table.GetData(currentReinforceDatas[3].id + 1).PRICE);
             currentReinforceDatas[3].level++;
             currentReinforceDatas[3].id++;
             CheckUpgrade("WeightLessUpgrade");
@@ -157,7 +155,7 @@ public class UpgradeManager : MonoBehaviour
     {
         if (CheckUpgrade("AeroBoostUpgrade"))
         {
-            GameManager.instance.money -= table.GetData(currentReinforceDatas[4].id + 1).PRICE;
+            GameManager.instance.MoneyChange(-table.GetData(currentReinforceDatas[4].id + 1).PRICE);
             currentReinforceDatas[4].level++;
             currentReinforceDatas[4].id++;
             CheckUpgrade("AeroBoostUpgrade");
@@ -168,7 +166,7 @@ public class UpgradeManager : MonoBehaviour
     {
         if (CheckUpgrade("MoreFuelUpgrade"))
         {
-            GameManager.instance.money -= table.GetData(currentReinforceDatas[5].id + 1).PRICE;
+            GameManager.instance.MoneyChange(-table.GetData(currentReinforceDatas[5].id + 1).PRICE);
             currentReinforceDatas[5].level++;
             currentReinforceDatas[5].id++;
             CheckUpgrade("MoreFuelUpgrade");
@@ -180,7 +178,7 @@ public class UpgradeManager : MonoBehaviour
         switch (name)
         {
             case "StartSpeedUpgrade":
-                if (GameManager.instance.money >= table.GetData(currentReinforceDatas[0].id + 1).PRICE && currentReinforceDatas[0].level < 10)
+                if (GameManager.money >= table.GetData(currentReinforceDatas[0].id + 1).PRICE && currentReinforceDatas[0].level < 10)
                 {
                     prices[0].text = table.GetData(currentReinforceDatas[0].id + 1).PRICE.ToString();
                     return true;
@@ -189,7 +187,7 @@ public class UpgradeManager : MonoBehaviour
                 break;
 
             case "RotateSpeedUpgrade":
-                if (GameManager.instance.money >= table.GetData(currentReinforceDatas[1].id + 1).PRICE && currentReinforceDatas[1].level < 10)
+                if (GameManager.money >= table.GetData(currentReinforceDatas[1].id + 1).PRICE && currentReinforceDatas[1].level < 10)
                 {
                     prices[1].text = table.GetData(currentReinforceDatas[1].id + 1).PRICE.ToString();
                     return true;
@@ -198,7 +196,7 @@ public class UpgradeManager : MonoBehaviour
                 break;
 
             case "CoinBonusUpgrade":
-                if (GameManager.instance.money >= table.GetData(currentReinforceDatas[2].id + 1).PRICE && currentReinforceDatas[2].level < 10)
+                if (GameManager.money >= table.GetData(currentReinforceDatas[2].id + 1).PRICE && currentReinforceDatas[2].level < 10)
                 {
                     prices[2].text = table.GetData(currentReinforceDatas[2].id + 1).PRICE.ToString();
                     return true;
@@ -207,7 +205,7 @@ public class UpgradeManager : MonoBehaviour
                 break;
 
             case "WeightLessUpgrade":
-                if (GameManager.instance.money >= table.GetData(currentReinforceDatas[3].id + 1).PRICE && currentReinforceDatas[3].level < 10)
+                if (GameManager.money >= table.GetData(currentReinforceDatas[3].id + 1).PRICE && currentReinforceDatas[3].level < 10)
                 {
                     prices[3].text = table.GetData(currentReinforceDatas[3].id + 1).PRICE.ToString();
                     return true;
@@ -216,7 +214,7 @@ public class UpgradeManager : MonoBehaviour
                 break;
 
             case "AeroBoostUpgrade":
-                if (GameManager.instance.money >= table.GetData(currentReinforceDatas[4].id + 1).PRICE && currentReinforceDatas[4].level < 10)
+                if (GameManager.money >= table.GetData(currentReinforceDatas[4].id + 1).PRICE && currentReinforceDatas[4].level < 10)
                 {
                     prices[4].text = table.GetData(currentReinforceDatas[4].id + 1).PRICE.ToString();
                     return true;
@@ -225,12 +223,20 @@ public class UpgradeManager : MonoBehaviour
                 break;
 
             case "MoreFuelUpgrade":
-                if (GameManager.instance.money >= table.GetData(currentReinforceDatas[5].id + 1).PRICE && currentReinforceDatas[5].level < 10)
+                Debug.Log(table.reinforceDatas.Count);
+                if(currentReinforceDatas[5].id + 1 < table.reinforceDatas.Count)
                 {
-                    prices[5].text = table.GetData(currentReinforceDatas[5].id + 1).PRICE.ToString();
-                    return true;
+                    if (GameManager.money >= table.GetData(currentReinforceDatas[5].id + 1).PRICE && currentReinforceDatas[5].level < 10)
+                    {
+                        prices[5].text = table.GetData(currentReinforceDatas[5].id + 1).PRICE.ToString();
+                        return true;
+                    }
+                    upgradeButton[5].interactable = false;
                 }
-                upgradeButton[5].interactable = false;
+                else
+                {
+                    upgradeButton[5].interactable = false;
+                }
                 break;
         }
         return false;
