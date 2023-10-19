@@ -59,21 +59,7 @@ public class UpgradeManager : MonoBehaviour
 
     private void Update()
     {
-        currentMoneyUI.text = GameManager.money.ToString();
-
-        // 저장 테스트
-        //if (Input.GetKeyDown(KeyCode.Alpha1))
-        //{
-        //    // save data 만들기
-        //    ReinforceData reinforceData = new ReinforceData();
-        //    reinforceData.name = "aaa";
-        //    reinforceData.id = 1;
-        //    reinforceData.level = 1;
-        //    SaveDataV1 saveData = new SaveDataV1();
-        //    saveData.reinforceDatas.Add(reinforceData);
-        //    PlayDataManager.data = saveData;
-        //    PlayDataManager.Save();
-        //}
+        currentMoneyUI.text = PlayDataManager.data.money.ToString();
     }
 
     public void StartSpeedUpgrade()
@@ -82,7 +68,7 @@ public class UpgradeManager : MonoBehaviour
         if (CheckUpgrade(name))
         {
             SaveReinforceData(name, table.GetData(PlayDataManager.data.reinforceDatas[name].id + 1).PRICE);
-            CheckUpgrade(name); // 버튼 막기
+            CheckAllUpgradeButtons();
         }
     }
 
@@ -92,7 +78,7 @@ public class UpgradeManager : MonoBehaviour
         if (CheckUpgrade(name))
         {
             SaveReinforceData(name, table.GetData(PlayDataManager.data.reinforceDatas[name].id + 1).PRICE);
-            CheckUpgrade(name);
+            CheckAllUpgradeButtons();
         }
     }
 
@@ -102,7 +88,7 @@ public class UpgradeManager : MonoBehaviour
         if (CheckUpgrade(name))
         {
             SaveReinforceData(name, table.GetData(PlayDataManager.data.reinforceDatas[name].id + 1).PRICE);
-            CheckUpgrade(name);
+            CheckAllUpgradeButtons();
         }
     }
 
@@ -112,7 +98,7 @@ public class UpgradeManager : MonoBehaviour
         if (CheckUpgrade(name))
         {
             SaveReinforceData(name, table.GetData(PlayDataManager.data.reinforceDatas[name].id + 1).PRICE);
-            CheckUpgrade(name);
+            CheckAllUpgradeButtons();
         }
     }
 
@@ -122,7 +108,7 @@ public class UpgradeManager : MonoBehaviour
         if (CheckUpgrade(name))
         {
             SaveReinforceData(name, table.GetData(PlayDataManager.data.reinforceDatas[name].id + 1).PRICE);
-            CheckUpgrade(name);
+            CheckAllUpgradeButtons();
         }
     }
 
@@ -132,7 +118,7 @@ public class UpgradeManager : MonoBehaviour
         if (CheckUpgrade(name))
         {
             SaveReinforceData(name, table.GetData(PlayDataManager.data.reinforceDatas[name].id + 1).PRICE);
-            CheckUpgrade(name);
+            CheckAllUpgradeButtons();
         }
     }
 
@@ -145,6 +131,7 @@ public class UpgradeManager : MonoBehaviour
             case "StartSpeedUpgrade":
                 if (originData.money >= table.GetData(originData.reinforceDatas[name].id + 1).PRICE && originData.reinforceDatas[name].level < 10)
                 {
+                    upgradeButton[0].interactable = true;
                     prices[0].text = table.GetData(originData.reinforceDatas[name].id + 1).PRICE.ToString();
                     return true;
                 }
@@ -154,6 +141,7 @@ public class UpgradeManager : MonoBehaviour
             case "RotateSpeedUpgrade":
                 if (originData.money >= table.GetData(originData.reinforceDatas[name].id + 1).PRICE && originData.reinforceDatas[name].level < 10)
                 {
+                    upgradeButton[1].interactable = true;
                     prices[1].text = table.GetData(originData.reinforceDatas[name].id + 1).PRICE.ToString();
                     return true;
                 }
@@ -163,6 +151,7 @@ public class UpgradeManager : MonoBehaviour
             case "CoinBonusUpgrade":
                 if (originData.money >= table.GetData(originData.reinforceDatas[name].id + 1).PRICE && originData.reinforceDatas[name].level < 10)
                 {
+                    upgradeButton[2].interactable = true;
                     prices[2].text = table.GetData(originData.reinforceDatas[name].id + 1).PRICE.ToString();
                     return true;
                 }
@@ -172,6 +161,7 @@ public class UpgradeManager : MonoBehaviour
             case "WeightLessUpgrade":
                 if (originData.money >= table.GetData(originData.reinforceDatas[name].id + 1).PRICE && originData.reinforceDatas[name].level < 10)
                 {
+                    upgradeButton[3].interactable = true;
                     prices[3].text = table.GetData(originData.reinforceDatas[name].id + 1).PRICE.ToString();
                     return true;
                 }
@@ -181,6 +171,7 @@ public class UpgradeManager : MonoBehaviour
             case "AeroBoostUpgrade":
                 if (originData.money >= table.GetData(originData.reinforceDatas[name].id + 1).PRICE && originData.reinforceDatas[name].level < 10)
                 {
+                    upgradeButton[4].interactable = true;
                     prices[4].text = table.GetData(originData.reinforceDatas[name].id + 1).PRICE.ToString();
                     return true;
                 }
@@ -192,6 +183,7 @@ public class UpgradeManager : MonoBehaviour
                 {
                     if (originData.money >= table.GetData(originData.reinforceDatas[name].id + 1).PRICE && originData.reinforceDatas[name].level < 10)
                     {
+                        upgradeButton[5].interactable = true;
                         prices[5].text = table.GetData(originData.reinforceDatas[name].id + 1).PRICE.ToString();
                         return true;
                     }
@@ -204,6 +196,16 @@ public class UpgradeManager : MonoBehaviour
                 break;
         }
         return false;
+    }
+
+    private void CheckAllUpgradeButtons()
+    {
+        CheckUpgrade("StartSpeedUpgrade");
+        CheckUpgrade("RotateSpeedUpgrade");
+        CheckUpgrade("CoinBonusUpgrade");
+        CheckUpgrade("WeightLessUpgrade");
+        CheckUpgrade("AeroBoostUpgrade");
+        CheckUpgrade("MoreFuelUpgrade");
     }
 
     private void Init()

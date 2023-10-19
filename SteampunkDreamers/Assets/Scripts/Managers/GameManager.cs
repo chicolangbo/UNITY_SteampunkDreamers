@@ -16,8 +16,6 @@ public class GameManager : MonoBehaviour
     public int coinScore;
     public float basicScore;
     public float bonusScore;
-    public static int money { get; private set; } = 0;
-
     private TextMeshProUGUI fps;
 
     public static GameManager instance = null;
@@ -26,6 +24,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        PlayDataManager.Init();
+
         Init();
 
         if (instance == null)
@@ -71,7 +71,8 @@ public class GameManager : MonoBehaviour
 
     public void UpdateMoney() // 점수 집계 시 호출
     {
-        money += coinScore + (int)basicScore + (int)bonusScore;
+        PlayDataManager.data.money += coinScore + (int)basicScore + (int)bonusScore;
+        PlayDataManager.Save();
     }
 
     public void SetPlayer(GameObject pl)
@@ -106,11 +107,10 @@ public class GameManager : MonoBehaviour
         coinScore = 0;
         basicScore = 0f;
         bonusScore = 0f;
-        // 돈 초기화
     }
 
     public void MoneyChange(int diff)
     {
-        money += diff;
+        PlayDataManager.data.money += diff;
     }
 }
