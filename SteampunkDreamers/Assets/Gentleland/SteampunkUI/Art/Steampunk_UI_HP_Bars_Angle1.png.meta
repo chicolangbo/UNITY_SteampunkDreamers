@@ -1,0 +1,734 @@
+fileFormatVersion: 2
+guid: f26b20ee31372334bb5174f7fcf5461a
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_0
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 866
+        width: 1021
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36adea6e3db707749ac90b617fff22b1
+      internalID: -1043441026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_1
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 901
+        width: 629
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77c4f74fa5c8e4545a5971dea8271910
+      internalID: -315031342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_2
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 773
+        width: 875
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5b4fd188145a9446b3f13f0a851490e
+      internalID: -613131601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_3
+      rect:
+        serializedVersion: 2
+        x: 1262
+        y: 793
+        width: 501
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6d6e00ac7224a14aaebdf82122be8ec
+      internalID: 101248792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_4
+      rect:
+        serializedVersion: 2
+        x: 1278
+        y: 782
+        width: 28
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3517aed71fb3d7343ab85eb63a76e434
+      internalID: -1175870102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_5
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 665
+        width: 887
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 545ce33138dab1b4d95c1adbb25dc539
+      internalID: 2025592048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_6
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 723
+        width: 25
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74c562944f47a77458657cf34ddf7413
+      internalID: 160824634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_7
+      rect:
+        serializedVersion: 2
+        x: 1257
+        y: 687
+        width: 508
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 310158741debbc444a28a80b144f6c21
+      internalID: -418455805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_8
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 705
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 092d68df9f90f2f409a24ea65f916546
+      internalID: 1125356468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_9
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 697
+        width: 13
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56fabf091841be141adae5fa778aa070
+      internalID: 1132561146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_10
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 674
+        width: 27
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9a017e58771f89439e8493b714e248e
+      internalID: -2000749857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_11
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 395
+        width: 100
+        height: 223
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b50f5c51fc3ae3449bc371d78b3f0011
+      internalID: 600789037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_12
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 380
+        width: 255
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79f3fce5c2cd85447a5e88a10861423b
+      internalID: -1147446068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_13
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 474
+        width: 1080
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d91fd62d9ee02404a920ac0132a5c76e
+      internalID: -2128032159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_14
+      rect:
+        serializedVersion: 2
+        x: 1853
+        y: 531
+        width: 12
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b200ca67df0724c4899490dc60d97373
+      internalID: 1120585996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_15
+      rect:
+        serializedVersion: 2
+        x: 1894
+        y: 530
+        width: 13
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ef4879755569ba469307f8a3666dce9
+      internalID: -1023036164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_16
+      rect:
+        serializedVersion: 2
+        x: 1907
+        y: 530
+        width: 11
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 164ed23d07bd35d468e83b72da608fca
+      internalID: -46237346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_17
+      rect:
+        serializedVersion: 2
+        x: 833
+        y: 402
+        width: 5
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d940e48851962524dab7e8e718cd2225
+      internalID: 430780060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_18
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 390
+        width: 903
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78f13c9734a900041a34dd40edbbff59
+      internalID: -458117477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_19
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 314
+        width: 5
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cb41f8a5cf7dc646948b03ee7414524
+      internalID: -2016000623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_20
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 302
+        width: 903
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1466777292ed8a047b4d9f1667bb316b
+      internalID: 441528369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_21
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 204
+        width: 1031
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2e19e580492bca4a973ead72f3e2087
+      internalID: -844139573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_22
+      rect:
+        serializedVersion: 2
+        x: 1304
+        y: 201
+        width: 374
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45ae61655ab6f0c44826590b0c78b2e0
+      internalID: 368344085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_23
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 116
+        width: 876
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82fb6e0c24398c847811ab3281ed93e9
+      internalID: -327738855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_24
+      rect:
+        serializedVersion: 2
+        x: 1333
+        y: 126
+        width: 306
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8958f1c472e55c4419e712ae4a89fb9a
+      internalID: -235916866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_25
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 26
+        width: 876
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bda425a88219a49428ffb463918ce74e
+      internalID: -1994249940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Angle1_26
+      rect:
+        serializedVersion: 2
+        x: 1336
+        y: 48
+        width: 306
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07c285e1ccefa804d8c5a70cbac527c2
+      internalID: 1299983078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Steampunk_UI_HP_Bars_Angle1_0: -1043441026
+      Steampunk_UI_HP_Bars_Angle1_1: -315031342
+      Steampunk_UI_HP_Bars_Angle1_10: -2000749857
+      Steampunk_UI_HP_Bars_Angle1_11: 600789037
+      Steampunk_UI_HP_Bars_Angle1_12: -1147446068
+      Steampunk_UI_HP_Bars_Angle1_13: -2128032159
+      Steampunk_UI_HP_Bars_Angle1_14: 1120585996
+      Steampunk_UI_HP_Bars_Angle1_15: -1023036164
+      Steampunk_UI_HP_Bars_Angle1_16: -46237346
+      Steampunk_UI_HP_Bars_Angle1_17: 430780060
+      Steampunk_UI_HP_Bars_Angle1_18: -458117477
+      Steampunk_UI_HP_Bars_Angle1_19: -2016000623
+      Steampunk_UI_HP_Bars_Angle1_2: -613131601
+      Steampunk_UI_HP_Bars_Angle1_20: 441528369
+      Steampunk_UI_HP_Bars_Angle1_21: -844139573
+      Steampunk_UI_HP_Bars_Angle1_22: 368344085
+      Steampunk_UI_HP_Bars_Angle1_23: -327738855
+      Steampunk_UI_HP_Bars_Angle1_24: -235916866
+      Steampunk_UI_HP_Bars_Angle1_25: -1994249940
+      Steampunk_UI_HP_Bars_Angle1_26: 1299983078
+      Steampunk_UI_HP_Bars_Angle1_3: 101248792
+      Steampunk_UI_HP_Bars_Angle1_4: -1175870102
+      Steampunk_UI_HP_Bars_Angle1_5: 2025592048
+      Steampunk_UI_HP_Bars_Angle1_6: 160824634
+      Steampunk_UI_HP_Bars_Angle1_7: -418455805
+      Steampunk_UI_HP_Bars_Angle1_8: 1125356468
+      Steampunk_UI_HP_Bars_Angle1_9: 1132561146
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

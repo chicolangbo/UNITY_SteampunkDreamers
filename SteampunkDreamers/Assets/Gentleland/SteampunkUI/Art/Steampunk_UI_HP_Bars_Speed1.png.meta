@@ -1,0 +1,734 @@
+fileFormatVersion: 2
+guid: a3a31e51d417126438c7b8aab8705386
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_0
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 866
+        width: 1021
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d5be2343301ea94d8b015cc23647d32
+      internalID: 844942019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_1
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 901
+        width: 629
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 314d3b41225011a4f90b80c95ffcc4b0
+      internalID: -1797276669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_2
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 773
+        width: 875
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da5d794717c5dbb488a97893eeafc2d7
+      internalID: -1886659586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_3
+      rect:
+        serializedVersion: 2
+        x: 1262
+        y: 793
+        width: 501
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ddc65c9632ab9e49b7345b92749392f
+      internalID: -1111180764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_4
+      rect:
+        serializedVersion: 2
+        x: 1278
+        y: 782
+        width: 28
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4beb3ba15906f74cabd65c41d25faca
+      internalID: -1077592673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_5
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 665
+        width: 887
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be5e723788da62f4fa44471c8d2ef813
+      internalID: -1792221860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_6
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 723
+        width: 25
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b607e4054edc8f418bee4164f0d14e0
+      internalID: -1738564007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_7
+      rect:
+        serializedVersion: 2
+        x: 1257
+        y: 687
+        width: 508
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc4c0cf4a68730a4c81f5d95d2b8a7f2
+      internalID: 972113063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_8
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 705
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 667d237f0871ad847b2e2ce0aad4afa4
+      internalID: 616865479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_9
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 697
+        width: 13
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eadec6ed312a35b4591f165f97bbf8c9
+      internalID: -1277736835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_10
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 674
+        width: 27
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c51824d2cee2a274c96c8f745dba0e03
+      internalID: -1089776391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_11
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 395
+        width: 98
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72c5ca7e5f3180b438641e2ba7990f04
+      internalID: -51459893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_12
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 380
+        width: 222
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 569e336f5385d0b46b7193709c833ecb
+      internalID: 1978592835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_13
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 474
+        width: 1080
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b23220f1ba4695249abc7dffa3dafe70
+      internalID: -705770941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_14
+      rect:
+        serializedVersion: 2
+        x: 1853
+        y: 531
+        width: 12
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb431f38d265c02498d26f589a98cf81
+      internalID: -571270418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_15
+      rect:
+        serializedVersion: 2
+        x: 1894
+        y: 530
+        width: 13
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d9b0cdc3a4d0a747a2591e7b073c20d
+      internalID: -762630968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_16
+      rect:
+        serializedVersion: 2
+        x: 1907
+        y: 530
+        width: 11
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05d610335181f3c4daf95ffb2d0754ff
+      internalID: -227751250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_17
+      rect:
+        serializedVersion: 2
+        x: 833
+        y: 402
+        width: 5
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1a0cc8aecb4d4f4aac7bc04c8030d58
+      internalID: -579535481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_18
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 390
+        width: 903
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a77c743819df7c48922b2c58db5fba0
+      internalID: -1788281192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_19
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 314
+        width: 5
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 745515ec2e1656b408720e522ac1f131
+      internalID: -1376305597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_20
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 302
+        width: 903
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61711d1825aefd84a9369778a0bc2c02
+      internalID: 132163716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_21
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 204
+        width: 1031
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d67b2d0a4cc152a48a58253e0d18260d
+      internalID: -1470241507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_22
+      rect:
+        serializedVersion: 2
+        x: 1304
+        y: 201
+        width: 374
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 895785f9696764843b3976b09b5e0143
+      internalID: -1131679592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_23
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 116
+        width: 876
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67a777a6497d8c642a0f199744ae4d7f
+      internalID: 1989136004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_24
+      rect:
+        serializedVersion: 2
+        x: 1333
+        y: 126
+        width: 306
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 466fcb720a662094b806508fac13674d
+      internalID: -1054719831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_25
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 26
+        width: 876
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1eb85242ba2db74d8e91ca783877031
+      internalID: 1886742668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Steampunk_UI_HP_Bars_Speed1_26
+      rect:
+        serializedVersion: 2
+        x: 1336
+        y: 48
+        width: 306
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23eb3a67f4b5c0c40b31a025d725dfb8
+      internalID: 945995648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 774d9d7d43bd7cf4cae2d067d45f92ea
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Steampunk_UI_HP_Bars_Speed1_0: 844942019
+      Steampunk_UI_HP_Bars_Speed1_1: -1797276669
+      Steampunk_UI_HP_Bars_Speed1_10: -1089776391
+      Steampunk_UI_HP_Bars_Speed1_11: -51459893
+      Steampunk_UI_HP_Bars_Speed1_12: 1978592835
+      Steampunk_UI_HP_Bars_Speed1_13: -705770941
+      Steampunk_UI_HP_Bars_Speed1_14: -571270418
+      Steampunk_UI_HP_Bars_Speed1_15: -762630968
+      Steampunk_UI_HP_Bars_Speed1_16: -227751250
+      Steampunk_UI_HP_Bars_Speed1_17: -579535481
+      Steampunk_UI_HP_Bars_Speed1_18: -1788281192
+      Steampunk_UI_HP_Bars_Speed1_19: -1376305597
+      Steampunk_UI_HP_Bars_Speed1_2: -1886659586
+      Steampunk_UI_HP_Bars_Speed1_20: 132163716
+      Steampunk_UI_HP_Bars_Speed1_21: -1470241507
+      Steampunk_UI_HP_Bars_Speed1_22: -1131679592
+      Steampunk_UI_HP_Bars_Speed1_23: 1989136004
+      Steampunk_UI_HP_Bars_Speed1_24: -1054719831
+      Steampunk_UI_HP_Bars_Speed1_25: 1886742668
+      Steampunk_UI_HP_Bars_Speed1_26: 945995648
+      Steampunk_UI_HP_Bars_Speed1_3: -1111180764
+      Steampunk_UI_HP_Bars_Speed1_4: -1077592673
+      Steampunk_UI_HP_Bars_Speed1_5: -1792221860
+      Steampunk_UI_HP_Bars_Speed1_6: -1738564007
+      Steampunk_UI_HP_Bars_Speed1_7: 972113063
+      Steampunk_UI_HP_Bars_Speed1_8: 616865479
+      Steampunk_UI_HP_Bars_Speed1_9: -1277736835
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
