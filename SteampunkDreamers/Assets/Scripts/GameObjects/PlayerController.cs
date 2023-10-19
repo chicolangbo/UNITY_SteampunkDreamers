@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
         speedBar = GameObject.FindGameObjectWithTag("SpeedBar");
         angleBar = transform.GetChild(0).GetChild(1).gameObject;
         shield = transform.GetChild(transform.childCount - 2).gameObject;
-        propeller = transform.GetChild(2).GetChild(2).transform;
+        propeller = transform.GetChild(3).GetChild(0).GetChild(2).transform;
 
         // 스포너 초기화
         var mapObjectCount = ObjectPoolManager.instance.GetComponents<MapObjectSpawner>().Length;
