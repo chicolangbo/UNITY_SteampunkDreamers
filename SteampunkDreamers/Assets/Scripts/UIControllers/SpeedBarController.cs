@@ -52,15 +52,18 @@ public class SpeedBarController : MonoBehaviour
         // vlaue 80~90 : 최대 속력의 90%
         if (fillBar.value < 0.7)
         {
-            playerController.initialSpeed = playerController.maxSpeed * 0.5f;
+            //playerController.initialSpeed = playerController.maxSpeed * 0.5f;
+            playerController.initialSpeed = (playerController.minSpeed + playerController.maxSpeed) / 2f;
         }
         else if ((fillBar.value >= 0.7 && fillBar.value < 0.8) || (fillBar.value >= 0.9 && fillBar.value <= 1))
         {
-            playerController.initialSpeed = playerController.maxSpeed * 0.7f;
+            //playerController.initialSpeed = playerController.maxSpeed * 0.7f;
+            playerController.initialSpeed = playerController.minSpeed + (playerController.maxSpeed - playerController.minSpeed) * 0.7f;
         }
         else if (fillBar.value >= 0.8 && fillBar.value < 0.9)
         {
-            playerController.initialSpeed = playerController.maxSpeed * 0.9f;
+            //playerController.initialSpeed = playerController.maxSpeed * 0.9f;
+            playerController.initialSpeed = playerController.minSpeed + (playerController.maxSpeed - playerController.minSpeed) * 0.9f;
         }
         GameManager.instance.SetBoardLength(playerController.initialSpeed);
         accelerator = Mathf.Pow(playerController.initialSpeed, 2) / ((GameManager.instance.boardScaleX - 20f) * 2);

@@ -13,10 +13,12 @@ public class PlayDataManager
     public static void Init()
     {
         data = SaveLoadSystem.Load("savefile.json") as SaveDataVC;
+        data.isFirstGame = false;
         if (data == null)
         {
             data = new SaveDataVC();
             FirstGameSet();
+            data.isFirstGame = true;
             SaveLoadSystem.Save(data, "savefile.json");
         }
     }

@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,7 +15,8 @@ public class PlayerController : MonoBehaviour
     public Quaternion initialAngle;
     public float maxAngle { get; private set; } = 80f;
     public float minAngle { get; private set; } = -80f;
-    public float maxSpeed; // 초기 속력 X, 플레이 중 최대 속력
+    public float minSpeed;
+    public float maxSpeed;
     public float frontSpeed; // 유동값
 
     public Rigidbody rb { get; private set; } // 충돌 처리만S
@@ -28,7 +30,7 @@ public class PlayerController : MonoBehaviour
     public float distance = 0f;
     public float altitude = 1f;
     public float altitudeRatio = 10f; // 정해야 함
-    public float fuelTimer = 5f;
+    public float fuelTimer = 10f;
 
     public ParticleSystem electronicParticle; // Nimbus collide
     public ParticleSystem explosionParticle; // Airship collide
@@ -53,17 +55,22 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        PlayDataManager.Init();
+
+        // 값 초기화
         maxSpeedReached = 0;
         maxAltitudeReached = 0;
         GameManager.instance.SetPlayer(this.gameObject);
-        GameManager.instance.Init();
+        GameManager.instance.SetBoardLength(maxSpeed);
+
+        // 컴포넌트 연결
         rb = GetComponent<Rigidbody>();
         speedBar = GameObject.FindGameObjectWithTag("SpeedBar");
         angleBar = transform.GetChild(0).GetChild(1).gameObject;
-        GameManager.instance.SetBoardLength(maxSpeed);
         shield = transform.GetChild(transform.childCount - 2).gameObject;
         propeller = transform.GetChild(2).GetChild(2).transform;
 
+        // 스포너 초기화
         var mapObjectCount = ObjectPoolManager.instance.GetComponents<MapObjectSpawner>().Length;
         spawners.Add(ObjectPoolManager.instance.GetComponent<AirflowSpwaner>());
         spawners[0].enabled = false;
@@ -79,6 +86,19 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        // 초기 속력 업그레이드
+        var initialSpeedUpValue = GameManager.instance.table.GetData(PlayDataManager.data.reinforceDatas["StartSpeedUpgrade"].id).VALUE;
+        minSpeed += initialSpeedUpValue;
+        maxSpeed += initialSpeedUpValue;
+        Debug.Log("초기 속력 레벨 : " + PlayDataManager.data.reinforceDatas["StartSpeedUpgrade"].level + " / 적용 min값 : " + minSpeed + " / 적용 max값 : " + maxSpeed);
+
+        // 연비 감소 업그레이드
+        var fuelUpValue = GameManager.instance.table.GetData(PlayDataManager.data.reinforceDatas["MoreFuelUpgrade"].id).VALUE;
+        if(fuelUpValue > 0)
+        {
+            fuelTimer = fuelUpValue;
+        }
+
         InitStateMachine();
     }
 

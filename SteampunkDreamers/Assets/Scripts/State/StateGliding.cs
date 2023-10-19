@@ -58,6 +58,21 @@ public class StateGliding : BaseState
         maxAngle = controller.maxAngle;
 
         startRotation = controller.transform.rotation;
+
+        // 각도 상승 가속 업그레이드
+        minRotSpeed = GameManager.instance.table.GetData(PlayDataManager.data.reinforceDatas["RotateSpeedUpgrade"].id).VALUE;
+
+        // 선체 무게 감소 업그레이드
+        var weightLooseValue = GameManager.instance.table.GetData(PlayDataManager.data.reinforceDatas["WeightLessUpgrade"].id).VALUE;
+        if (weightLooseValue > 0)
+        {
+            maxRotSpeed = weightLooseValue;
+        }
+
+        // 공기 저항 감소 업그레이드
+        var resistanceDownValue = GameManager.instance.table.GetData(PlayDataManager.data.reinforceDatas["AeroBoostUpgrade"].id).VALUE;
+        airResistanceUp += resistanceDownValue;
+        airResistanceDown += resistanceDownValue;
     }     
 
     public override void OnExitState()

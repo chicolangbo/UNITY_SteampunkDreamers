@@ -14,18 +14,19 @@ public class GameManager : MonoBehaviour
     public float boardScaleZ;
     public GameObject player { get; private set; }
     public int coinScore;
+    public int coinBonus = 1;
     public float basicScore;
     public float bonusScore;
     private TextMeshProUGUI fps;
 
     public static GameManager instance = null;
+    public ReinforceTable table { get; private set; }
 
     public bool isGameover { get; private set; } // 게임 오버 상태
 
     private void Awake()
     {
         PlayDataManager.Init();
-
         Init();
 
         if (instance == null)
@@ -38,8 +39,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        DontDestroyOnLoad(instance);
-
         player = GameObject.FindGameObjectWithTag("Player");
         var inGameUI = GameObject.FindGameObjectWithTag("InGameUI");
         fps = inGameUI.transform.GetChild(inGameUI.transform.childCount - 2).GetComponent<TextMeshProUGUI>();
@@ -47,6 +46,13 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        table = new ReinforceTable();
+        var value = (int)table.GetData(PlayDataManager.data.reinforceDatas["CoinBonusUpgrade"].id).VALUE;
+        if (value > 0)
+        {
+            coinBonus = value;
+        }
+        Debug.Log("코인 보너스값" + coinBonus);
     }
 
     public void Update()
@@ -71,7 +77,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdateMoney() // 점수 집계 시 호출
     {
-        PlayDataManager.data.money += coinScore + (int)basicScore + (int)bonusScore;
+        PlayDataManager.data.money += coinScore * coinBonus + (int)basicScore + (int)bonusScore;
         PlayDataManager.Save();
     }
 
@@ -107,10 +113,5 @@ public class GameManager : MonoBehaviour
         coinScore = 0;
         basicScore = 0f;
         bonusScore = 0f;
-    }
-
-    public void MoneyChange(int diff)
-    {
-        PlayDataManager.data.money += diff;
     }
 }
