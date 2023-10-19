@@ -38,42 +38,52 @@ public class StateGliding : BaseState
     private Quaternion jumpTargetAngle;
     private float elapsedTime = 0;
 
+    private bool once;
+
     public StateGliding(PlayerController controller) : base(controller)
     {
     }
 
     public override void OnEnterState()
     {
-        // 초기 각도 세팅 & 점프 로테이션 스피드 지정
-        jumpTargetAngle = controller.initialAngle;
-
-        // velocity 적용 -> 발사
-        if (controller.launchSuccess)
+        if(!once)
         {
-            direction = controller.transform.right;
-            initialPos = controller.transform.position;
+            Debug.Log("엔터");
+            // 초기 각도 세팅 & 점프 로테이션 스피드 지정
+            jumpTargetAngle = controller.initialAngle;
+
+            // velocity 적용 -> 발사
+            if (controller.launchSuccess)
+            {
+                direction = controller.transform.right;
+                initialPos = controller.transform.position;
+            }
+            controller.frontSpeed = controller.initialSpeed;
+            minAngle = controller.minAngle;
+            maxAngle = controller.maxAngle;
+
+            startRotation = controller.transform.rotation;
+
+            // 각도 상승 가속 업그레이드
+            minRotSpeed = GameManager.instance.table.GetData(PlayDataManager.data.reinforceDatas["RotateSpeedUpgrade"].id).VALUE;
+            Debug.Log("각도 상승 가속 레벨 : " + PlayDataManager.data.reinforceDatas["RotateSpeedUpgrade"].level + " / 적용 값 : " + minRotSpeed);
+
+            // 선체 무게 감소 업그레이드
+            var weightLooseValue = GameManager.instance.table.GetData(PlayDataManager.data.reinforceDatas["WeightLessUpgrade"].id).VALUE;
+            if (weightLooseValue > 0)
+            {
+                maxRotSpeed = weightLooseValue;
+            }
+            Debug.Log("선체 무게 감소 레벨 : " + PlayDataManager.data.reinforceDatas["WeightLessUpgrade"].level + " / 적용 값 : " + maxRotSpeed);
+
+            // 공기 저항 감소 업그레이드
+            var resistanceDownValue = GameManager.instance.table.GetData(PlayDataManager.data.reinforceDatas["AeroBoostUpgrade"].id).VALUE;
+            airResistanceUp += resistanceDownValue;
+            airResistanceDown += resistanceDownValue;
+            Debug.Log("공기 저항 감소 레벨 : " + PlayDataManager.data.reinforceDatas["AeroBoostUpgrade"].level + " / airResistanceUp 값 : " + airResistanceUp + "/ airResistanceDown 값 : " + airResistanceDown);
+            once = true;
         }
-        controller.frontSpeed = controller.initialSpeed;
-        minAngle = controller.minAngle;
-        maxAngle = controller.maxAngle;
-
-        startRotation = controller.transform.rotation;
-
-        // 각도 상승 가속 업그레이드
-        minRotSpeed = GameManager.instance.table.GetData(PlayDataManager.data.reinforceDatas["RotateSpeedUpgrade"].id).VALUE;
-
-        // 선체 무게 감소 업그레이드
-        var weightLooseValue = GameManager.instance.table.GetData(PlayDataManager.data.reinforceDatas["WeightLessUpgrade"].id).VALUE;
-        if (weightLooseValue > 0)
-        {
-            maxRotSpeed = weightLooseValue;
-        }
-
-        // 공기 저항 감소 업그레이드
-        var resistanceDownValue = GameManager.instance.table.GetData(PlayDataManager.data.reinforceDatas["AeroBoostUpgrade"].id).VALUE;
-        airResistanceUp += resistanceDownValue;
-        airResistanceDown += resistanceDownValue;
-    }     
+    }
 
     public override void OnExitState()
     {

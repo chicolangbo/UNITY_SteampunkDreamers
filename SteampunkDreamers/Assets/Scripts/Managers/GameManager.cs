@@ -47,12 +47,13 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         table = new ReinforceTable();
+        // 코인 보너스 업그레이드
         var value = (int)table.GetData(PlayDataManager.data.reinforceDatas["CoinBonusUpgrade"].id).VALUE;
         if (value > 0)
         {
             coinBonus = value;
         }
-        Debug.Log("코인 보너스값" + coinBonus);
+        Debug.Log("코인보너스 레벨 : " + PlayDataManager.data.reinforceDatas["CoinBonusUpgrade"].level + "/ 코인 보너스값 : " + coinBonus);
     }
 
     public void Update()

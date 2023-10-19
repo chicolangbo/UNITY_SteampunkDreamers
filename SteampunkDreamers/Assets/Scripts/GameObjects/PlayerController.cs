@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
     public float propellerSpeed { get; private set; }
     private Transform propeller;
 
+    public ReinforceTable table { get; private set; }
+
     private void Awake()
     {
         PlayDataManager.Init();
@@ -86,18 +88,20 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        table = new ReinforceTable();
         // 초기 속력 업그레이드
-        var initialSpeedUpValue = GameManager.instance.table.GetData(PlayDataManager.data.reinforceDatas["StartSpeedUpgrade"].id).VALUE;
+        var initialSpeedUpValue = table.GetData(PlayDataManager.data.reinforceDatas["StartSpeedUpgrade"].id).VALUE;
         minSpeed += initialSpeedUpValue;
         maxSpeed += initialSpeedUpValue;
         Debug.Log("초기 속력 레벨 : " + PlayDataManager.data.reinforceDatas["StartSpeedUpgrade"].level + " / 적용 min값 : " + minSpeed + " / 적용 max값 : " + maxSpeed);
 
         // 연비 감소 업그레이드
-        var fuelUpValue = GameManager.instance.table.GetData(PlayDataManager.data.reinforceDatas["MoreFuelUpgrade"].id).VALUE;
+        var fuelUpValue = table.GetData(PlayDataManager.data.reinforceDatas["MoreFuelUpgrade"].id).VALUE;
         if(fuelUpValue > 0)
         {
             fuelTimer = fuelUpValue;
         }
+        Debug.Log("연비 감소 레벨 : " + PlayDataManager.data.reinforceDatas["MoreFuelUpgrade"].level + " / 적용 연료값 : " + fuelTimer);
 
         InitStateMachine();
     }
@@ -147,7 +151,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Jump"))
+        if(other.CompareTag("Jump") && angleBar.activeSelf)
         {
             // 상태 변경 (Ready -> Gliding)
             stateMachine.AddState(StateName.Gliding, new StateGliding(this));
@@ -159,6 +163,7 @@ public class PlayerController : MonoBehaviour
                 s.enabled = true;
                 s.spawnStop = false;
             }
+
         }
 
         if (other.CompareTag("Floor"))

@@ -58,7 +58,7 @@ public class ReinforceTable : DataTable
 
     public ReinforceData GetData(int id)
     {
-        if (id <= 0 || id > reinforceDatas.Count)
+        if (id < 0 || id >= reinforceDatas.Count)
         {
             return null;
         }

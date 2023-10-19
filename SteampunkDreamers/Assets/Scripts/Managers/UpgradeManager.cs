@@ -36,22 +36,65 @@ public class UpgradeManager : MonoBehaviour
             switch(i)
             {
                 case 0:
-                    prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["StartSpeedUpgrade"].id + 1).PRICE.ToString();
+                    if(PlayDataManager.data.reinforceDatas["StartSpeedUpgrade"].id + 1 < 11)
+                    {
+                        prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["StartSpeedUpgrade"].id + 1).PRICE.ToString();
+                    }
+                    else
+                    {
+                        prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["StartSpeedUpgrade"].id).PRICE.ToString();
+                    }
                     break;
                 case 1:
-                    prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["RotateSpeedUpgrade"].id + 1).PRICE.ToString();
+                    if (PlayDataManager.data.reinforceDatas["RotateSpeedUpgrade"].id + 1 < 22)
+                    {
+                        prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["RotateSpeedUpgrade"].id + 1).PRICE.ToString();
+                    }
+                    else
+                    {
+                        prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["RotateSpeedUpgrade"].id).PRICE.ToString();
+                    }
                     break;
                 case 2:
-                    prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["CoinBonusUpgrade"].id + 1).PRICE.ToString();
+                    if (PlayDataManager.data.reinforceDatas["CoinBonusUpgrade"].id + 1 < 33)
+                    {
+                        prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["CoinBonusUpgrade"].id + 1).PRICE.ToString();
+                    }
+                    else
+                    {
+                        prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["CoinBonusUpgrade"].id).PRICE.ToString();
+                    }
                     break;
                 case 3:
-                    prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["WeightLessUpgrade"].id + 1).PRICE.ToString();
+                    if (PlayDataManager.data.reinforceDatas["WeightLessUpgrade"].id + 1 < 44)
+                    {
+                        prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["WeightLessUpgrade"].id + 1).PRICE.ToString();
+                    }
+                    else
+                    {
+                        prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["WeightLessUpgrade"].id).PRICE.ToString();
+                    }
                     break;
                 case 4:
-                    prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["AeroBoostUpgrade"].id + 1).PRICE.ToString();
+                    if (PlayDataManager.data.reinforceDatas["AeroBoostUpgrade"].id + 1 < 55)
+                    {
+                        prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["AeroBoostUpgrade"].id + 1).PRICE.ToString();
+                    }
+                    else
+                    {
+                        prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["AeroBoostUpgrade"].id).PRICE.ToString();
+                    }
                     break;
                 case 5:
-                    prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["MoreFuelUpgrade"].id + 1).PRICE.ToString();
+                    var temp = table.GetData(PlayDataManager.data.reinforceDatas["MoreFuelUpgrade"].id + 1);
+                    if (temp == null)
+                    {
+                        prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["MoreFuelUpgrade"].id).PRICE.ToString();
+                    }
+                    else
+                    {
+                        prices[i].text = temp.PRICE.ToString();
+                    }
                     break;
             }
         }
@@ -59,6 +102,12 @@ public class UpgradeManager : MonoBehaviour
 
     private void Update()
     {
+        // µ· Ä¡Æ®
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            PlayDataManager.data.money += 100000;
+        }    
+
         currentMoneyUI.text = PlayDataManager.data.money.ToString();
     }
 
