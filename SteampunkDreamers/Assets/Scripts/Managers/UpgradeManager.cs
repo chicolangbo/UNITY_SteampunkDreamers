@@ -1,9 +1,12 @@
+using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
+using SaveDataVC = SaveDataV1; // 교체
 
 public class CurrentReinforceData
 {
@@ -14,89 +17,42 @@ public class CurrentReinforceData
 
 public class UpgradeManager : MonoBehaviour
 {
-    public CurrentReinforceData[] currentReinforceDatas = new CurrentReinforceData[6];
     public GameObject[] window = new GameObject[6];
-
     private Button[] upgradeButton = new Button[6];
     private TextMeshProUGUI[] prices = new TextMeshProUGUI[6];
     private ReinforceTable table;
-    private static UpgradeManager m_instance;
     private TextMeshProUGUI currentMoneyUI;
 
-    public GameObject upgradeManager;
-
-    public static UpgradeManager instance = null;
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-
-        DontDestroyOnLoad(instance);
-
         Time.timeScale = 1.0f;
-        currentMoneyUI = GameObject.FindGameObjectWithTag("Money").GetComponent<TextMeshProUGUI>();
-        table = DataTableMgr.GetTable<ReinforceTable>();
-        for (int i = 0; i < window.Length; i++)
-        {
-            prices[i] = window[i].transform.GetChild(window[i].transform.childCount - 1).GetChild(window[i].transform.GetChild(window[i].transform.childCount - 1).childCount - 1).GetChild(0).GetComponent<TextMeshProUGUI>();
-            upgradeButton[i] = window[i].transform.GetChild(window[i].transform.childCount - 1).GetChild(window[i].transform.GetChild(window[i].transform.childCount - 1).childCount - 3).GetComponent<Button>();
-        }
 
-        // currentReinforceDatas에 저장 데이터 씌우기
-        // 초기 시작 코드
-        for (int i = 0; i<currentReinforceDatas.Length; i++)
+        // 저장 데이터 씌우기?
+        PlayDataManager.Init();
+
+        Init();
+        for(int i = 0; i < prices.Length; i ++)
         {
-            //var tempData = new CurrentReinforceData();
-            currentReinforceDatas[i] = new CurrentReinforceData();
-            currentReinforceDatas[i].level = 0;
             switch(i)
             {
-                case 0: 
-                    currentReinforceDatas[i].name = "StartSpeedUpgrade";
-                    currentReinforceDatas[i].id = 0;
+                case 0:
+                    prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["StartSpeedUpgrade"].id + 1).PRICE.ToString();
                     break;
-                case 1: currentReinforceDatas[i].name = "RotateSpeedUpgrade";
-                    currentReinforceDatas[i].id = 11;
+                case 1:
+                    prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["RotateSpeedUpgrade"].id + 1).PRICE.ToString();
                     break;
-                case 2: currentReinforceDatas[i].name = "CoinBonusUpgrade";
-                    currentReinforceDatas[i].id = 22;
+                case 2:
+                    prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["CoinBonusUpgrade"].id + 1).PRICE.ToString();
                     break;
-                case 3: currentReinforceDatas[i].name = "WeightLessUpgrade";
-                    currentReinforceDatas[i].id = 33;
+                case 3:
+                    prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["WeightLessUpgrade"].id + 1).PRICE.ToString();
                     break;
-                case 4: currentReinforceDatas[i].name = "AeroBoostUpgrade";
-                    currentReinforceDatas[i].id = 44;
+                case 4:
+                    prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["AeroBoostUpgrade"].id + 1).PRICE.ToString();
                     break;
-                case 5: currentReinforceDatas[i].name = "MoreFuelUpgrade";
-                    currentReinforceDatas[i].id = 55;
+                case 5:
+                    prices[i].text = table.GetData(PlayDataManager.data.reinforceDatas["MoreFuelUpgrade"].id + 1).PRICE.ToString();
                     break;
-            }
-            prices[i].text = table.GetData(currentReinforceDatas[i].id + 1).PRICE.ToString();
-        }
-
-    }
-
-    public void Start()
-    {
-        table = DataTableMgr.GetTable<ReinforceTable>();
-        for (int i = 0; i < window.Length; i++)
-        {
-            prices[i] = window[i].transform.GetChild(window[i].transform.childCount - 1).GetChild(window[i].transform.GetChild(window[i].transform.childCount - 1).childCount - 1).GetChild(0).GetComponent<TextMeshProUGUI>();
-            upgradeButton[i] = window[i].transform.GetChild(window[i].transform.childCount - 1).GetChild(window[i].transform.GetChild(window[i].transform.childCount - 1).childCount - 3).GetComponent<Button>();
-        }
-
-        for (int i = 1; i < table.reinforceDatas.Count; i++)
-        {
-            if (i % 10 == 1)
-            {
-                CheckUpgrade(table.GetData(i).NAME);
             }
         }
     }
@@ -104,131 +60,139 @@ public class UpgradeManager : MonoBehaviour
     private void Update()
     {
         currentMoneyUI.text = GameManager.money.ToString();
-        Debug.Log(GameManager.money);
+
+        // 저장 테스트
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    // save data 만들기
+        //    ReinforceData reinforceData = new ReinforceData();
+        //    reinforceData.name = "aaa";
+        //    reinforceData.id = 1;
+        //    reinforceData.level = 1;
+        //    SaveDataV1 saveData = new SaveDataV1();
+        //    saveData.reinforceDatas.Add(reinforceData);
+        //    PlayDataManager.data = saveData;
+        //    PlayDataManager.Save();
+        //}
     }
 
     public void StartSpeedUpgrade()
     {
-        if(CheckUpgrade("StartSpeedUpgrade"))
+        var name = "StartSpeedUpgrade";
+        if (CheckUpgrade(name))
         {
-            GameManager.instance.MoneyChange(- table.GetData(currentReinforceDatas[0].id + 1).PRICE);
-            currentReinforceDatas[0].level++;
-            currentReinforceDatas[0].id++;
-            CheckUpgrade("StartSpeedUpgrade");
+            SaveReinforceData(name, table.GetData(PlayDataManager.data.reinforceDatas[name].id + 1).PRICE);
+            CheckUpgrade(name); // 버튼 막기
         }
     }
 
     public void RotateSpeedUpgrade()
     {
-        if (CheckUpgrade("RotateSpeedUpgrade"))
+        var name = "RotateSpeedUpgrade";
+        if (CheckUpgrade(name))
         {
-            GameManager.instance.MoneyChange(- table.GetData(currentReinforceDatas[1].id + 1).PRICE);
-            currentReinforceDatas[1].level++;
-            currentReinforceDatas[1].id++;
-            CheckUpgrade("RotateSpeedUpgrade");
+            SaveReinforceData(name, table.GetData(PlayDataManager.data.reinforceDatas[name].id + 1).PRICE);
+            CheckUpgrade(name);
         }
     }
 
     public void CoinBonusUpgrade()
     {
-        if (CheckUpgrade("CoinBonusUpgrade"))
+        var name = "CoinBonusUpgrade";
+        if (CheckUpgrade(name))
         {
-            GameManager.instance.MoneyChange(-table.GetData(currentReinforceDatas[2].id + 1).PRICE);
-            currentReinforceDatas[2].level++;
-            currentReinforceDatas[2].id++;
-            CheckUpgrade("CoinBonusUpgrade");
+            SaveReinforceData(name, table.GetData(PlayDataManager.data.reinforceDatas[name].id + 1).PRICE);
+            CheckUpgrade(name);
         }
     }
 
     public void WeightLessUpgrade()
     {
-        if (CheckUpgrade("WeightLessUpgrade"))
+        var name = "WeightLessUpgrade";
+        if (CheckUpgrade(name))
         {
-            GameManager.instance.MoneyChange(- table.GetData(currentReinforceDatas[3].id + 1).PRICE);
-            currentReinforceDatas[3].level++;
-            currentReinforceDatas[3].id++;
-            CheckUpgrade("WeightLessUpgrade");
+            SaveReinforceData(name, table.GetData(PlayDataManager.data.reinforceDatas[name].id + 1).PRICE);
+            CheckUpgrade(name);
         }
     }
 
     public void AeroBoostUpgrade()
     {
-        if (CheckUpgrade("AeroBoostUpgrade"))
+        var name = "AeroBoostUpgrade";
+        if (CheckUpgrade(name))
         {
-            GameManager.instance.MoneyChange(-table.GetData(currentReinforceDatas[4].id + 1).PRICE);
-            currentReinforceDatas[4].level++;
-            currentReinforceDatas[4].id++;
-            CheckUpgrade("AeroBoostUpgrade");
+            SaveReinforceData(name, table.GetData(PlayDataManager.data.reinforceDatas[name].id + 1).PRICE);
+            CheckUpgrade(name);
         }
     }
 
     public void MoreFuelUpgrade()
     {
-        if (CheckUpgrade("MoreFuelUpgrade"))
+        var name = "MoreFuelUpgrade";
+        if (CheckUpgrade(name))
         {
-            GameManager.instance.MoneyChange(-table.GetData(currentReinforceDatas[5].id + 1).PRICE);
-            currentReinforceDatas[5].level++;
-            currentReinforceDatas[5].id++;
-            CheckUpgrade("MoreFuelUpgrade");
+            SaveReinforceData(name, table.GetData(PlayDataManager.data.reinforceDatas[name].id + 1).PRICE);
+            CheckUpgrade(name);
         }
     }
 
     private bool CheckUpgrade(string name)
     {
+        var originData = PlayDataManager.data;
+
         switch (name)
         {
             case "StartSpeedUpgrade":
-                if (GameManager.money >= table.GetData(currentReinforceDatas[0].id + 1).PRICE && currentReinforceDatas[0].level < 10)
+                if (originData.money >= table.GetData(originData.reinforceDatas[name].id + 1).PRICE && originData.reinforceDatas[name].level < 10)
                 {
-                    prices[0].text = table.GetData(currentReinforceDatas[0].id + 1).PRICE.ToString();
+                    prices[0].text = table.GetData(originData.reinforceDatas[name].id + 1).PRICE.ToString();
                     return true;
                 }
                 upgradeButton[0].interactable = false;
                 break;
 
             case "RotateSpeedUpgrade":
-                if (GameManager.money >= table.GetData(currentReinforceDatas[1].id + 1).PRICE && currentReinforceDatas[1].level < 10)
+                if (originData.money >= table.GetData(originData.reinforceDatas[name].id + 1).PRICE && originData.reinforceDatas[name].level < 10)
                 {
-                    prices[1].text = table.GetData(currentReinforceDatas[1].id + 1).PRICE.ToString();
+                    prices[1].text = table.GetData(originData.reinforceDatas[name].id + 1).PRICE.ToString();
                     return true;
                 }
                 upgradeButton[1].interactable = false;
                 break;
 
             case "CoinBonusUpgrade":
-                if (GameManager.money >= table.GetData(currentReinforceDatas[2].id + 1).PRICE && currentReinforceDatas[2].level < 10)
+                if (originData.money >= table.GetData(originData.reinforceDatas[name].id + 1).PRICE && originData.reinforceDatas[name].level < 10)
                 {
-                    prices[2].text = table.GetData(currentReinforceDatas[2].id + 1).PRICE.ToString();
+                    prices[2].text = table.GetData(originData.reinforceDatas[name].id + 1).PRICE.ToString();
                     return true;
                 }
                 upgradeButton[2].interactable = false;
                 break;
 
             case "WeightLessUpgrade":
-                if (GameManager.money >= table.GetData(currentReinforceDatas[3].id + 1).PRICE && currentReinforceDatas[3].level < 10)
+                if (originData.money >= table.GetData(originData.reinforceDatas[name].id + 1).PRICE && originData.reinforceDatas[name].level < 10)
                 {
-                    prices[3].text = table.GetData(currentReinforceDatas[3].id + 1).PRICE.ToString();
+                    prices[3].text = table.GetData(originData.reinforceDatas[name].id + 1).PRICE.ToString();
                     return true;
                 }
                 upgradeButton[3].interactable = false;
                 break;
 
             case "AeroBoostUpgrade":
-                if (GameManager.money >= table.GetData(currentReinforceDatas[4].id + 1).PRICE && currentReinforceDatas[4].level < 10)
+                if (originData.money >= table.GetData(originData.reinforceDatas[name].id + 1).PRICE && originData.reinforceDatas[name].level < 10)
                 {
-                    prices[4].text = table.GetData(currentReinforceDatas[4].id + 1).PRICE.ToString();
+                    prices[4].text = table.GetData(originData.reinforceDatas[name].id + 1).PRICE.ToString();
                     return true;
                 }
                 upgradeButton[4].interactable = false;
                 break;
 
             case "MoreFuelUpgrade":
-                Debug.Log(table.reinforceDatas.Count);
-                if(currentReinforceDatas[5].id + 1 < table.reinforceDatas.Count)
+                if(originData.reinforceDatas[name].id + 1 < table.reinforceDatas.Count)
                 {
-                    if (GameManager.money >= table.GetData(currentReinforceDatas[5].id + 1).PRICE && currentReinforceDatas[5].level < 10)
+                    if (originData.money >= table.GetData(originData.reinforceDatas[name].id + 1).PRICE && originData.reinforceDatas[name].level < 10)
                     {
-                        prices[5].text = table.GetData(currentReinforceDatas[5].id + 1).PRICE.ToString();
+                        prices[5].text = table.GetData(originData.reinforceDatas[name].id + 1).PRICE.ToString();
                         return true;
                     }
                     upgradeButton[5].interactable = false;
@@ -240,5 +204,46 @@ public class UpgradeManager : MonoBehaviour
                 break;
         }
         return false;
+    }
+
+    private void Init()
+    {
+        // 컴포넌트 연결
+        currentMoneyUI = GameObject.FindGameObjectWithTag("Money").GetComponent<TextMeshProUGUI>();
+        table = DataTableMgr.GetTable<ReinforceTable>();
+        for (int i = 0; i < window.Length; i++)
+        {
+            prices[i] = window[i].transform.GetChild(window[i].transform.childCount - 1).GetChild(window[i].transform.GetChild(window[i].transform.childCount - 1).childCount - 1).GetChild(0).GetComponent<TextMeshProUGUI>();
+            upgradeButton[i] = window[i].transform.GetChild(window[i].transform.childCount - 1).GetChild(window[i].transform.GetChild(window[i].transform.childCount - 1).childCount - 3).GetComponent<Button>();
+        }
+        // 버튼 제한
+        for (int i = 1; i < table.reinforceDatas.Count; i++)
+        {
+            if (i % 10 == 1)
+            {
+                CheckUpgrade(table.GetData(i).NAME);
+            }
+        }
+    }
+
+    private void SaveReinforceData(string name, int price)
+    {
+        // 기존 정보에 ++
+        var originData = PlayDataManager.data;
+        if(originData.reinforceDatas.ContainsKey(name))
+        {
+            originData.reinforceDatas[name].level++;
+            originData.reinforceDatas[name].id++;
+        }
+        else
+        {
+            ReinforceData reinforceData = new ReinforceData();
+            reinforceData.name = name;
+            reinforceData.id++;
+            reinforceData.level++;
+            originData.reinforceDatas.Add(name, reinforceData);
+        }
+        originData.money -= price;
+        PlayDataManager.Save();
     }
 }

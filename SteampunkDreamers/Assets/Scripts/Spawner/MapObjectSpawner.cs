@@ -27,15 +27,10 @@ public class MapObjectSpawner : Spawner
         {
             yield return new WaitForSeconds(spawnDelayTime);
             spawnDelayTime = Random.Range(minSpawnDelayTime, maxSpawnDelayTime);
-            Debug.Log("aaa");
-
             if (GameManager.instance != null && GameManager.instance.isGameover)
             {
                 break;
             }
-
-            Debug.Log("ddd");
-
             FindPlayerIndex();
             GetRandomSpawnIndex();
             MapObject go = ObjectPoolManager.instance.GetGo(prefab.name).GetComponent<MapObject>();
@@ -46,8 +41,6 @@ public class MapObjectSpawner : Spawner
             selectedPoint.x = playerController.transform.position.x + playerGapLength;
             selectedPoint.z = prefab.transform.position.z;
             go.transform.position = selectedPoint;
-
-            Debug.Log("eee");
         }
     }
 }

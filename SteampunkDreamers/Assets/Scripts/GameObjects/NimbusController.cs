@@ -24,7 +24,6 @@ public class NimbusController : MapObject
         {
             while (elapsedTime < duration)
             {
-                Debug.Log("로테이션 막음");
                 stateGliding.isRotPossible = false;
                 yield return null;
                 elapsedTime += Time.deltaTime;
