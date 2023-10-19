@@ -23,7 +23,10 @@ public class ButtonController : MonoBehaviour
     {
         SceneManager.LoadScene("Option Scene");
     }
-
+    public void CloseGame()
+    {
+        Application.Quit();
+    }
 
 
 
