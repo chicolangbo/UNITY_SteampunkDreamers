@@ -3792,7 +3792,7 @@ MonoBehaviour:
   distance: 0
   altitude: 1
   altitudeRatio: 10
-  fuelTimer: 50
+  fuelTimer: 10
   electronicParticle: {fileID: 0}
   explosionParticle: {fileID: 0}
   fireParticle: {fileID: 0}
