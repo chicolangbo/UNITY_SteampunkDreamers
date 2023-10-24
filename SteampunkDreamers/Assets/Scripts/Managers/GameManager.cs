@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         {
             RestartGame();
         }
-        fps.text = "FPS : " + (1f / Time.deltaTime).ToString();
+        //fps.text = "FPS : " + (1f / Time.deltaTime).ToString();
     }
 
     public void SetBoardLength(float initialSpeed)

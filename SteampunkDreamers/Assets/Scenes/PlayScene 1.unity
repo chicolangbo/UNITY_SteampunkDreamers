@@ -495,6 +495,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &83768904 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4069397757317818359, guid: ba6ce9833d39e2641830b9223a556d41, type: 3}
+  m_PrefabInstance: {fileID: 258952974}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &83768906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83768904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab5a416182ba8774a8e27eb16637864d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &143992618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,7 +1111,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4069397757317818359, guid: ba6ce9833d39e2641830b9223a556d41, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 83768906}
   m_SourcePrefab: {fileID: 100100000, guid: ba6ce9833d39e2641830b9223a556d41, type: 3}
 --- !u!1 &274094253
 GameObject:
@@ -1550,7 +1570,6 @@ GameObject:
   - component: {fileID: 550283693}
   - component: {fileID: 550283692}
   - component: {fileID: 550283695}
-  - component: {fileID: 550283696}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -1666,18 +1685,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &550283696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 550283691}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3350d1c187fc87a47ada1dbfa0a5fc88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &581121477 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 623349616926068847, guid: c0e6933f0ed97da4fad425bcc0823418, type: 3}

@@ -9,19 +9,19 @@ public class ButtonController : MonoBehaviour
     Button button;
     public void GameStart()
     {
-        SceneManager.LoadScene("PlayScene");
+        SceneManager.LoadScene("PlayScene 1");
     }
     public void MainMenu()
     {
-        SceneManager.LoadScene("Main Menu Scene");
+        SceneManager.LoadScene("Main Menu Scene 1");
     }
     public void Upgrade()
     {
-        SceneManager.LoadScene("Upgrade Scene");
+        SceneManager.LoadScene("Upgrade Scene 1");
     }
     public void Option()
     {
-        SceneManager.LoadScene("Option Scene");
+        SceneManager.LoadScene("Option Scene 1");
     }
     public void CloseGame()
     {

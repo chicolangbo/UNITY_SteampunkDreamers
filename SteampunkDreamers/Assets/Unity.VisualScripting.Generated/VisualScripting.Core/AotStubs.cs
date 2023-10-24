@@ -1180,6 +1180,10 @@ namespace Unity.VisualScripting.Generated.Aot
 	// UnityEngine.GameObject.SetActive
 	// --------------- Scene Stubs
 	// --------------- Scene Stubs
+	// --------------- Scene Stubs
+	// --------------- Scene Stubs
+	// --------------- Scene Stubs
+	// --------------- Scene Stubs
 	[UnityEngine.Scripting.PreserveAttribute()]
 	public class AotStubs
 	{
