@@ -115,6 +115,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(transform.eulerAngles.z);
+
         stateMachine?.UpdateState();
 
         if(shieldOn)
