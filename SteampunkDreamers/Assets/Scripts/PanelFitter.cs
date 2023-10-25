@@ -8,7 +8,8 @@ public class PanelFitter : MonoBehaviour
     {
         var h = Screen.height;
         var w = Screen.width;
+        var freeSpace = 500f;
         var rect = GetComponent<RectTransform>();
-        rect.sizeDelta = new Vector2(w, h);
+        rect.sizeDelta = new Vector2(w + freeSpace, h + freeSpace);
     }
 }
