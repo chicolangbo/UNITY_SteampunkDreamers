@@ -41,6 +41,10 @@ public class UIManager : MonoBehaviour
         distance.text = sb.ToString();
     }
 
+    public void Update()
+    {
+    }
+
     public void UpdateVelocityText(float v)
     {
         StringBuilder sb = new StringBuilder();

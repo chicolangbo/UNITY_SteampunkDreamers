@@ -2392,7 +2392,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2434,8 +2434,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1656895177}
-  - {fileID: 159984876}
   - {fileID: 2161536269062874898}
+  - {fileID: 159984876}
   - {fileID: 308356195}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5125,7 +5125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2161536269062874898
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5464,6 +5464,7 @@ GameObject:
   - component: {fileID: 539220807901584654}
   - component: {fileID: 8250580811579240403}
   - component: {fileID: 6385614310841247813}
+  - component: {fileID: 8250580811579240404}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -6829,7 +6830,7 @@ RectTransform:
   m_Father: {fileID: 5809506906951263774}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 18.635986, y: 0}
   m_SizeDelta: {x: -62.2679, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7434,7 +7435,7 @@ RectTransform:
   m_Father: {fileID: 6734488963637300021}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 18.635986, y: 0}
   m_SizeDelta: {x: -62.2679, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8100,6 +8101,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2886759891856095594}
   m_CullTransparentMesh: 1
+--- !u!114 &8250580811579240404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2886759891856095594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab5a416182ba8774a8e27eb16637864d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8592716789255102679
 MonoBehaviour:
   m_ObjectHideFlags: 0
