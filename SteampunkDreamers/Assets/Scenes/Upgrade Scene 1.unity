@@ -344,6 +344,7 @@ GameObject:
   - component: {fileID: 12134469}
   - component: {fileID: 12134471}
   - component: {fileID: 12134470}
+  - component: {fileID: 12134472}
   m_Layer: 5
   m_Name: Weight Less Upg Panel
   m_TagString: Untagged
@@ -408,6 +409,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12134468}
   m_CullTransparentMesh: 1
+--- !u!114 &12134472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12134468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab5a416182ba8774a8e27eb16637864d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &16827683
 GameObject:
   m_ObjectHideFlags: 0
@@ -4224,6 +4237,7 @@ GameObject:
   - component: {fileID: 826592226}
   - component: {fileID: 826592228}
   - component: {fileID: 826592227}
+  - component: {fileID: 826592229}
   m_Layer: 5
   m_Name: Aero Boost Upg Panel
   m_TagString: Untagged
@@ -4288,6 +4302,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 826592225}
   m_CullTransparentMesh: 1
+--- !u!114 &826592229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826592225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab5a416182ba8774a8e27eb16637864d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &841035676
 GameObject:
   m_ObjectHideFlags: 0
@@ -4919,6 +4945,7 @@ GameObject:
   - component: {fileID: 948857504}
   - component: {fileID: 948857506}
   - component: {fileID: 948857505}
+  - component: {fileID: 948857507}
   m_Layer: 5
   m_Name: Coin Bonus Upg Panel
   m_TagString: Untagged
@@ -4983,6 +5010,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 948857503}
   m_CullTransparentMesh: 1
+--- !u!114 &948857507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948857503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab5a416182ba8774a8e27eb16637864d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &964484888
 GameObject:
   m_ObjectHideFlags: 0
@@ -7456,6 +7495,7 @@ GameObject:
   - component: {fileID: 1440195813}
   - component: {fileID: 1440195815}
   - component: {fileID: 1440195814}
+  - component: {fileID: 1440195816}
   m_Layer: 5
   m_Name: More Fuel Upg Panel
   m_TagString: Untagged
@@ -7520,6 +7560,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1440195812}
   m_CullTransparentMesh: 1
+--- !u!114 &1440195816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440195812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab5a416182ba8774a8e27eb16637864d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1441005321
 GameObject:
   m_ObjectHideFlags: 0
@@ -7683,6 +7735,7 @@ GameObject:
   - component: {fileID: 1485335020}
   - component: {fileID: 1485335022}
   - component: {fileID: 1485335021}
+  - component: {fileID: 1485335023}
   m_Layer: 5
   m_Name: Start Speed Upg Panel
   m_TagString: Untagged
@@ -7747,6 +7800,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1485335019}
   m_CullTransparentMesh: 1
+--- !u!114 &1485335023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485335019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab5a416182ba8774a8e27eb16637864d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1496632458
 GameObject:
   m_ObjectHideFlags: 0
@@ -10118,6 +10183,7 @@ GameObject:
   - component: {fileID: 1899310162}
   - component: {fileID: 1899310164}
   - component: {fileID: 1899310163}
+  - component: {fileID: 1899310165}
   m_Layer: 5
   m_Name: Rotate Speed Upg Panel
   m_TagString: Untagged
@@ -10182,6 +10248,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1899310161}
   m_CullTransparentMesh: 1
+--- !u!114 &1899310165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899310161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab5a416182ba8774a8e27eb16637864d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1951455462
 GameObject:
   m_ObjectHideFlags: 0
