@@ -180,7 +180,7 @@ public class UpgradeManager : MonoBehaviour
                 if (originData.money >= table.GetData(originData.reinforceDatas[name].id + 1).PRICE && originData.reinforceDatas[name].level < 10)
                 {
                     upgradeButton[0].interactable = true;
-                    prices[0].text = table.GetData(originData.reinforceDatas[name].id + 1).PRICE.ToString();
+                    prices[0].text = table.GetData(originData.reinforceDatas[name].id + 2).PRICE.ToString();
                     return true;
                 }
                 upgradeButton[0].interactable = false;
@@ -190,7 +190,7 @@ public class UpgradeManager : MonoBehaviour
                 if (originData.money >= table.GetData(originData.reinforceDatas[name].id + 1).PRICE && originData.reinforceDatas[name].level < 10)
                 {
                     upgradeButton[1].interactable = true;
-                    prices[1].text = table.GetData(originData.reinforceDatas[name].id + 1).PRICE.ToString();
+                    prices[1].text = table.GetData(originData.reinforceDatas[name].id + 2).PRICE.ToString();
                     return true;
                 }
                 upgradeButton[1].interactable = false;
@@ -200,7 +200,7 @@ public class UpgradeManager : MonoBehaviour
                 if (originData.money >= table.GetData(originData.reinforceDatas[name].id + 1).PRICE && originData.reinforceDatas[name].level < 10)
                 {
                     upgradeButton[2].interactable = true;
-                    prices[2].text = table.GetData(originData.reinforceDatas[name].id + 1).PRICE.ToString();
+                    prices[2].text = table.GetData(originData.reinforceDatas[name].id + 2).PRICE.ToString();
                     return true;
                 }
                 upgradeButton[2].interactable = false;
@@ -210,7 +210,7 @@ public class UpgradeManager : MonoBehaviour
                 if (originData.money >= table.GetData(originData.reinforceDatas[name].id + 1).PRICE && originData.reinforceDatas[name].level < 10)
                 {
                     upgradeButton[3].interactable = true;
-                    prices[3].text = table.GetData(originData.reinforceDatas[name].id + 1).PRICE.ToString();
+                    prices[3].text = table.GetData(originData.reinforceDatas[name].id + 2).PRICE.ToString();
                     return true;
                 }
                 upgradeButton[3].interactable = false;
@@ -220,7 +220,7 @@ public class UpgradeManager : MonoBehaviour
                 if (originData.money >= table.GetData(originData.reinforceDatas[name].id + 1).PRICE && originData.reinforceDatas[name].level < 10)
                 {
                     upgradeButton[4].interactable = true;
-                    prices[4].text = table.GetData(originData.reinforceDatas[name].id + 1).PRICE.ToString();
+                    prices[4].text = table.GetData(originData.reinforceDatas[name].id + 2).PRICE.ToString();
                     return true;
                 }
                 upgradeButton[4].interactable = false;
@@ -232,7 +232,7 @@ public class UpgradeManager : MonoBehaviour
                     if (originData.money >= table.GetData(originData.reinforceDatas[name].id + 1).PRICE && originData.reinforceDatas[name].level < 10)
                     {
                         upgradeButton[5].interactable = true;
-                        prices[5].text = table.GetData(originData.reinforceDatas[name].id + 1).PRICE.ToString();
+                        prices[5].text = table.GetData(originData.reinforceDatas[name].id + 2).PRICE.ToString();
                         return true;
                     }
                     upgradeButton[5].interactable = false;
