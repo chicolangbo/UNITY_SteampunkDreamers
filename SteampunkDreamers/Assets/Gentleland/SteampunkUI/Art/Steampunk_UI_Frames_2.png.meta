@@ -350,13 +350,13 @@ TextureImporter:
       name: Steampunk_UI_Frames_2_8
       rect:
         serializedVersion: 2
-        x: 1418
+        x: 1384
         y: 33
-        width: 461
-        height: 682
+        width: 528
+        height: 739
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 132, y: 115, z: 134, w: 85}
+      border: {x: 198, y: 130, z: 193, w: 210}
       outline: []
       physicsShape: []
       tessellationDetail: 0
