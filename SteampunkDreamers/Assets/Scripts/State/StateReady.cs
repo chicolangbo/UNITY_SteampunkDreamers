@@ -44,13 +44,17 @@ public class StateReady : BaseState
         if(!selectSpeed)
         {
             speedBarController.SpeedBarMoving();
-            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+            //Debug.Log(EventSystem.current.IsPointerOverGameObject());
+            //EventSystem.current.IsPointerOverGameObject();
+            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
             {
                 selectSpeed = true;
             }
         }
         else
         {
+            //Debug.Log(EventSystem.current.IsPointerOverGameObject());
+
             // 1초 뒤 속력게이지 비활성화
             timer += Time.deltaTime;
             if(timer > 1f && controller.speedBar.activeSelf)
@@ -72,7 +76,7 @@ public class StateReady : BaseState
                     angleBarController.AngleBarMoving();
                 }
 
-                if(controller.angleBar.activeSelf == true && Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+                if(controller.angleBar.activeSelf == true && Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
                 {
                     controller.launchSuccess = true;
                     startAngleMove = false;

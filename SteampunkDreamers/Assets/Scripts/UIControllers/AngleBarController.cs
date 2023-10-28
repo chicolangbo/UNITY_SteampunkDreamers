@@ -8,7 +8,7 @@ public class AngleBarController : MonoBehaviour
     private Slider fillBar;
     private PlayerController playerController;
     public float value = 0;
-    private bool toRight;
+    private bool toRight = false;
     private float controllSpeed = 0.33f;
 
     private void Start()

@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed;
     public float frontSpeed; // 유동값
 
-    public Rigidbody rb { get; private set; } // 충돌 처리만S
+    public Rigidbody rb { get; private set; } // 충돌 처리만
     public bool launchSuccess = false;
     public bool airshipColiide = false;
 
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         var initialSpeedUpValue = table.GetData(PlayDataManager.data.reinforceDatas["StartSpeedUpgrade"].id).VALUE;
         minSpeed += initialSpeedUpValue;
         maxSpeed += initialSpeedUpValue;
-        Debug.Log("초기 속력 레벨 : " + PlayDataManager.data.reinforceDatas["StartSpeedUpgrade"].level + " / 적용 min값 : " + minSpeed + " / 적용 max값 : " + maxSpeed);
+        //Debug.Log("초기 속력 레벨 : " + PlayDataManager.data.reinforceDatas["StartSpeedUpgrade"].level + " / 적용 min값 : " + minSpeed + " / 적용 max값 : " + maxSpeed);
 
         // 연비 감소 업그레이드
         var fuelUpValue = table.GetData(PlayDataManager.data.reinforceDatas["MoreFuelUpgrade"].id).VALUE;
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
         {
             fuelTimer = fuelUpValue;
         }
-        Debug.Log("연비 감소 레벨 : " + PlayDataManager.data.reinforceDatas["MoreFuelUpgrade"].level + " / 적용 연료값 : " + fuelTimer);
+        //Debug.Log("연비 감소 레벨 : " + PlayDataManager.data.reinforceDatas["MoreFuelUpgrade"].level + " / 적용 연료값 : " + fuelTimer);
 
         InitStateMachine();
     }

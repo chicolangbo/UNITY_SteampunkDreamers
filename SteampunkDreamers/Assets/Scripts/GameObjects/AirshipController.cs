@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class AirshipController : MapObject
 {
-    public AudioClip fireAudioClip;
     public AudioClip explisionAudioClip;
+    private GameObject explosion;
+
     public void Start()
     {
         onDisappear += () =>
         {
+            explosion = ObjectPoolManager.instance.GetGo("AirshipParticle");
+            explosion.transform.position = transform.position;
+            explosion.GetComponent<ParticleAutoRelease>().PlayAndRelease();
+            audioSource.PlayOneShot(explisionAudioClip);
+            playerController.explosionParticle.Play();
             ReleaseObject();
         };
     }
@@ -45,5 +51,14 @@ public class AirshipController : MapObject
 
             yield return null;
         }
+    }
+
+    IEnumerator WaitAndReleaseObject(float waitTime)
+    {
+        // 사운드 재생 시간 동안 대기
+        yield return new WaitForSeconds(waitTime);
+
+        // 대기 시간이 끝나면 ReleaseObject() 호출
+        ReleaseObject();
     }
 }
