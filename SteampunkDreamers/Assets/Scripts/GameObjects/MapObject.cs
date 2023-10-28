@@ -42,6 +42,7 @@ public class MapObject : PoolAble
             Debug.Log("¸Ê ¹Ù±ù¿¡¼­ »èÁ¦");
             ReleaseObject();
         }
+
     }
 
     public void OnTriggerEnter(Collider other)

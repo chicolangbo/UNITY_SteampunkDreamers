@@ -23,18 +23,9 @@ public class SoundManager : MonoBehaviour
         obstacleAudioSource = GetComponent<AudioSource>();
     }
 
-    public void PlayAudioClip(bool loop, AudioClip clip)
+    public void PlayAudioClip(AudioClip clip)
     {
-        obstacleAudioSource.loop = loop;
-        if (!loop)
-        {
-            obstacleAudioSource.PlayOneShot(clip);
-        }
-        else
-        {
-            obstacleAudioSource.clip = clip;
-            obstacleAudioSource.Play();
-        }
+        obstacleAudioSource.PlayOneShot(clip);
     }
 
     public void StopAudio()

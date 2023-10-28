@@ -8,6 +8,8 @@ public class BoosterController : MapObject
     {
         onDisappear += () =>
         {
+            playerController.fireParticle.Play();
+            playerController.fireParticle.gameObject.GetComponent<AudioSource>().enabled = true;
             ReleaseObject();
         };
     }

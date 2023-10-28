@@ -663,6 +663,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8200000, guid: 3ac6c47a2bd6ccb49b951f7a02c78511, type: 3}
+      propertyPath: m_Volume
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200000, guid: 3ac6c47a2bd6ccb49b951f7a02c78511, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 19900008, guid: 3ac6c47a2bd6ccb49b951f7a02c78511, type: 3}
       propertyPath: m_MinParticleSize
       value: 0.35

@@ -15,7 +15,7 @@ public class AirshipController : MapObject
             explosion.transform.position = transform.position;
             explosion.GetComponent<ParticleAutoRelease>().PlayAndRelease();
             playerController.explosionParticle.Play();
-            SoundManager.instance.PlayAudioClip(false, explosionAudioClip);
+            SoundManager.instance.PlayAudioClip(explosionAudioClip);
             ReleaseObject();
         };
     }
@@ -25,7 +25,8 @@ public class AirshipController : MapObject
         if(!playerController.shieldOn)
         {
             playerController.airshipColiide = true;
-
+            playerController.explosionParticle.Play();
+            SoundManager.instance.PlayAudioClip(explosionAudioClip);
             StartCoroutine(ClickImpossible());
         }
         else

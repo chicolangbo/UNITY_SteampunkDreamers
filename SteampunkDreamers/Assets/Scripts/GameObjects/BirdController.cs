@@ -14,7 +14,7 @@ public class BirdController : MapObject
         onDisappear += () =>
         {
             playerController.birdParticle.Play();
-            SoundManager.instance.PlayAudioClip(false, birdCryAudioClip);
+            SoundManager.instance.PlayAudioClip(birdCryAudioClip);
             ReleaseObject();
         };
     }

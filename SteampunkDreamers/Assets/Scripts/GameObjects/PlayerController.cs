@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         speedBar = GameObject.FindGameObjectWithTag("SpeedBar");
         angleBar = transform.GetChild(0).GetChild(1).gameObject;
-        shield = transform.GetChild(transform.childCount - 2).gameObject;
+        shield = transform.GetChild(1).gameObject;
         propeller = transform.GetChild(3).GetChild(0).GetChild(2).transform;
 
         // 스포너 초기화
@@ -121,6 +121,7 @@ public class PlayerController : MonoBehaviour
         if(shieldOn)
         {
             shield.SetActive(true);
+            Debug.Log(shield);
             Invoke("ShieldRemove", 5f);
         }
         else
@@ -217,6 +218,8 @@ public class PlayerController : MonoBehaviour
     public void BoosterRemove()
     {
         boosterOn = false;
+        fireParticle.Stop();
+        fireParticle.gameObject.GetComponent<AudioSource>().enabled = false;
     }
 
     public void RotatePropeller()

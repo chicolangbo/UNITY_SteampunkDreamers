@@ -123,5 +123,5 @@ MonoBehaviour:
   speed: 0
   effectTimer: 0
   effectStrength: 0
-  audioSource: {fileID: 0}
   playerController: {fileID: 0}
+  boosterAudioClip: {fileID: 8300000, guid: 6100cbc0765ac884cabacee32bd88887, type: 3}
