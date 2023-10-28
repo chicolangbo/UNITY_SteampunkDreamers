@@ -9,6 +9,10 @@ public class ParticleAutoRelease : MonoBehaviour
     private void Awake()
     {
         particle = GetComponent<ParticleSystem>();
+        if(particle == null)
+        {
+            particle = GetComponentInChildren<ParticleSystem>();
+        }
     }
 
     public void PlayAndRelease()

@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     public float fuelTimer = 10f;
 
     public ParticleSystem electronicParticle; // Nimbus collide
+    public ParticleSystem birdParticle; // Bird collide
     public ParticleSystem explosionParticle; // Airship collide
     public ParticleSystem fireParticle; // Airship collide
 

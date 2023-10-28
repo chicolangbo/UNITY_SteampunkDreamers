@@ -14,7 +14,6 @@ public class MapObject : PoolAble
     public float speed;
     public float effectTimer;
     public float effectStrength;
-    public AudioSource audioSource;
 
     public PlayerController playerController;
 
@@ -25,7 +24,6 @@ public class MapObject : PoolAble
         bg1 = GameObject.FindGameObjectWithTag("Bg1").transform;
         bg2 = GameObject.FindGameObjectWithTag("Bg2").transform;
         bgWidth = GameObject.FindGameObjectWithTag("Bg1").GetComponent<BoxCollider>().size.x;
-        audioSource = GetComponent<AudioSource>();
         playerController = GameManager.instance.player.GetComponent<PlayerController>();
     }
 

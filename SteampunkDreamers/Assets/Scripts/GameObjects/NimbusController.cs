@@ -5,11 +5,18 @@ using UnityEngine;
 public class NimbusController : MapObject
 {
     public AudioClip electronicAudioClip;
-
     public int effectMaxCount;
-
     public float duration;
     private float elapsedTime = 0.0f;
+
+    public void Start()
+    {
+        onDisappear += () =>
+        {
+            playerController.electronicParticle.Play();
+            SoundManager.instance.PlayAudioClip(true, electronicAudioClip);
+        };
+    }
 
     public override void CollideEffect()
     {
@@ -29,6 +36,8 @@ public class NimbusController : MapObject
                 elapsedTime += Time.deltaTime;
             }
             stateGliding.isRotPossible = true;
+            SoundManager.instance.StopAudio();
+            playerController.electronicParticle.Stop();
         }
         else
         {

@@ -6,7 +6,6 @@ using System;
 public class BirdController : MapObject
 {
     public AudioClip birdCryAudioClip;
-    public AudioClip bumpAudioClip;
     public float planeSpeedDownRatio;
     public float planeSpeedUpRatio;
 
@@ -14,6 +13,8 @@ public class BirdController : MapObject
     {
         onDisappear += () =>
         {
+            playerController.birdParticle.Play();
+            SoundManager.instance.PlayAudioClip(false, birdCryAudioClip);
             ReleaseObject();
         };
     }
@@ -22,9 +23,6 @@ public class BirdController : MapObject
     {
         if(!playerController.shieldOn)
         {
-            audioSource.PlayOneShot(birdCryAudioClip);
-            audioSource.PlayOneShot(bumpAudioClip);
-
             var angle = Utils.EulerToAngle(playerController.transform.localEulerAngles.z);
             var anglePercentage = (angle - playerController.minAngle) / (playerController.maxAngle - playerController.minAngle) * 100f;
 

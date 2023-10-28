@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AirshipController : MapObject
 {
-    public AudioClip explisionAudioClip;
+    public AudioClip explosionAudioClip;
     private GameObject explosion;
 
     public void Start()
@@ -14,8 +14,8 @@ public class AirshipController : MapObject
             explosion = ObjectPoolManager.instance.GetGo("AirshipParticle");
             explosion.transform.position = transform.position;
             explosion.GetComponent<ParticleAutoRelease>().PlayAndRelease();
-            audioSource.PlayOneShot(explisionAudioClip);
             playerController.explosionParticle.Play();
+            SoundManager.instance.PlayAudioClip(false, explosionAudioClip);
             ReleaseObject();
         };
     }

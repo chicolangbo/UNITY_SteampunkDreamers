@@ -1135,8 +1135,7 @@ MonoBehaviour:
   effectStrength: 0.3
   audioSource: {fileID: 0}
   playerController: {fileID: 0}
-  birdCryAudioClip: {fileID: 0}
-  bumpAudioClip: {fileID: 0}
+  birdCryAudioClip: {fileID: 8300000, guid: ce20bcdccd1779649bcc502f08dfb8c7, type: 3}
   planeSpeedDownRatio: 0.2
   planeSpeedUpRatio: 0.4
 --- !u!65 &-8072946163123921851
