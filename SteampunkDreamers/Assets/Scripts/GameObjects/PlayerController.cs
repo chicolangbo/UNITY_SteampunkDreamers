@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("연비 감소 레벨 : " + PlayDataManager.data.reinforceDatas["MoreFuelUpgrade"].level + " / 적용 연료값 : " + fuelTimer);
 
         InitStateMachine();
+        SoundManager.instance.PlayBgm();
     }
 
     private void FixedUpdate()
@@ -220,7 +221,8 @@ public class PlayerController : MonoBehaviour
     {
         boosterOn = false;
         fireParticle.Stop();
-        fireParticle.gameObject.GetComponent<AudioSource>().enabled = false;
+        //fireParticle.gameObject.GetComponent<AudioSource>().enabled = false;
+        SoundManager.instance.StopLoopAudio();
     }
 
     public void RotatePropeller()

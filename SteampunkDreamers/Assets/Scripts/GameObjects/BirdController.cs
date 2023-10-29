@@ -24,7 +24,7 @@ public class BirdController : MapObject
         if(!playerController.shieldOn)
         {
             playerController.birdParticle.Play();
-            SoundManager.instance.PlayAudioClip(birdCryAudioClip);
+            SoundManager.instance.PlaySingleAudio(birdCryAudioClip);
 
             var angle = Utils.EulerToAngle(playerController.transform.localEulerAngles.z);
             var anglePercentage = (angle - playerController.minAngle) / (playerController.maxAngle - playerController.minAngle) * 100f;

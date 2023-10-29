@@ -123,5 +123,5 @@ MonoBehaviour:
   speed: 0
   effectTimer: 0
   effectStrength: 0
-  audioSource: {fileID: 0}
   playerController: {fileID: 0}
+  shieldGetClip: {fileID: 8300000, guid: 2b7950b75ace546e4bfdbfa1c3f9aa4a, type: 3}

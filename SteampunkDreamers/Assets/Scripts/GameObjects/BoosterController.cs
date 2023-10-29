@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class BoosterController : MapObject
 {
+    public AudioClip fireAudioClip;
+
     private void Start()
     {
         onDisappear += () =>
         {
+            SoundManager.instance.PlayLoopAudio(fireAudioClip);
             playerController.fireParticle.Play();
-            playerController.fireParticle.gameObject.GetComponent<AudioSource>().enabled = true;
             ReleaseObject();
         };
     }

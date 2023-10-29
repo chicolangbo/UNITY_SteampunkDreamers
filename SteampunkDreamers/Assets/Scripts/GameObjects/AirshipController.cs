@@ -30,7 +30,7 @@ public class AirshipController : MapObject
 
             playerController.airshipColiide = true;
             playerController.explosionParticle.Play();
-            SoundManager.instance.PlayAudioClip(explosionAudioClip);
+            SoundManager.instance.PlaySingleAudio(explosionAudioClip);
             StartCoroutine(ClickImpossible());
         }
         else

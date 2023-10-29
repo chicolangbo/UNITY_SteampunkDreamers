@@ -124,6 +124,5 @@ MonoBehaviour:
   speed: 0
   effectTimer: 0
   effectStrength: 0
-  audioSource: {fileID: 0}
   playerController: {fileID: 0}
-  coinAudioClip: {fileID: 0}
+  coinAudioClip: {fileID: 8300000, guid: 7c763e87ab2014ed2baf1b2b03d4c852, type: 3}

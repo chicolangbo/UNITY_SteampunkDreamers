@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using SaveDataVC = SaveDataV1; // 교체
+using SaveDataVC = SaveDataV2; // 교체
 
 public class CurrentReinforceData
 {

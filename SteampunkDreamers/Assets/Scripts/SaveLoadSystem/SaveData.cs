@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using SaveDataVC = SaveDataV1;
+using SaveDataVC = SaveDataV2;
 public abstract class SaveData
 {
     public int Version { get; set; }
@@ -25,25 +25,30 @@ public class SaveDataV1 : SaveData
 
     public override SaveData VersionUp()
     {
-        return null;
+        var data = new SaveDataV2();
+        return data;
     }
 }
 
-//public class SaveDataV2 : SaveData
-//{
-//    public SaveDataV2()
-//    {
-//        Version = 2;
-//    }
+public class SaveDataV2 : SaveData
+{
+    public SaveDataV2()
+    {
+        Version = 2;
+    }
 
-//    public int Gold { get; set; }
-//    public string Name { get; set; } = "Unknown";
-//    public override SaveData VersionUp()
-//    {
-//        var data = new SaveDataV3();
-//        return data;
-//    }
-//}
+    public int money { get; set; }
+    public bool isFirstGame { get; set; } = true;
+    public float bgmVolume { get; set; }
+    public float effectVolume { get; set; }
+    public Dictionary<string, ReinforceData> reinforceDatas { get; set; } = new Dictionary<string, ReinforceData>();
+
+    public override SaveData VersionUp()
+    {
+        //var data = new SaveDataV3();
+        return null;
+    }
+}
 
 //public class SaveDataV3 : SaveData
 //{

@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using SaveDataVC = SaveDataV1; // 교체
+using SaveDataVC = SaveDataV2; // 교체
 
 public static class SaveLoadSystem
 {
@@ -15,7 +15,7 @@ public static class SaveLoadSystem
         EncryptedBinary
     }
     public static Modes FileMode { get; } = Modes.Json;
-    public static int SaveDataVersion { get; } = 1; // 교체
+    public static int SaveDataVersion { get; } = 2; // 교체
     private static string[] SaveSlotFileNames =
     {
         "Save0.json",
@@ -97,10 +97,10 @@ public static class SaveLoadSystem
                     data = serialize.Deserialize<SaveDataV1>(reader);
                     break;
                 case 2:
-                    data = serialize.Deserialize<SaveDataV1>(reader);
+                    data = serialize.Deserialize<SaveDataV2>(reader);
                     break;
                 case 3:
-                    data = serialize.Deserialize<SaveDataV1>(reader);
+                    //data = serialize.Deserialize<SaveDataV3>(reader);
                     break;
             }
 

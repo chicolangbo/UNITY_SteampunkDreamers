@@ -30,7 +30,8 @@ public class NimbusController : MapObject
         if (stateGliding != null && !playerController.shieldOn)
         {
             playerController.electronicParticle.Play();
-            playerController.electronicParticle.gameObject.GetComponent<AudioSource>().enabled = true;
+            //playerController.electronicParticle.gameObject.GetComponent<AudioSource>().enabled = true;
+            SoundManager.instance.PlayLoopAudio(electronicAudioClip);
 
             while (elapsedTime < duration)
             {
@@ -39,9 +40,9 @@ public class NimbusController : MapObject
                 elapsedTime += Time.deltaTime;
             }
             stateGliding.isRotPossible = true;
-            SoundManager.instance.StopAudio();
+            SoundManager.instance.StopLoopAudio();
             playerController.electronicParticle.Stop();
-            playerController.electronicParticle.gameObject.GetComponent<AudioSource>().enabled = false;
+            //playerController.electronicParticle.gameObject.GetComponent<AudioSource>().enabled = false;
         }
         else
         {

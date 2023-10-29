@@ -11,6 +11,7 @@ public class CoinController : MapObject
         onDisappear += () =>
         {
             playerController.coinCount++;
+            SoundManager.instance.PlaySingleAudio(coinAudioClip);
             ReleaseObject();
         };
     }

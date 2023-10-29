@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour
         UIManager.instance.UpdateBasicScoreText(basicScore);
         UIManager.instance.UpdateBonusScoreText(bonusScore);
         UpdateMoney();
+        SoundManager.instance.PlayUiWindowAudio();
     }
 
     public void Init()

@@ -587,7 +587,7 @@ MonoBehaviour:
   effectTimer: 0
   effectStrength: 0
   playerController: {fileID: 0}
-  electronicAudioClip: {fileID: 0}
+  electronicAudioClip: {fileID: 8300000, guid: b6e7bea0623796447bde85ea84038fc8, type: 3}
   effectMaxCount: 3
   duration: 3
 --- !u!65 &7039207641120581019

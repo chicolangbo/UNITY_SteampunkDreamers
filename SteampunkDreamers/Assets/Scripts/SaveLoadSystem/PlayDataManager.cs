@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
-using SaveDataVC = SaveDataV1;
+using SaveDataVC = SaveDataV2;
 
 public class PlayDataManager
 {
@@ -35,6 +35,9 @@ public class PlayDataManager
 
     private static void FirstGameSet()
     {
+        data.bgmVolume = 0.5f;
+        data.effectVolume = 0.5f;
+
         for (int i = 0; i < reinforceCount; i++)
         {
             var tempReinforceData = new ReinforceData();

@@ -3,10 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
+public enum AudioType
+{
+    SoundEffectSingle,
+    SoundEffectLoop,
+    BGM,
+    UI
+}
+
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance = null;
-    private static AudioSource obstacleAudioSource;
+    public AudioClip uiButton;
+    public AudioClip uiUpgrade;
+    public AudioClip uiWindow;
+    public AudioClip play;
+    public bool isUIWindow;
+    private static AudioSource[] audioSource;
+
 
     private void Awake()
     {
@@ -20,16 +34,73 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        obstacleAudioSource = GetComponent<AudioSource>();
+        audioSource = GetComponents<AudioSource>();
     }
 
-    public void PlayAudioClip(AudioClip clip)
+    private void Start()
     {
-        obstacleAudioSource.PlayOneShot(clip);
+        if(isUIWindow)
+        {
+            PlayUiWindowAudio();
+        }
     }
 
-    public void StopAudio()
+    public void PlaySingleAudio(AudioClip clip)
     {
-        obstacleAudioSource.Stop();
+        audioSource[(int)AudioType.SoundEffectSingle].PlayOneShot(clip);
+    }
+
+    public void PlayLoopAudio(AudioClip clip)
+    {
+        audioSource[(int)AudioType.SoundEffectLoop].clip = clip;
+        audioSource[(int)AudioType.SoundEffectLoop].loop = true;
+        audioSource[(int)AudioType.SoundEffectLoop].Play();
+    }
+
+    public void StopLoopAudio()
+    {
+        audioSource[(int)AudioType.SoundEffectLoop].Stop();
+    }
+
+    public void PlayBgm()
+    {
+        audioSource[(int)AudioType.BGM].clip = play;
+        audioSource[(int)AudioType.BGM].loop = true;
+        audioSource[(int)AudioType.BGM].Play();
+    }
+
+    public void PlayUiWindowAudio()
+    {
+        audioSource[(int)AudioType.SoundEffectSingle].Pause();
+        audioSource[(int)AudioType.SoundEffectLoop].Pause();
+        audioSource[(int)AudioType.BGM].Pause();
+
+        audioSource[(int)AudioType.UI].clip = uiWindow;
+        audioSource[(int)AudioType.UI].loop = true;
+        audioSource[(int)AudioType.UI].Play();
+    }
+
+    public void CloseUiWindowAudio()
+    {
+        audioSource[(int)AudioType.SoundEffectSingle].UnPause();
+        audioSource[(int)AudioType.SoundEffectLoop].UnPause();
+        audioSource[(int)AudioType.BGM].UnPause();
+
+        audioSource[(int)AudioType.UI].Stop();
+    }
+
+    public void PlayUIButtonAudio()
+    {
+        audioSource[(int)AudioType.SoundEffectSingle].PlayOneShot(uiButton);
+    }
+
+    public void PlayUIUpgradeAudio()
+    {
+        audioSource[(int)AudioType.SoundEffectSingle].PlayOneShot(uiUpgrade);
+    }
+
+    public void StopSoundEffect()
+    {
+        audioSource[(int)AudioType.SoundEffectSingle].Stop();
     }
 }
