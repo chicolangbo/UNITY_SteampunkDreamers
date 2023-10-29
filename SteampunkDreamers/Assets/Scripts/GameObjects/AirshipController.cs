@@ -11,11 +11,11 @@ public class AirshipController : MapObject
     {
         onDisappear += () =>
         {
-            explosion = ObjectPoolManager.instance.GetGo("AirshipParticle");
-            explosion.transform.position = transform.position;
-            explosion.GetComponent<ParticleAutoRelease>().PlayAndRelease();
-            playerController.explosionParticle.Play();
-            SoundManager.instance.PlayAudioClip(explosionAudioClip);
+            //explosion = ObjectPoolManager.instance.GetGo("AirshipParticle");
+            //explosion.transform.position = transform.position;
+            //explosion.GetComponent<ParticleAutoRelease>().PlayAndRelease();
+            //playerController.explosionParticle.Play();
+            //SoundManager.instance.PlayAudioClip(explosionAudioClip);
             ReleaseObject();
         };
     }
@@ -24,6 +24,10 @@ public class AirshipController : MapObject
     {
         if(!playerController.shieldOn)
         {
+            explosion = ObjectPoolManager.instance.GetGo("AirshipParticle");
+            explosion.transform.position = transform.position;
+            explosion.GetComponent<ParticleAutoRelease>().PlayAndRelease();
+
             playerController.airshipColiide = true;
             playerController.explosionParticle.Play();
             SoundManager.instance.PlayAudioClip(explosionAudioClip);
@@ -31,7 +35,7 @@ public class AirshipController : MapObject
         }
         else
         {
-            playerController.shieldOn = false;
+            //playerController.shieldOn = false;
         }
     }
 

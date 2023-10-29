@@ -13,8 +13,8 @@ public class NimbusController : MapObject
     {
         onDisappear += () =>
         {
-            playerController.electronicParticle.Play();
-            playerController.electronicParticle.gameObject.GetComponent<AudioSource>().enabled = true;
+            //playerController.electronicParticle.Play();
+            //playerController.electronicParticle.gameObject.GetComponent<AudioSource>().enabled = true;
         };
     }
 
@@ -29,6 +29,9 @@ public class NimbusController : MapObject
 
         if (stateGliding != null && !playerController.shieldOn)
         {
+            playerController.electronicParticle.Play();
+            playerController.electronicParticle.gameObject.GetComponent<AudioSource>().enabled = true;
+
             while (elapsedTime < duration)
             {
                 stateGliding.isRotPossible = false;
@@ -42,7 +45,7 @@ public class NimbusController : MapObject
         }
         else
         {
-            playerController.shieldOn = false;
+            //playerController.shieldOn = false;
         }
 
     }

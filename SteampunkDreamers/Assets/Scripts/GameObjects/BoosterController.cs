@@ -16,6 +16,7 @@ public class BoosterController : MapObject
     public override void CollideEffect()
     {
         playerController.boosterOn = true;
+        playerController.once = true;
         playerController.boosterSpeed = playerController.frontSpeed * 0.2f;
     }
 }

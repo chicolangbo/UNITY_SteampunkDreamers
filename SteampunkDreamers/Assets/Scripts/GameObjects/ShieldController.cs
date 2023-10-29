@@ -9,6 +9,7 @@ public class ShieldController : MapObject
         onDisappear += () =>
         {
             playerController.shieldOn = true;
+            playerController.once = true;
             ReleaseObject();
         };
     }

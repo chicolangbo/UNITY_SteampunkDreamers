@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     private List<Spawner> spawners = new List<Spawner>();
     public bool shieldOn;
     public GameObject shield;
+    public bool once;
 
     public float boosterSpeed;
     public bool boosterOn;
@@ -118,21 +119,20 @@ public class PlayerController : MonoBehaviour
     {
         stateMachine?.UpdateState();
 
-        if(shieldOn)
+        if(shieldOn && once)
         {
             shield.SetActive(true);
-            Debug.Log(shield);
+            once = false;
             Invoke("ShieldRemove", 5f);
         }
-        else
-        {
-            shield.SetActive(false);
-        }
-
         if(boosterOn)
         {
             Booster(boosterSpeed);
-            Invoke("BoosterRemove", 5f);
+            if(once)
+            {
+                Invoke("BoosterRemove", 5f);
+                once = false;
+            }
         }
 
         if(velocity.x > maxSpeedReached)
@@ -208,6 +208,7 @@ public class PlayerController : MonoBehaviour
     public void ShieldRemove()
     {
         shieldOn = false;
+        shield.SetActive(false);
     }
 
     public void Booster(float boosterSpeed)
